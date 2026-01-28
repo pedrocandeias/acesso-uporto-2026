@@ -1,0 +1,185 @@
+/**
+ * Acesso U.Porto Theme - Editor Styles
+ *
+ * @package AcessoUPorto
+ */
+
+/* ==========================================================================
+   CSS Variables
+   ========================================================================== */
+
+:root {
+    --color-purple: #572ddf;
+    --color-pink: #da2489;
+    --color-dark: #060221;
+    --color-white: #ffffff;
+    --color-cyan: #00d084;
+    --color-lavender: #8887e2;
+    --color-coral: #ff6b6b;
+
+    --gradient-primary: linear-gradient(135deg, var(--color-purple) 0%, var(--color-pink) 100%);
+
+    --font-primary: 'Barlow', sans-serif;
+    --font-condensed: 'Barlow Semi Condensed', sans-serif;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 50px;
+}
+
+/* ==========================================================================
+   Base Editor Styles
+   ========================================================================== */
+
+.editor-styles-wrapper {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--color-dark);
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-dark);
+}
+
+.editor-styles-wrapper h1 {
+    font-size: 3.5rem;
+    font-weight: 600;
+}
+
+.editor-styles-wrapper h2 {
+    font-size: 2.75rem;
+}
+
+.editor-styles-wrapper h3 {
+    font-size: 2rem;
+}
+
+.editor-styles-wrapper h4 {
+    font-size: 1.5rem;
+}
+
+.editor-styles-wrapper a {
+    color: var(--color-purple);
+}
+
+.editor-styles-wrapper a:hover {
+    color: var(--color-pink);
+}
+
+/* ==========================================================================
+   Button Styles in Editor
+   ========================================================================== */
+
+.editor-styles-wrapper .wp-block-button__link {
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    padding: 0.875rem 2rem;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
+    background: transparent;
+    border: 2px solid var(--color-purple);
+    color: var(--color-purple);
+}
+
+/* ==========================================================================
+   ACF Block Previews
+   ========================================================================== */
+
+.acf-block-preview {
+    padding: var(--spacing-md);
+}
+
+/* Hero Block Preview */
+.acf-block-preview .hero-section {
+    min-height: 400px;
+}
+
+/* Statistics Block Preview */
+.acf-block-preview .stats-section {
+    padding: var(--spacing-md);
+}
+
+/* ==========================================================================
+   Color Palette
+   ========================================================================== */
+
+.has-purple-color {
+    color: var(--color-purple);
+}
+
+.has-purple-background-color {
+    background-color: var(--color-purple);
+}
+
+.has-pink-color {
+    color: var(--color-pink);
+}
+
+.has-pink-background-color {
+    background-color: var(--color-pink);
+}
+
+.has-dark-color {
+    color: var(--color-dark);
+}
+
+.has-dark-background-color {
+    background-color: var(--color-dark);
+}
+
+.has-cyan-color {
+    color: var(--color-cyan);
+}
+
+.has-cyan-background-color {
+    background-color: var(--color-cyan);
+}
+
+.has-lavender-color {
+    color: var(--color-lavender);
+}
+
+.has-lavender-background-color {
+    background-color: var(--color-lavender);
+}
+
+.has-coral-color {
+    color: var(--color-coral);
+}
+
+.has-coral-background-color {
+    background-color: var(--color-coral);
+}
+
+.has-white-color {
+    color: var(--color-white);
+}
+
+.has-white-background-color {
+    background-color: var(--color-white);
+}
+
+/* Gradient */
+.has-purple-pink-gradient-background {
+    background: var(--gradient-primary);
+}

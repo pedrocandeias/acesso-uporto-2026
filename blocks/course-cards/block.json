@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/course-cards",
+    "version": "1.0.0",
+    "title": "Course Cards",
+    "category": "acesso-blocks",
+    "icon": "grid-view",
+    "description": "Display courses in a card grid layout.",
+    "keywords": ["courses", "cards", "grid", "cursos"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": ""
+        },
+        "sectionSubtitle": {
+            "type": "string",
+            "default": ""
+        },
+        "layout": {
+            "type": "string",
+            "default": "grid-3"
+        },
+        "cardStyle": {
+            "type": "string",
+            "default": "default"
+        },
+        "filterType": {
+            "type": "string",
+            "default": "all"
+        },
+        "filterFaculty": {
+            "type": "number",
+            "default": 0
+        },
+        "limit": {
+            "type": "number",
+            "default": 6
+        },
+        "showFilters": {
+            "type": "boolean",
+            "default": false
+        },
+        "showCta": {
+            "type": "boolean",
+            "default": true
+        },
+        "ctaText": {
+            "type": "string",
+            "default": "Ver Todos os Cursos"
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

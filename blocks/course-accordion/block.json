@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/course-accordion",
+    "version": "1.0.0",
+    "title": "Course Accordion",
+    "category": "acesso-blocks",
+    "icon": "list-view",
+    "description": "Expandable course listings with filters.",
+    "keywords": ["courses", "accordion", "list", "cursos"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Cursos"
+        },
+        "showFilters": {
+            "type": "boolean",
+            "default": true
+        },
+        "filterFaculty": {
+            "type": "number",
+            "default": 0
+        },
+        "showDestaqueOnly": {
+            "type": "boolean",
+            "default": false
+        },
+        "limit": {
+            "type": "number",
+            "default": 10
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

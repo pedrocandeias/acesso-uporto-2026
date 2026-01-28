@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/course-detail",
+    "version": "1.0.0",
+    "title": "Course Detail",
+    "category": "acesso-blocks",
+    "icon": "id-alt",
+    "description": "Display comprehensive course information.",
+    "keywords": ["course", "detail", "info", "curso"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "courseSource": {
+            "type": "string",
+            "default": "current"
+        },
+        "selectedCourse": {
+            "type": "number",
+            "default": 0
+        },
+        "displayStyle": {
+            "type": "string",
+            "default": "full"
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}
