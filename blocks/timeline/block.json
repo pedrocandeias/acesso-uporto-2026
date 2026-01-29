@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/timeline",
+    "version": "1.0.0",
+    "title": "Timeline",
+    "category": "acesso-blocks",
+    "icon": "clock",
+    "description": "Timeline section for displaying phases, dates and milestones.",
+    "keywords": ["timeline", "phases", "dates", "schedule", "milestones"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Fases de Candidatura"
+        },
+        "sectionSubtitle": {
+            "type": "string",
+            "default": ""
+        },
+        "phases": {
+            "type": "array",
+            "default": [
+                {
+                    "icon": "calendar",
+                    "color": "cyan",
+                    "label": "1ª Fase",
+                    "title": "Candidaturas",
+                    "dates": "Julho 2026",
+                    "description": "Período de candidaturas ao Concurso Nacional de Acesso."
+                },
+                {
+                    "icon": "edit",
+                    "color": "lavender",
+                    "label": "2ª Fase",
+                    "title": "Colocações",
+                    "dates": "Setembro 2026",
+                    "description": "Divulgação dos resultados e matrículas."
+                },
+                {
+                    "icon": "check",
+                    "color": "coral",
+                    "label": "3ª Fase",
+                    "title": "Início das Aulas",
+                    "dates": "Setembro 2026",
+                    "description": "Começo do ano letivo na U.Porto."
+                }
+            ]
+        },
+        "layout": {
+            "type": "string",
+            "default": "horizontal"
+        },
+        "style": {
+            "type": "string",
+            "default": "default"
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

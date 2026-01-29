@@ -242,13 +242,20 @@ class Acesso_Cursos_Importer {
                     <tbody>
                         <tr><td>Curso</td><td>Post Title</td></tr>
                         <tr><td>Faculdade</td><td>Taxonomy: faculdades</td></tr>
+                        <tr><td>Instituição</td><td>Meta: instituicao</td></tr>
                         <tr><td>Grau</td><td>ACF: grau</td></tr>
+                        <tr><td>Informações adicionais do curso</td><td>ACF: info_extra_curso</td></tr>
                         <tr><td>Duração / ETCS</td><td>ACF: duracaoects</td></tr>
                         <tr><td>vagas_*</td><td>ACF: vagas (group)</td></tr>
                         <tr><td>nota_do_ultimo_colocado_*</td><td>ACF: nota_do_ultimo_colocado (group)</td></tr>
                         <tr><td>provas_de_ingresso_*</td><td>ACF: provas_de_ingresso (group)</td></tr>
+                        <tr><td>classificacao_minima_*</td><td>ACF: classificacao_minima (group)</td></tr>
+                        <tr><td>formula_de_calculo_*</td><td>ACF: formula_de_calculo (group)</td></tr>
+                        <tr><td>Pré-requisitos</td><td>ACF: prerequisitos</td></tr>
                         <tr><td>Descrição</td><td>ACF: cursos_descricao</td></tr>
                         <tr><td>Saídas profissionais</td><td>ACF: cursos_saidas_profissionais</td></tr>
+                        <tr><td>Certificacao</td><td>ACF: certificacao (URL)</td></tr>
+                        <tr><td>Selo</td><td>ACF: selo (URL)</td></tr>
                         <tr><td>Destaque</td><td>ACF: destaque (1/0)</td></tr>
                         <tr><td>Novo</td><td>ACF: novo (1/0)</td></tr>
                     </tbody>
@@ -355,8 +362,23 @@ class Acesso_Cursos_Importer {
             $results['log'] = array_merge($results['log'], $draft_result['log']);
         }
 
-        $handle = fopen($csv_path, 'r');
+        // Read file content and detect/convert encoding
+        $csv_content = file_get_contents($csv_path);
+
+        // Detect encoding and convert to UTF-8 if needed
+        $encoding = mb_detect_encoding($csv_content, ['UTF-8', 'ISO-8859-1', 'Windows-1252'], true);
+        if ($encoding && $encoding !== 'UTF-8') {
+            $csv_content = mb_convert_encoding($csv_content, 'UTF-8', $encoding);
+            $results['log'][] = ['type' => 'warning', 'message' => "Encoding convertido de $encoding para UTF-8"];
+        }
+
+        // Write to temp file for fgetcsv to read
+        $temp_file = tempnam(sys_get_temp_dir(), 'csv_');
+        file_put_contents($temp_file, $csv_content);
+
+        $handle = fopen($temp_file, 'r');
         if (!$handle) {
+            @unlink($temp_file);
             $results['errors']++;
             $results['log'][] = ['type' => 'error', 'message' => 'Não foi possível abrir o ficheiro CSV.'];
             return $results;
@@ -371,12 +393,19 @@ class Acesso_Cursos_Importer {
             return $results;
         }
 
-        // Clean header (remove BOM and trim)
+        // Clean header (remove BOM and control characters, preserve UTF-8)
         $header = array_map(function($col) {
-            return trim(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $col));
+            // Remove UTF-8 BOM if present
+            $col = preg_replace('/^\xEF\xBB\xBF/', '', $col);
+            // Remove control characters but keep valid UTF-8
+            $col = preg_replace('/[\x00-\x1F\x7F]/', '', $col);
+            return trim($col);
         }, $header);
 
-        $results['log'][] = ['type' => 'success', 'message' => 'Colunas: ' . implode(', ', array_slice($header, 0, 10)) . '...'];
+        // Log all columns for debugging
+        $results['log'][] = ['type' => 'success', 'message' => 'Total colunas: ' . count($header)];
+        $results['log'][] = ['type' => 'success', 'message' => 'Colunas (1-15): ' . implode(', ', array_slice($header, 0, 15))];
+        $results['log'][] = ['type' => 'success', 'message' => 'Colunas (16-31): ' . implode(', ', array_slice($header, 15, 16))];
 
         // Process each row
         $row_number = 1;
@@ -411,6 +440,20 @@ class Acesso_Cursos_Importer {
                 continue;
             }
 
+            // Debug: Log first 3 courses' Descrição status
+            if ($results['total'] <= 3) {
+                // Check if Descrição key exists and what its value is
+                $has_key = array_key_exists('Descrição', $data);
+                $desc_value = $data['Descrição'] ?? '';
+                $desc_len = strlen($desc_value);
+                $results['log'][] = ['type' => 'error', 'message' => "=== DEBUG $course_title ==="];
+                $results['log'][] = ['type' => 'error', 'message' => "Descrição key exists: " . ($has_key ? 'SIM' : 'NÃO')];
+                $results['log'][] = ['type' => 'error', 'message' => "Descrição length: $desc_len chars"];
+                if ($desc_len > 0) {
+                    $results['log'][] = ['type' => 'error', 'message' => "Descrição preview: " . mb_substr($desc_value, 0, 100)];
+                }
+            }
+
             if ($dry_run) {
                 if ($existing_post_id && $existing_action === 'update') {
                     $results['updated']++;
@@ -440,6 +483,12 @@ class Acesso_Cursos_Importer {
         }
 
         fclose($handle);
+
+        // Clean up temp file if created
+        if (isset($temp_file) && file_exists($temp_file)) {
+            @unlink($temp_file);
+        }
+
         return $results;
     }
 
@@ -611,14 +660,37 @@ class Acesso_Cursos_Importer {
                 update_field('prerequisitos', sanitize_text_field($data['Pré-requisitos']), $post_id);
             }
 
-            // Descrição
-            if (!empty($data['Descrição'])) {
-                update_field('cursos_descricao', sanitize_textarea_field($data['Descrição']), $post_id);
+            // Descrição - try multiple possible column names
+            $descricao = '';
+            $descricao_col_found = '';
+            foreach (['Descrição', 'Descricao', 'descricao', 'Descriçao', 'DESCRIÇÃO'] as $col_name) {
+                if (isset($data[$col_name])) {
+                    $descricao_col_found = $col_name;
+                    if (!empty($data[$col_name])) {
+                        $descricao = $data[$col_name];
+                        break;
+                    }
+                }
+            }
+            // Debug: Log first 3 courses' Descrição status
+            if ($results['total'] <= 3) {
+                $desc_preview = $descricao ? substr($descricao, 0, 50) . '...' : '(vazio)';
+                $results['log'][] = ['type' => 'warning', 'message' => "DEBUG Linha $row_number: Descrição col='$descricao_col_found', valor=$desc_preview"];
+            }
+            if (!empty($descricao)) {
+                update_field('cursos_descricao', wp_kses_post($descricao), $post_id);
             }
 
-            // Saídas profissionais
-            if (!empty($data['Saídas profissionais'])) {
-                update_field('cursos_saidas_profissionais', sanitize_textarea_field($data['Saídas profissionais']), $post_id);
+            // Saídas profissionais - try multiple possible column names
+            $saidas = '';
+            foreach (['Saídas profissionais', 'Saidas profissionais', 'saidas profissionais', 'Saídas Profissionais', 'SAÍDAS PROFISSIONAIS'] as $col_name) {
+                if (!empty($data[$col_name])) {
+                    $saidas = $data[$col_name];
+                    break;
+                }
+            }
+            if (!empty($saidas)) {
+                update_field('cursos_saidas_profissionais', wp_kses_post($saidas), $post_id);
             }
 
             // Destaque
@@ -628,6 +700,16 @@ class Acesso_Cursos_Importer {
             // Novo
             $novo = isset($data['Novo']) && ($data['Novo'] === '1' || $data['Novo'] === 1);
             update_field('novo', $novo, $post_id);
+
+            // Certificação (image URL)
+            if (!empty($data['Certificacao'])) {
+                update_field('certificacao', esc_url_raw($data['Certificacao']), $post_id);
+            }
+
+            // Selo (image URL)
+            if (!empty($data['Selo'])) {
+                update_field('selo', esc_url_raw($data['Selo']), $post_id);
+            }
 
             // Instituição
             if (!empty($data['Instituição'])) {

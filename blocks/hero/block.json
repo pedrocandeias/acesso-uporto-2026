@@ -1,0 +1,76 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/hero",
+    "version": "1.0.0",
+    "title": "Hero Section",
+    "category": "acesso-blocks",
+    "icon": "cover-image",
+    "description": "Full-width hero section with rotating text animation and gradient overlay.",
+    "keywords": ["hero", "banner", "header", "slider"],
+    "supports": {
+        "html": false,
+        "align": ["full", "wide"]
+    },
+    "attributes": {
+        "backgroundImage": {
+            "type": "string",
+            "default": ""
+        },
+        "backgroundImageId": {
+            "type": "number",
+            "default": 0
+        },
+        "rotatingWords": {
+            "type": "array",
+            "default": ["Conhecimento", "Investigação", "Inovação", "Futuro"]
+        },
+        "staticTextBefore": {
+            "type": "string",
+            "default": "ISTO É"
+        },
+        "mainTitle": {
+            "type": "string",
+            "default": "U.PORTO"
+        },
+        "tagline": {
+            "type": "string",
+            "default": "...e tu também podes ser!"
+        },
+        "primaryButtonText": {
+            "type": "string",
+            "default": "Explorar Cursos"
+        },
+        "primaryButtonUrl": {
+            "type": "string",
+            "default": "#cursos"
+        },
+        "secondaryButtonText": {
+            "type": "string",
+            "default": "Ver Vídeo"
+        },
+        "secondaryButtonUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "gradientStart": {
+            "type": "string",
+            "default": "#572ddf"
+        },
+        "gradientEnd": {
+            "type": "string",
+            "default": "#da2489"
+        },
+        "overlayOpacity": {
+            "type": "number",
+            "default": 70
+        },
+        "minHeight": {
+            "type": "string",
+            "default": "100vh"
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

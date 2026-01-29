@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/video-section",
+    "version": "1.0.0",
+    "title": "Video Section",
+    "category": "acesso-blocks",
+    "icon": "video-alt3",
+    "description": "Video embed section with poster image and play button.",
+    "keywords": ["video", "youtube", "vimeo", "embed", "media"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": ""
+        },
+        "sectionSubtitle": {
+            "type": "string",
+            "default": ""
+        },
+        "videoUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "posterImage": {
+            "type": "string",
+            "default": ""
+        },
+        "posterImageId": {
+            "type": "number",
+            "default": 0
+        },
+        "aspectRatio": {
+            "type": "string",
+            "default": "16-9"
+        },
+        "style": {
+            "type": "string",
+            "default": "default"
+        },
+        "autoplay": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

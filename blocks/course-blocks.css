@@ -230,6 +230,21 @@
     color: var(--color-purple, #572ddf);
 }
 
+/* Card Seals */
+.course-card-seals {
+    display: flex;
+    gap: var(--spacing-xs, 0.5rem);
+    margin-top: var(--spacing-sm, 0.75rem);
+    padding-top: var(--spacing-sm, 0.75rem);
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.course-card-seal {
+    max-height: 30px;
+    width: auto;
+}
+
 /* Card Footer */
 .course-card-footer {
     margin-top: auto;
@@ -532,6 +547,22 @@
     opacity: 0.9;
 }
 
+.course-detail-seals {
+    display: flex;
+    gap: var(--spacing-md, 1rem);
+    margin-top: var(--spacing-md, 1rem);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.course-seal {
+    max-height: 50px;
+    width: auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm, 4px);
+}
+
 /* Stats */
 .course-detail-stats {
     display: grid;
@@ -592,6 +623,60 @@
 }
 
 .stat-highlight .stat-value {
+    color: var(--color-purple, #572ddf);
+}
+
+/* Multi-phase stats */
+.stat-multi {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stat-multi .stat-icon {
+    margin-bottom: var(--spacing-xs, 0.5rem);
+}
+
+.stat-label small {
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.stat-phases {
+    display: flex;
+    gap: var(--spacing-sm, 0.75rem);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-xs, 0.5rem);
+}
+
+.phase-item {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-xs, 0.5rem) var(--spacing-sm, 0.75rem);
+    background: rgba(0,0,0,0.03);
+    border-radius: var(--radius-sm, 4px);
+    min-width: 70px;
+    text-align: center;
+}
+
+.stat-highlight .phase-item {
+    background: rgba(87,45,223,0.08);
+}
+
+.phase-label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.phase-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-dark, #060221);
+}
+
+.stat-highlight .phase-value {
     color: var(--color-purple, #572ddf);
 }
 

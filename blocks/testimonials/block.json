@@ -1,0 +1,56 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/testimonials",
+    "version": "1.0.0",
+    "title": "Testimonials Carousel",
+    "category": "acesso-blocks",
+    "icon": "format-quote",
+    "description": "Student testimonials carousel with photos and quotes.",
+    "keywords": ["testimonials", "students", "quotes", "carousel"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Os teus futuros colegas"
+        },
+        "sectionSubtitle": {
+            "type": "string",
+            "default": "Descobre o que os estudantes da U.Porto têm a dizer"
+        },
+        "testimonials": {
+            "type": "array",
+            "default": [
+                {
+                    "name": "Maria Silva",
+                    "course": "Engenharia Informática - FEUP",
+                    "quote": "O ambiente universitário é pautado pela união e pelo espírito de entreajuda entre colegas.",
+                    "image": "",
+                    "imageId": 0
+                }
+            ]
+        },
+        "autoplay": {
+            "type": "boolean",
+            "default": true
+        },
+        "autoplaySpeed": {
+            "type": "number",
+            "default": 5000
+        },
+        "style": {
+            "type": "string",
+            "default": "cards"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#f9f9f9"
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

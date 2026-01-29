@@ -1,0 +1,108 @@
+<?php
+/**
+ * Hero Section Block - Server-side Render
+ *
+ * @package AcessoUPorto
+ */
+
+$background_image = $attributes['backgroundImage'] ?? '';
+$rotating_words = $attributes['rotatingWords'] ?? ['Conhecimento', 'Investigação', 'Inovação', 'Futuro'];
+$static_text_before = $attributes['staticTextBefore'] ?? 'ISTO É';
+$main_title = $attributes['mainTitle'] ?? 'U.PORTO';
+$tagline = $attributes['tagline'] ?? '...e tu também podes ser!';
+$primary_btn_text = $attributes['primaryButtonText'] ?? 'Explorar Cursos';
+$primary_btn_url = $attributes['primaryButtonUrl'] ?? '#cursos';
+$secondary_btn_text = $attributes['secondaryButtonText'] ?? '';
+$secondary_btn_url = $attributes['secondaryButtonUrl'] ?? '';
+$gradient_start = $attributes['gradientStart'] ?? '#572ddf';
+$gradient_end = $attributes['gradientEnd'] ?? '#da2489';
+$overlay_opacity = ($attributes['overlayOpacity'] ?? 70) / 100;
+$min_height = $attributes['minHeight'] ?? '100vh';
+
+$block_id = 'hero-' . uniqid();
+
+$wrapper_attributes = get_block_wrapper_attributes(array(
+    'id' => $block_id,
+    'class' => 'hero-section',
+));
+
+$background_style = $background_image
+    ? "background-image: url('" . esc_url($background_image) . "');"
+    : '';
+?>
+
+<section <?php echo $wrapper_attributes; ?> style="min-height: <?php echo esc_attr($min_height); ?>; <?php echo $background_style; ?>">
+    <div class="hero-overlay" style="background: linear-gradient(135deg, <?php echo esc_attr($gradient_start); ?>, <?php echo esc_attr($gradient_end); ?>); opacity: <?php echo esc_attr($overlay_opacity); ?>;"></div>
+
+    <div class="hero-content">
+        <div class="hero-text-rotating">
+            <span class="hero-static-text"><?php echo esc_html($static_text_before); ?></span>
+            <span class="hero-rotating-words" data-words="<?php echo esc_attr(wp_json_encode($rotating_words)); ?>">
+                <?php echo esc_html($rotating_words[0] ?? ''); ?>
+            </span>
+        </div>
+
+        <h1 class="hero-title"><?php echo esc_html($main_title); ?></h1>
+
+        <?php if ($tagline) : ?>
+            <p class="hero-tagline"><?php echo esc_html($tagline); ?></p>
+        <?php endif; ?>
+
+        <div class="hero-buttons">
+            <?php if ($primary_btn_text && $primary_btn_url) : ?>
+                <a href="<?php echo esc_url($primary_btn_url); ?>" class="btn btn-primary btn-hero-primary">
+                    <?php echo esc_html($primary_btn_text); ?>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            <?php endif; ?>
+
+            <?php if ($secondary_btn_text && $secondary_btn_url) : ?>
+                <a href="<?php echo esc_url($secondary_btn_url); ?>" class="btn btn-secondary btn-hero-secondary">
+                    <?php if (strpos($secondary_btn_url, 'youtube') !== false || strpos($secondary_btn_url, 'vimeo') !== false) : ?>
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                    <?php endif; ?>
+                    <?php echo esc_html($secondary_btn_text); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="hero-scroll-indicator">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30">
+            <polyline points="6 9 12 15 18 9"/>
+        </svg>
+    </div>
+</section>
+
+<script>
+(function() {
+    var hero = document.getElementById('<?php echo esc_js($block_id); ?>');
+    if (!hero) return;
+
+    var rotatingEl = hero.querySelector('.hero-rotating-words');
+    if (!rotatingEl) return;
+
+    var words = JSON.parse(rotatingEl.dataset.words || '[]');
+    if (words.length <= 1) return;
+
+    var currentIndex = 0;
+
+    function rotateWord() {
+        currentIndex = (currentIndex + 1) % words.length;
+        rotatingEl.style.opacity = '0';
+        rotatingEl.style.transform = 'translateY(-10px)';
+
+        setTimeout(function() {
+            rotatingEl.textContent = words[currentIndex];
+            rotatingEl.style.opacity = '1';
+            rotatingEl.style.transform = 'translateY(0)';
+        }, 300);
+    }
+
+    setInterval(rotateWord, 3000);
+})();
+</script>

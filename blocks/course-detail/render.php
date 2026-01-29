@@ -9,6 +9,17 @@ $course_source = $attributes['courseSource'] ?? 'current';
 $selected_course = $attributes['selectedCourse'] ?? 0;
 $display_style = $attributes['displayStyle'] ?? 'full';
 
+// Section visibility - use individual toggles or fallback to display_style presets
+$show_header = $attributes['showHeader'] ?? ($display_style === 'full' || $display_style === 'header');
+$show_stats = $attributes['showStats'] ?? ($display_style === 'full' || $display_style === 'stats');
+$show_provas = $attributes['showProvas'] ?? ($display_style === 'full' || $display_style === 'info');
+$show_classificacao = $attributes['showClassificacao'] ?? ($display_style === 'full' || $display_style === 'info');
+$show_formula = $attributes['showFormula'] ?? ($display_style === 'full' || $display_style === 'info');
+$show_prerequisitos = $attributes['showPrerequisitos'] ?? ($display_style === 'full' || $display_style === 'info');
+$show_descricao = $attributes['showDescricao'] ?? ($display_style === 'full' || $display_style === 'description');
+$show_saidas = $attributes['showSaidas'] ?? ($display_style === 'full' || $display_style === 'description');
+$show_cta = $attributes['showCta'] ?? ($display_style === 'full' || $display_style === 'header');
+
 $block_id = 'course-detail-' . uniqid();
 
 // Get course ID
@@ -52,6 +63,8 @@ if (function_exists('get_field')) {
     $saber_mais = get_field('saber_mais', $course_id);
     $destaque = get_field('destaque', $course_id);
     $novo = get_field('novo', $course_id);
+    $certificacao = get_field('certificacao', $course_id);
+    $selo = get_field('selo', $course_id);
 } else {
     $grau = get_post_meta($course_id, 'grau', true);
     $info_extra = get_post_meta($course_id, 'info_extra_curso', true);
@@ -67,6 +80,8 @@ if (function_exists('get_field')) {
     $saber_mais = get_post_meta($course_id, 'saber_mais', true);
     $destaque = get_post_meta($course_id, 'destaque', true);
     $novo = get_post_meta($course_id, 'novo', true);
+    $certificacao = get_post_meta($course_id, 'certificacao', true);
+    $selo = get_post_meta($course_id, 'selo', true);
 }
 
 $wrapper_attributes = get_block_wrapper_attributes(array(
@@ -77,7 +92,7 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
 
 <div <?php echo $wrapper_attributes; ?>>
 
-    <?php if ($display_style === 'full' || $display_style === 'header') : ?>
+    <?php if ($show_header) : ?>
     <div class="course-detail-header">
         <div class="course-detail-header-content">
             <?php if ($destaque || $novo) : ?>
@@ -107,11 +122,22 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
+
+            <?php if ($certificacao || $selo) : ?>
+                <div class="course-detail-seals">
+                    <?php if ($certificacao) : ?>
+                        <img src="<?php echo esc_url($certificacao); ?>" alt="<?php esc_attr_e('Certificação', 'acesso-uporto'); ?>" class="course-seal course-certificacao">
+                    <?php endif; ?>
+                    <?php if ($selo) : ?>
+                        <img src="<?php echo esc_url($selo); ?>" alt="<?php esc_attr_e('Selo', 'acesso-uporto'); ?>" class="course-seal course-selo">
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <?php endif; ?>
 
-    <?php if ($display_style === 'full' || $display_style === 'stats') : ?>
+    <?php if ($show_stats) : ?>
     <div class="course-detail-stats">
         <?php if ($duracao) : ?>
             <div class="stat-item">
@@ -127,8 +153,8 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
             </div>
         <?php endif; ?>
 
-        <?php if (is_array($vagas) && !empty($vagas['fase_1'])) : ?>
-            <div class="stat-item">
+        <?php if (is_array($vagas) && (!empty($vagas['fase_1']) || !empty($vagas['fase_2']) || !empty($vagas['fase_3']))) : ?>
+            <div class="stat-item stat-multi">
                 <div class="stat-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -140,16 +166,39 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
                     <span class="stat-label">
                         <?php esc_html_e('Vagas', 'acesso-uporto'); ?>
                         <?php if (!empty($vagas['ano_das_vagas'])) : ?>
-                            (<?php echo esc_html($vagas['ano_das_vagas']); ?>)
+                            <small>(<?php echo esc_html($vagas['ano_das_vagas']); ?>)</small>
                         <?php endif; ?>
                     </span>
-                    <span class="stat-value"><?php echo esc_html($vagas['fase_1']); ?></span>
+                    <div class="stat-phases">
+                        <?php if (!empty($vagas['fase_1'])) : ?>
+                            <div class="phase-item">
+                                <span class="phase-label"><?php esc_html_e('1ª Fase', 'acesso-uporto'); ?></span>
+                                <span class="phase-value"><?php echo esc_html($vagas['fase_1']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($vagas['fase_2'])) : ?>
+                            <div class="phase-item">
+                                <span class="phase-label"><?php esc_html_e('2ª Fase', 'acesso-uporto'); ?></span>
+                                <span class="phase-value"><?php echo esc_html($vagas['fase_2']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($vagas['fase_3'])) : ?>
+                            <div class="phase-item">
+                                <span class="phase-label"><?php esc_html_e('3ª Fase', 'acesso-uporto'); ?></span>
+                                <span class="phase-value"><?php echo esc_html($vagas['fase_3']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         <?php endif; ?>
 
-        <?php if (is_array($nota_ultimo) && !empty($nota_ultimo['notas']['fase_1'])) : ?>
-            <div class="stat-item stat-highlight">
+        <?php
+        $has_notas = is_array($nota_ultimo) && is_array($nota_ultimo['notas'] ?? null) &&
+                     (!empty($nota_ultimo['notas']['fase_1']) || !empty($nota_ultimo['notas']['fase_2']) || !empty($nota_ultimo['notas']['fase_3']));
+        ?>
+        <?php if ($has_notas) : ?>
+            <div class="stat-item stat-highlight stat-multi">
                 <div class="stat-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
@@ -160,20 +209,43 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
                     <span class="stat-label">
                         <?php esc_html_e('Nota Último Colocado', 'acesso-uporto'); ?>
                         <?php if (!empty($nota_ultimo['ano_ultimo_classificado'])) : ?>
-                            (<?php echo esc_html($nota_ultimo['ano_ultimo_classificado']); ?>)
+                            <small>(<?php echo esc_html($nota_ultimo['ano_ultimo_classificado']); ?>)</small>
                         <?php endif; ?>
                     </span>
-                    <span class="stat-value"><?php echo esc_html($nota_ultimo['notas']['fase_1']); ?></span>
+                    <div class="stat-phases">
+                        <?php if (!empty($nota_ultimo['notas']['fase_1'])) : ?>
+                            <div class="phase-item">
+                                <span class="phase-label"><?php esc_html_e('1ª Fase', 'acesso-uporto'); ?></span>
+                                <span class="phase-value"><?php echo esc_html($nota_ultimo['notas']['fase_1']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($nota_ultimo['notas']['fase_2'])) : ?>
+                            <div class="phase-item">
+                                <span class="phase-label"><?php esc_html_e('2ª Fase', 'acesso-uporto'); ?></span>
+                                <span class="phase-value"><?php echo esc_html($nota_ultimo['notas']['fase_2']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($nota_ultimo['notas']['fase_3'])) : ?>
+                            <div class="phase-item">
+                                <span class="phase-label"><?php esc_html_e('3ª Fase', 'acesso-uporto'); ?></span>
+                                <span class="phase-value"><?php echo esc_html($nota_ultimo['notas']['fase_3']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         <?php endif; ?>
     </div>
     <?php endif; ?>
 
-    <?php if ($display_style === 'full' || $display_style === 'info') : ?>
+    <?php
+    // Check if any info section should be shown
+    $show_info_sections = $show_provas || $show_classificacao || $show_formula || $show_prerequisitos;
+    ?>
+    <?php if ($show_info_sections) : ?>
     <div class="course-detail-sections">
 
-        <?php if (is_array($provas) && !empty($provas['provas'])) : ?>
+        <?php if ($show_provas && is_array($provas) && !empty($provas['provas'])) : ?>
         <div class="course-section">
             <h3 class="course-section-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -195,7 +267,7 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
         </div>
         <?php endif; ?>
 
-        <?php if (is_array($classificacao) && (!empty($classificacao['nota_de_candidatura']) || !empty($classificacao['nota_prova_de_ingresso']))) : ?>
+        <?php if ($show_classificacao && is_array($classificacao) && (!empty($classificacao['nota_de_candidatura']) || !empty($classificacao['nota_prova_de_ingresso']))) : ?>
         <div class="course-section">
             <h3 class="course-section-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -224,7 +296,7 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
         </div>
         <?php endif; ?>
 
-        <?php if (is_array($formula) && (!empty($formula['percentagem_secundario']) || !empty($formula['nota_prova_de_ingresso']))) : ?>
+        <?php if ($show_formula && is_array($formula) && (!empty($formula['percentagem_secundario']) || !empty($formula['nota_prova_de_ingresso']))) : ?>
         <div class="course-section">
             <h3 class="course-section-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -252,7 +324,7 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
         </div>
         <?php endif; ?>
 
-        <?php if ($prerequisitos) : ?>
+        <?php if ($show_prerequisitos && $prerequisitos) : ?>
         <div class="course-section">
             <h3 class="course-section-title">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -270,10 +342,9 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
     </div>
     <?php endif; ?>
 
-    <?php if ($display_style === 'full' || $display_style === 'description') : ?>
-    <?php if ($descricao || $saidas) : ?>
+    <?php if (($show_descricao && $descricao) || ($show_saidas && $saidas)) : ?>
     <div class="course-detail-descriptions">
-        <?php if ($descricao) : ?>
+        <?php if ($show_descricao && $descricao) : ?>
         <div class="course-description">
             <h3><?php esc_html_e('Sobre o Curso', 'acesso-uporto'); ?></h3>
             <div class="description-content">
@@ -282,7 +353,7 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
         </div>
         <?php endif; ?>
 
-        <?php if ($saidas) : ?>
+        <?php if ($show_saidas && $saidas) : ?>
         <div class="course-description">
             <h3><?php esc_html_e('Saídas Profissionais', 'acesso-uporto'); ?></h3>
             <div class="description-content">
@@ -292,9 +363,8 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
         <?php endif; ?>
     </div>
     <?php endif; ?>
-    <?php endif; ?>
 
-    <?php if (is_array($saber_mais) && !empty($saber_mais['url']) && ($display_style === 'full' || $display_style === 'header')) : ?>
+    <?php if ($show_cta && is_array($saber_mais) && !empty($saber_mais['url'])) : ?>
     <div class="course-detail-cta">
         <a href="<?php echo esc_url($saber_mais['url']); ?>"
            class="btn btn-primary"

@@ -131,6 +131,8 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
                         $nota = get_field('nota_do_ultimo_colocado', $post_id);
                         $destaque = get_field('destaque', $post_id);
                         $novo = get_field('novo', $post_id);
+                        $certificacao = get_field('certificacao', $post_id);
+                        $selo = get_field('selo', $post_id);
                     } else {
                         $grau = get_post_meta($post_id, 'grau', true);
                         $duracao = get_post_meta($post_id, 'duracaoects', true);
@@ -138,6 +140,8 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
                         $nota = get_post_meta($post_id, 'nota_do_ultimo_colocado', true);
                         $destaque = get_post_meta($post_id, 'destaque', true);
                         $novo = get_post_meta($post_id, 'novo', true);
+                        $certificacao = get_post_meta($post_id, 'certificacao', true);
+                        $selo = get_post_meta($post_id, 'selo', true);
                     }
                 ?>
                     <article class="course-card" data-faculty="<?php echo esc_attr($faculty_slug); ?>">
@@ -198,6 +202,17 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
                                     </div>
                                 <?php endif; ?>
                             </div>
+
+                            <?php if ($certificacao || $selo) : ?>
+                                <div class="course-card-seals">
+                                    <?php if ($certificacao) : ?>
+                                        <img src="<?php echo esc_url($certificacao); ?>" alt="" class="course-card-seal">
+                                    <?php endif; ?>
+                                    <?php if ($selo) : ?>
+                                        <img src="<?php echo esc_url($selo); ?>" alt="" class="course-card-seal">
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
 
                             <div class="course-card-footer">
                                 <a href="<?php the_permalink(); ?>" class="course-card-link">

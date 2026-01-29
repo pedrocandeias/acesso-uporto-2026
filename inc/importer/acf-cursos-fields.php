@@ -240,6 +240,22 @@ function acesso_register_cursos_acf_fields() {
                 'name' => 'saber_mais',
                 'type' => 'link',
             ),
+            // Certificação (image URL)
+            array(
+                'key' => 'field_cursos_certificacao',
+                'label' => 'Certificação',
+                'name' => 'certificacao',
+                'type' => 'url',
+                'instructions' => 'URL da imagem de certificação (ex: PRR, etc.)',
+            ),
+            // Selo (image URL)
+            array(
+                'key' => 'field_cursos_selo',
+                'label' => 'Selo',
+                'name' => 'selo',
+                'type' => 'url',
+                'instructions' => 'URL da imagem do selo (ex: Jovens STEAM, etc.)',
+            ),
         ),
         'location' => array(
             array(

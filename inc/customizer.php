@@ -1,0 +1,588 @@
+<?php
+/**
+ * Theme Customizer - Colors and Typography Options
+ *
+ * @package AcessoUPorto
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Register Customizer settings
+ */
+function acesso_customize_register($wp_customize) {
+
+    // =====================================================
+    // LOGO & IDENTITY SECTION
+    // =====================================================
+    $wp_customize->add_section('acesso_logo_section', array(
+        'title'    => __('Logo e Identidade', 'acesso-uporto'),
+        'priority' => 20,
+    ));
+
+    // Main Logo
+    $wp_customize->add_setting('acesso_logo', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'acesso_logo', array(
+        'label'       => __('Logo Principal', 'acesso-uporto'),
+        'description' => __('Logo usado no cabeçalho (recomendado: PNG com fundo transparente).', 'acesso-uporto'),
+        'section'     => 'acesso_logo_section',
+    )));
+
+    // Logo for dark backgrounds
+    $wp_customize->add_setting('acesso_logo_light', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'acesso_logo_light', array(
+        'label'       => __('Logo Claro (para fundos escuros)', 'acesso-uporto'),
+        'description' => __('Versão clara do logo para uso em fundos escuros ou no footer.', 'acesso-uporto'),
+        'section'     => 'acesso_logo_section',
+    )));
+
+    // Logo Height
+    $wp_customize->add_setting('acesso_logo_height', array(
+        'default'           => '50',
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('acesso_logo_height', array(
+        'label'       => __('Altura do Logo (px)', 'acesso-uporto'),
+        'description' => __('Altura máxima do logo no cabeçalho.', 'acesso-uporto'),
+        'section'     => 'acesso_logo_section',
+        'type'        => 'number',
+        'input_attrs' => array(
+            'min'  => 30,
+            'max'  => 150,
+            'step' => 5,
+        ),
+    ));
+
+    // Favicon
+    $wp_customize->add_setting('acesso_favicon', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'acesso_favicon', array(
+        'label'       => __('Favicon', 'acesso-uporto'),
+        'description' => __('Ícone do site (recomendado: 512x512px PNG).', 'acesso-uporto'),
+        'section'     => 'acesso_logo_section',
+    )));
+
+    // =====================================================
+    // COLORS PANEL
+    // =====================================================
+    $wp_customize->add_panel('acesso_colors_panel', array(
+        'title'       => __('Cores do Tema', 'acesso-uporto'),
+        'description' => __('Personalize as cores do tema.', 'acesso-uporto'),
+        'priority'    => 30,
+    ));
+
+    // --- Primary Colors Section ---
+    $wp_customize->add_section('acesso_primary_colors', array(
+        'title'    => __('Cores Principais', 'acesso-uporto'),
+        'panel'    => 'acesso_colors_panel',
+        'priority' => 10,
+    ));
+
+    // Primary Color (Purple)
+    $wp_customize->add_setting('acesso_color_primary', array(
+        'default'           => '#572ddf',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_primary', array(
+        'label'    => __('Cor Primária', 'acesso-uporto'),
+        'description' => __('Cor principal do tema (botões, links, destaques).', 'acesso-uporto'),
+        'section'  => 'acesso_primary_colors',
+    )));
+
+    // Secondary Color (Pink)
+    $wp_customize->add_setting('acesso_color_secondary', array(
+        'default'           => '#da2489',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_secondary', array(
+        'label'    => __('Cor Secundária', 'acesso-uporto'),
+        'description' => __('Cor secundária (hover, acentos).', 'acesso-uporto'),
+        'section'  => 'acesso_primary_colors',
+    )));
+
+    // Dark Color
+    $wp_customize->add_setting('acesso_color_dark', array(
+        'default'           => '#060221',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_dark', array(
+        'label'    => __('Cor Escura', 'acesso-uporto'),
+        'description' => __('Cor para textos e fundos escuros.', 'acesso-uporto'),
+        'section'  => 'acesso_primary_colors',
+    )));
+
+    // --- Accent Colors Section ---
+    $wp_customize->add_section('acesso_accent_colors', array(
+        'title'    => __('Cores de Destaque', 'acesso-uporto'),
+        'panel'    => 'acesso_colors_panel',
+        'priority' => 20,
+    ));
+
+    // Cyan
+    $wp_customize->add_setting('acesso_color_cyan', array(
+        'default'           => '#00d084',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_cyan', array(
+        'label'   => __('Cyan / Verde', 'acesso-uporto'),
+        'section' => 'acesso_accent_colors',
+    )));
+
+    // Lavender
+    $wp_customize->add_setting('acesso_color_lavender', array(
+        'default'           => '#8887e2',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_lavender', array(
+        'label'   => __('Lavanda', 'acesso-uporto'),
+        'section' => 'acesso_accent_colors',
+    )));
+
+    // Coral
+    $wp_customize->add_setting('acesso_color_coral', array(
+        'default'           => '#ff6b6b',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_coral', array(
+        'label'   => __('Coral', 'acesso-uporto'),
+        'section' => 'acesso_accent_colors',
+    )));
+
+    // --- Gradient Section ---
+    $wp_customize->add_section('acesso_gradient_colors', array(
+        'title'    => __('Gradiente Principal', 'acesso-uporto'),
+        'panel'    => 'acesso_colors_panel',
+        'priority' => 30,
+    ));
+
+    // Gradient Start Color
+    $wp_customize->add_setting('acesso_gradient_start', array(
+        'default'           => '#572ddf',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_gradient_start', array(
+        'label'   => __('Cor Inicial do Gradiente', 'acesso-uporto'),
+        'section' => 'acesso_gradient_colors',
+    )));
+
+    // Gradient End Color
+    $wp_customize->add_setting('acesso_gradient_end', array(
+        'default'           => '#da2489',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_gradient_end', array(
+        'label'   => __('Cor Final do Gradiente', 'acesso-uporto'),
+        'section' => 'acesso_gradient_colors',
+    )));
+
+    // Gradient Direction
+    $wp_customize->add_setting('acesso_gradient_direction', array(
+        'default'           => '135deg',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('acesso_gradient_direction', array(
+        'label'   => __('Direção do Gradiente', 'acesso-uporto'),
+        'section' => 'acesso_gradient_colors',
+        'type'    => 'select',
+        'choices' => array(
+            '90deg'  => __('Horizontal (esquerda para direita)', 'acesso-uporto'),
+            '180deg' => __('Vertical (cima para baixo)', 'acesso-uporto'),
+            '135deg' => __('Diagonal (padrão)', 'acesso-uporto'),
+            '45deg'  => __('Diagonal invertida', 'acesso-uporto'),
+            '0deg'   => __('Vertical (baixo para cima)', 'acesso-uporto'),
+        ),
+    ));
+
+    // =====================================================
+    // TYPOGRAPHY PANEL
+    // =====================================================
+    $wp_customize->add_panel('acesso_typography_panel', array(
+        'title'       => __('Tipografia', 'acesso-uporto'),
+        'description' => __('Personalize as fontes do tema.', 'acesso-uporto'),
+        'priority'    => 35,
+    ));
+
+    // --- Body Font Section ---
+    $wp_customize->add_section('acesso_body_font', array(
+        'title'    => __('Fonte do Corpo', 'acesso-uporto'),
+        'panel'    => 'acesso_typography_panel',
+        'priority' => 10,
+    ));
+
+    // Body Font Family
+    $wp_customize->add_setting('acesso_font_body', array(
+        'default'           => 'Barlow',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_body', array(
+        'label'   => __('Fonte Principal', 'acesso-uporto'),
+        'description' => __('Fonte usada para textos do corpo.', 'acesso-uporto'),
+        'section' => 'acesso_body_font',
+        'type'    => 'select',
+        'choices' => acesso_get_google_fonts_list(),
+    ));
+
+    // Body Font Weight
+    $wp_customize->add_setting('acesso_font_body_weight', array(
+        'default'           => '400',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('acesso_font_body_weight', array(
+        'label'   => __('Peso da Fonte', 'acesso-uporto'),
+        'section' => 'acesso_body_font',
+        'type'    => 'select',
+        'choices' => array(
+            '300' => __('Light (300)', 'acesso-uporto'),
+            '400' => __('Regular (400)', 'acesso-uporto'),
+            '500' => __('Medium (500)', 'acesso-uporto'),
+            '600' => __('Semi-Bold (600)', 'acesso-uporto'),
+            '700' => __('Bold (700)', 'acesso-uporto'),
+        ),
+    ));
+
+    // --- Heading Font Section ---
+    $wp_customize->add_section('acesso_heading_font', array(
+        'title'    => __('Fonte dos Títulos', 'acesso-uporto'),
+        'panel'    => 'acesso_typography_panel',
+        'priority' => 20,
+    ));
+
+    // Heading Font Family
+    $wp_customize->add_setting('acesso_font_heading', array(
+        'default'           => 'Barlow Semi Condensed',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_heading', array(
+        'label'   => __('Fonte dos Títulos', 'acesso-uporto'),
+        'description' => __('Fonte usada para títulos H1-H6.', 'acesso-uporto'),
+        'section' => 'acesso_heading_font',
+        'type'    => 'select',
+        'choices' => acesso_get_google_fonts_list(),
+    ));
+
+    // Heading Font Weight
+    $wp_customize->add_setting('acesso_font_heading_weight', array(
+        'default'           => '700',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('acesso_font_heading_weight', array(
+        'label'   => __('Peso da Fonte', 'acesso-uporto'),
+        'section' => 'acesso_heading_font',
+        'type'    => 'select',
+        'choices' => array(
+            '400' => __('Regular (400)', 'acesso-uporto'),
+            '500' => __('Medium (500)', 'acesso-uporto'),
+            '600' => __('Semi-Bold (600)', 'acesso-uporto'),
+            '700' => __('Bold (700)', 'acesso-uporto'),
+            '800' => __('Extra-Bold (800)', 'acesso-uporto'),
+            '900' => __('Black (900)', 'acesso-uporto'),
+        ),
+    ));
+
+    // --- Font Size Section ---
+    $wp_customize->add_section('acesso_font_sizes', array(
+        'title'    => __('Tamanhos de Fonte', 'acesso-uporto'),
+        'panel'    => 'acesso_typography_panel',
+        'priority' => 30,
+    ));
+
+    // Base Font Size
+    $wp_customize->add_setting('acesso_font_size_base', array(
+        'default'           => '16',
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('acesso_font_size_base', array(
+        'label'   => __('Tamanho Base (px)', 'acesso-uporto'),
+        'description' => __('Tamanho base da fonte em pixels.', 'acesso-uporto'),
+        'section' => 'acesso_font_sizes',
+        'type'    => 'number',
+        'input_attrs' => array(
+            'min'  => 12,
+            'max'  => 24,
+            'step' => 1,
+        ),
+    ));
+}
+add_action('customize_register', 'acesso_customize_register');
+
+/**
+ * Get list of popular Google Fonts
+ */
+function acesso_get_google_fonts_list() {
+    return array(
+        // Sans-serif fonts
+        'Barlow'              => 'Barlow',
+        'Barlow Semi Condensed' => 'Barlow Semi Condensed',
+        'Barlow Condensed'    => 'Barlow Condensed',
+        'Inter'               => 'Inter',
+        'Roboto'              => 'Roboto',
+        'Open Sans'           => 'Open Sans',
+        'Lato'                => 'Lato',
+        'Montserrat'          => 'Montserrat',
+        'Poppins'             => 'Poppins',
+        'Nunito'              => 'Nunito',
+        'Nunito Sans'         => 'Nunito Sans',
+        'Raleway'             => 'Raleway',
+        'Ubuntu'              => 'Ubuntu',
+        'Source Sans Pro'     => 'Source Sans Pro',
+        'Work Sans'           => 'Work Sans',
+        'Rubik'               => 'Rubik',
+        'Outfit'              => 'Outfit',
+        'DM Sans'             => 'DM Sans',
+        'Plus Jakarta Sans'   => 'Plus Jakarta Sans',
+        'Space Grotesk'       => 'Space Grotesk',
+        'Manrope'             => 'Manrope',
+        'Figtree'             => 'Figtree',
+        // Serif fonts
+        'Playfair Display'    => 'Playfair Display',
+        'Merriweather'        => 'Merriweather',
+        'Lora'                => 'Lora',
+        'PT Serif'            => 'PT Serif',
+        'Libre Baskerville'   => 'Libre Baskerville',
+        'Source Serif Pro'    => 'Source Serif Pro',
+        'Crimson Text'        => 'Crimson Text',
+        // Display fonts
+        'Oswald'              => 'Oswald',
+        'Bebas Neue'          => 'Bebas Neue',
+        'Anton'               => 'Anton',
+        'Archivo Black'       => 'Archivo Black',
+    );
+}
+
+/**
+ * Output custom CSS from Customizer settings
+ */
+function acesso_customizer_css() {
+    // Get settings
+    $primary      = get_theme_mod('acesso_color_primary', '#572ddf');
+    $secondary    = get_theme_mod('acesso_color_secondary', '#da2489');
+    $dark         = get_theme_mod('acesso_color_dark', '#060221');
+    $cyan         = get_theme_mod('acesso_color_cyan', '#00d084');
+    $lavender     = get_theme_mod('acesso_color_lavender', '#8887e2');
+    $coral        = get_theme_mod('acesso_color_coral', '#ff6b6b');
+
+    $gradient_start = get_theme_mod('acesso_gradient_start', '#572ddf');
+    $gradient_end   = get_theme_mod('acesso_gradient_end', '#da2489');
+    $gradient_dir   = get_theme_mod('acesso_gradient_direction', '135deg');
+
+    $font_body         = get_theme_mod('acesso_font_body', 'Barlow');
+    $font_body_weight  = get_theme_mod('acesso_font_body_weight', '400');
+    $font_heading      = get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
+    $font_heading_weight = get_theme_mod('acesso_font_heading_weight', '700');
+    $font_size_base    = get_theme_mod('acesso_font_size_base', '16');
+
+    ?>
+    <style type="text/css" id="acesso-customizer-css">
+        :root {
+            /* Colors */
+            --color-primary: <?php echo esc_attr($primary); ?>;
+            --color-secondary: <?php echo esc_attr($secondary); ?>;
+            --color-dark: <?php echo esc_attr($dark); ?>;
+            --color-cyan: <?php echo esc_attr($cyan); ?>;
+            --color-lavender: <?php echo esc_attr($lavender); ?>;
+            --color-coral: <?php echo esc_attr($coral); ?>;
+
+            /* Legacy color names for compatibility */
+            --color-purple: <?php echo esc_attr($primary); ?>;
+            --color-pink: <?php echo esc_attr($secondary); ?>;
+
+            /* Gradient */
+            --gradient-primary: linear-gradient(<?php echo esc_attr($gradient_dir); ?>, <?php echo esc_attr($gradient_start); ?> 0%, <?php echo esc_attr($gradient_end); ?> 100%);
+
+            /* Typography */
+            --font-primary: '<?php echo esc_attr($font_body); ?>', sans-serif;
+            --font-display: '<?php echo esc_attr($font_heading); ?>', sans-serif;
+            --font-body-weight: <?php echo esc_attr($font_body_weight); ?>;
+            --font-heading-weight: <?php echo esc_attr($font_heading_weight); ?>;
+            --font-size-base: <?php echo esc_attr($font_size_base); ?>px;
+        }
+
+        /* Apply font family */
+        body {
+            font-family: var(--font-primary);
+            font-weight: var(--font-body-weight);
+            font-size: var(--font-size-base);
+        }
+
+        h1, h2, h3, h4, h5, h6,
+        .section-title,
+        .hero-title {
+            font-family: var(--font-display);
+            font-weight: var(--font-heading-weight);
+        }
+
+        /* Apply colors */
+        a {
+            color: var(--color-primary);
+        }
+        a:hover {
+            color: var(--color-secondary);
+        }
+
+        .btn-primary,
+        button[type="submit"],
+        input[type="submit"] {
+            background: var(--color-primary);
+        }
+        .btn-primary:hover,
+        button[type="submit"]:hover,
+        input[type="submit"]:hover {
+            background: var(--color-secondary);
+        }
+
+        /* Gradient backgrounds */
+        .has-gradient-background,
+        .hero-section,
+        .cta-section.style-gradient {
+            background: var(--gradient-primary);
+        }
+
+        /* Badge colors */
+        .badge-destaque {
+            background: var(--color-primary);
+        }
+        .badge-novo {
+            background: var(--color-secondary);
+        }
+
+        /* Stat highlights */
+        .stat-highlight .stat-value,
+        .stat-highlight .phase-value {
+            color: var(--color-primary);
+        }
+
+        /* Logo */
+        .site-logo img,
+        .custom-logo {
+            max-height: <?php echo esc_attr(get_theme_mod('acesso_logo_height', '50')); ?>px;
+            width: auto;
+        }
+    </style>
+    <?php
+}
+add_action('wp_head', 'acesso_customizer_css', 100);
+
+/**
+ * Enqueue Google Fonts based on Customizer settings
+ */
+function acesso_customizer_fonts() {
+    $font_body    = get_theme_mod('acesso_font_body', 'Barlow');
+    $font_heading = get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
+
+    // Build font families array (avoid duplicates)
+    $fonts = array();
+    $fonts[$font_body] = $font_body . ':wght@300;400;500;600;700';
+
+    if ($font_heading !== $font_body) {
+        $fonts[$font_heading] = $font_heading . ':wght@400;500;600;700;800;900';
+    }
+
+    // Build Google Fonts URL
+    $font_families = array_values($fonts);
+    $font_string = implode('&family=', array_map('urlencode', $font_families));
+
+    $google_fonts_url = 'https://fonts.googleapis.com/css2?family=' . $font_string . '&display=swap';
+
+    // Dequeue default fonts if set
+    wp_dequeue_style('acesso-google-fonts');
+
+    // Enqueue customized fonts
+    wp_enqueue_style(
+        'acesso-customizer-fonts',
+        $google_fonts_url,
+        array(),
+        null
+    );
+}
+add_action('wp_enqueue_scripts', 'acesso_customizer_fonts', 5);
+
+/**
+ * Live preview JS for Customizer
+ */
+function acesso_customizer_preview_js() {
+    wp_enqueue_script(
+        'acesso-customizer-preview',
+        get_template_directory_uri() . '/assets/js/customizer-preview.js',
+        array('customize-preview', 'jquery'),
+        '1.0.0',
+        true
+    );
+}
+add_action('customize_preview_init', 'acesso_customizer_preview_js');
+
+/**
+ * Get theme logo
+ *
+ * @param string $type 'default' or 'light' for dark backgrounds
+ * @return string Logo HTML or empty string
+ */
+function acesso_get_logo($type = 'default') {
+    $logo_url = '';
+
+    if ($type === 'light') {
+        $logo_url = get_theme_mod('acesso_logo_light', '');
+    }
+
+    if (empty($logo_url)) {
+        $logo_url = get_theme_mod('acesso_logo', '');
+    }
+
+    // Fallback to WordPress custom logo
+    if (empty($logo_url) && has_custom_logo()) {
+        return get_custom_logo();
+    }
+
+    if (empty($logo_url)) {
+        return '';
+    }
+
+    $logo_height = get_theme_mod('acesso_logo_height', '50');
+
+    return sprintf(
+        '<a href="%s" class="site-logo" rel="home"><img src="%s" alt="%s" style="max-height: %spx;"></a>',
+        esc_url(home_url('/')),
+        esc_url($logo_url),
+        esc_attr(get_bloginfo('name')),
+        esc_attr($logo_height)
+    );
+}
+
+/**
+ * Output favicon if set
+ */
+function acesso_output_favicon() {
+    $favicon = get_theme_mod('acesso_favicon', '');
+    if (!empty($favicon)) {
+        echo '<link rel="icon" href="' . esc_url($favicon) . '" type="image/png">' . "\n";
+        echo '<link rel="apple-touch-icon" href="' . esc_url($favicon) . '">' . "\n";
+    }
+}
+add_action('wp_head', 'acesso_output_favicon', 1);

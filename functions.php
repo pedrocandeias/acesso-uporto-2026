@@ -183,17 +183,40 @@ function acesso_enqueue_editor_assets() {
 add_action('enqueue_block_editor_assets', 'acesso_enqueue_editor_assets');
 
 /**
- * Register Native Gutenberg Blocks (Course Blocks)
+ * Register Native Gutenberg Blocks
  */
 function acesso_register_native_blocks() {
-    // Course Accordion Block
+    // Course Blocks
     register_block_type(ACESSO_THEME_DIR . '/blocks/course-accordion');
-
-    // Course Cards Block
     register_block_type(ACESSO_THEME_DIR . '/blocks/course-cards');
-
-    // Course Detail Block
     register_block_type(ACESSO_THEME_DIR . '/blocks/course-detail');
+
+    // Hero Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/hero');
+
+    // Statistics Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/statistics');
+
+    // Testimonials Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/testimonials');
+
+    // Feature Cards Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/feature-cards');
+
+    // Timeline Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/timeline');
+
+    // CTA Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/cta');
+
+    // Video Section Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/video-section');
+
+    // FAQ Accordion Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/faq-accordion');
+
+    // Faculty Cards Block
+    register_block_type(ACESSO_THEME_DIR . '/blocks/faculty-cards');
 }
 add_action('init', 'acesso_register_native_blocks');
 
@@ -1072,6 +1095,7 @@ function acesso_get_icon($name, $class = '') {
 /**
  * Include Additional Files
  */
+require_once ACESSO_THEME_DIR . '/inc/customizer.php';
 require_once ACESSO_THEME_DIR . '/inc/acf-course-fields.php';
 
 // Cursos Importer (integrated from uporto-cursos-importer plugin)

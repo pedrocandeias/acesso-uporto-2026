@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/feature-cards",
+    "version": "1.0.0",
+    "title": "Feature Cards",
+    "category": "acesso-blocks",
+    "icon": "grid-view",
+    "description": "Grid of feature cards with icons, titles and descriptions.",
+    "keywords": ["features", "cards", "grid", "services", "benefits"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": ""
+        },
+        "sectionSubtitle": {
+            "type": "string",
+            "default": ""
+        },
+        "features": {
+            "type": "array",
+            "default": [
+                {"icon": "building", "title": "15 Faculdades", "description": "+ 1 Business School", "link": ""},
+                {"icon": "groups", "title": "+35.700", "description": "Estudantes Inscritos", "link": ""},
+                {"icon": "science", "title": "48", "description": "Centros de Investigação", "link": ""},
+                {"icon": "library", "title": "18", "description": "Bibliotecas", "link": ""}
+            ]
+        },
+        "columns": {
+            "type": "number",
+            "default": 4
+        },
+        "style": {
+            "type": "string",
+            "default": "default"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "showIcons": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

@@ -18,11 +18,11 @@
     <header id="masthead" class="site-header">
         <div class="header-inner">
             <div class="site-branding">
-                <?php if (has_custom_logo()) : ?>
-                    <div class="site-logo">
-                        <?php the_custom_logo(); ?>
-                    </div>
-                <?php else : ?>
+                <?php
+                $logo = acesso_get_logo();
+                if (!empty($logo)) :
+                    echo $logo;
+                else : ?>
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo" rel="home">
                         <span class="site-title"><?php bloginfo('name'); ?></span>
                     </a>

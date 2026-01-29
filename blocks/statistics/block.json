@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/statistics",
+    "version": "1.0.0",
+    "title": "Statistics Counter",
+    "category": "acesso-blocks",
+    "icon": "chart-bar",
+    "description": "Animated statistics counters with numbers and labels.",
+    "keywords": ["statistics", "numbers", "counter", "stats", "data"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": ""
+        },
+        "stats": {
+            "type": "array",
+            "default": [
+                {"number": "15", "suffix": "", "label": "Faculdades", "icon": "building"},
+                {"number": "35700", "suffix": "+", "label": "Estudantes", "icon": "groups"},
+                {"number": "48", "suffix": "", "label": "Centros de Investigação", "icon": "science"},
+                {"number": "18", "suffix": "", "label": "Bibliotecas", "icon": "library"}
+            ]
+        },
+        "layout": {
+            "type": "string",
+            "default": "grid-4"
+        },
+        "style": {
+            "type": "string",
+            "default": "default"
+        },
+        "animateOnScroll": {
+            "type": "boolean",
+            "default": true
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "textColor": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,44 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/faculty-cards",
+    "version": "1.0.0",
+    "title": "Faculty Cards",
+    "category": "acesso-blocks",
+    "icon": "building",
+    "description": "Grid of faculty cards with images, names and links.",
+    "keywords": ["faculty", "faculties", "schools", "cards", "grid"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Faculdades"
+        },
+        "sectionSubtitle": {
+            "type": "string",
+            "default": "Conhece as 14 faculdades e a Business School da U.Porto"
+        },
+        "faculties": {
+            "type": "array",
+            "default": []
+        },
+        "columns": {
+            "type": "number",
+            "default": 4
+        },
+        "style": {
+            "type": "string",
+            "default": "default"
+        },
+        "showAcronym": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

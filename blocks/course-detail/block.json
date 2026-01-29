@@ -24,6 +24,42 @@
         "displayStyle": {
             "type": "string",
             "default": "full"
+        },
+        "showHeader": {
+            "type": "boolean",
+            "default": true
+        },
+        "showStats": {
+            "type": "boolean",
+            "default": true
+        },
+        "showProvas": {
+            "type": "boolean",
+            "default": true
+        },
+        "showClassificacao": {
+            "type": "boolean",
+            "default": true
+        },
+        "showFormula": {
+            "type": "boolean",
+            "default": true
+        },
+        "showPrerequisitos": {
+            "type": "boolean",
+            "default": true
+        },
+        "showDescricao": {
+            "type": "boolean",
+            "default": true
+        },
+        "showSaidas": {
+            "type": "boolean",
+            "default": true
+        },
+        "showCta": {
+            "type": "boolean",
+            "default": true
         }
     },
     "textdomain": "acesso-uporto",
