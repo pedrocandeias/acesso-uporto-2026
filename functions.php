@@ -1097,6 +1097,7 @@ function acesso_get_icon($name, $class = '') {
  */
 require_once ACESSO_THEME_DIR . '/inc/customizer.php';
 require_once ACESSO_THEME_DIR . '/inc/acf-course-fields.php';
+require_once ACESSO_THEME_DIR . '/inc/block-patterns.php';
 
 // Cursos Importer (integrated from uporto-cursos-importer plugin)
 require_once ACESSO_THEME_DIR . '/inc/importer/acf-cursos-fields.php';

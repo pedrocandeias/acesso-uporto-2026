@@ -2,6 +2,90 @@
 
 All notable changes to the Acesso U.Porto 2026 theme.
 
+## [1.2.1] - 2026-01-29
+
+### Added
+- feat(templates): add Home Page template with pre-placed blocks
+  - templates/template-home.php page template
+  - Automatic default content for empty front pages
+  - Full home page layout with all section blocks
+
+- feat(patterns): add block patterns for Acesso U.Porto
+  - "Home Page Completa" pattern with full layout
+  - Individual section patterns (Hero, Statistics, Testimonials, CTA)
+  - patterns/home-page.php with complete markup
+  - Block pattern category "Acesso U.Porto" in inserter
+
+- feat(front-page): auto-populate with default blocks
+  - front-page.php shows default content if page is empty
+  - Uses acesso_get_default_home_content() function
+  - Renders all custom blocks via the_content filter
+
+- feat(home): default home page sections (10 blocks)
+  1. Hero - Full-screen with rotating words, gradient, CTA buttons
+  2. Statistics - 5-column animated counters (Faculties, Students, etc.)
+  3. Feature Cards - 4 cards (Excellence, International, Research, Community)
+  4. Course Cards - Featured courses grid with filters
+  5. Testimonials - Student testimonials carousel (3 students)
+  6. Timeline - 3 application phases (Candidaturas, Colocações, Início)
+  7. Video Section - Embedded video with poster
+  8. Faculty Cards - 8 faculty cards with acronyms
+  9. FAQ Accordion - 5 common questions with answers
+  10. CTA - Final call-to-action with gradient background
+
+### Changed
+- refactor(functions): include block-patterns.php
+
+## [1.2.0] - 2026-01-29
+
+### Added
+- feat(blocks): convert all remaining ACF blocks to native Gutenberg
+  - Hero Section block with rotating text animation, gradient overlays, background images
+  - Statistics block with animated counters, multiple grid layouts (2-5 columns), icon styles
+  - Testimonials block with carousel/grid modes, autoplay, navigation dots
+  - Timeline block with horizontal/vertical layouts, colored phase icons
+  - CTA block with gradient/dark/light/image styles, dual buttons
+  - Video Section block with YouTube/Vimeo support, poster images, play overlay
+  - Faculty Cards block with image overlays, acronyms, hover effects
+
+- feat(blocks): add new Feature Cards block
+  - Customizable icon grid for university highlights
+  - Multiple style variants: default, elevated, bordered, gradient, minimal
+  - 2-6 column layouts with responsive breakpoints
+  - 16 icon options (building, groups, science, library, globe, etc.)
+
+- feat(blocks): add new FAQ Accordion block
+  - Expandable Q&A items with smooth animations
+  - Style variants: default, cards, minimal, bordered
+  - Optional question numbering
+  - Allow multiple or single item open modes
+
+- feat(styles): comprehensive block styles in assets/css/blocks.css
+  - UP.pt Acesso design system CSS variables (navy, gold, purple, pink)
+  - Complete styling for all 12 Gutenberg blocks
+  - Responsive breakpoints (1024px, 768px, 576px)
+  - Animation keyframes (bounce, fadeIn, slideDown)
+
+### Changed
+- refactor(functions): register all blocks as native Gutenberg
+  - Hero, Statistics, Testimonials, Feature Cards, Timeline
+  - CTA, Video Section, FAQ Accordion, Faculty Cards
+  - All blocks now work without ACF PRO dependency
+  - Blocks appear under "Acesso U.Porto" category in inserter
+
+- refactor(blocks): standardized block file structure
+  - block.json for metadata and attributes
+  - editor.js with InspectorControls for settings
+  - render.php for server-side frontend rendering
+  - editor.asset.php for dependencies
+
+### Technical
+- Each block includes:
+  - Multiple style/layout variants configurable in editor
+  - Full responsive design
+  - Accessibility features (ARIA labels, keyboard navigation)
+  - Inline JavaScript for interactivity (carousels, accordions, counters)
+
 ## [1.1.0] - 2026-01-28
 
 ### Added
@@ -148,40 +232,84 @@ All notable changes to the Acesso U.Porto 2026 theme.
 acesso-uporto-2026/
 ├── assets/
 │   ├── css/
-│   │   ├── blocks.css
+│   │   ├── blocks.css          # Comprehensive block styles
 │   │   └── editor.css
 │   └── js/
 │       └── main.js
 ├── blocks/
-│   ├── course-accordion/
+│   ├── course-accordion/       # Native Gutenberg block
 │   │   ├── block.json
+│   │   ├── editor.asset.php
 │   │   ├── editor.js
 │   │   └── render.php
-│   ├── course-cards/
+│   ├── course-cards/           # Native Gutenberg block
 │   │   ├── block.json
+│   │   ├── editor.asset.php
 │   │   ├── editor.js
 │   │   └── render.php
-│   ├── course-detail/
+│   ├── course-detail/          # Native Gutenberg block
 │   │   ├── block.json
+│   │   ├── editor.asset.php
 │   │   ├── editor.js
 │   │   └── render.php
-│   ├── course-blocks.css
-│   ├── cta/
-│   ├── faculty-cards/
-│   ├── hero/
-│   ├── statistics/
-│   ├── testimonials/
-│   ├── timeline/
-│   └── video-section/
+│   ├── cta/                    # Native Gutenberg block
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── faculty-cards/          # Native Gutenberg block
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── faq-accordion/          # Native Gutenberg block (NEW)
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── feature-cards/          # Native Gutenberg block (NEW)
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── hero/                   # Native Gutenberg block
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── statistics/             # Native Gutenberg block
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── testimonials/           # Native Gutenberg block
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── timeline/               # Native Gutenberg block
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   ├── video-section/          # Native Gutenberg block
+│   │   ├── block.json
+│   │   ├── editor.asset.php
+│   │   ├── editor.js
+│   │   └── render.php
+│   └── course-blocks.css       # Course block specific styles
 ├── inc/
 │   ├── acf-course-fields.php
+│   ├── block-patterns.php      # Block patterns & default home content
+│   ├── customizer.php
 │   └── importer/
 │       ├── acf-cursos-fields.php
 │       ├── class-cursos-importer.php
-│       ├── backups/
-│       ├── Licenciaturas_Mestrados_Cursos_2026.csv
-│       └── up_dges_courses.csv
+│       └── backups/
+├── patterns/
+│   └── home-page.php           # Full home page block pattern
 ├── templates/
+│   └── template-home.php       # Home Page template
 ├── 404.php
 ├── archive.php
 ├── archive-cursos.php
@@ -196,5 +324,6 @@ acesso-uporto-2026/
 ├── single-cursos.php
 ├── style.css
 ├── theme.json
+├── README.md
 └── CHANGELOG.md
 ```
