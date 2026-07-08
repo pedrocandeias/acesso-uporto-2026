@@ -1,0 +1,45 @@
+name: Empacotar tema (.zip) na release
+
+# Gera o zip distribuível do tema e anexa-o à release, para "Aparência →
+# Temas → Adicionar novo → Carregar tema" no WordPress.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag da release a empacotar (ex.: v1.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determinar a tag
+        id: tag
+        run: echo "tag=${{ github.event.release.tag_name || github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout da tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.tag.outputs.tag }}
+
+      - name: Construir o zip
+        run: |
+          git archive --format=zip \
+            --prefix=acesso-uporto-2026/ \
+            -o "acesso-uporto-2026-${{ steps.tag.outputs.tag }}.zip" \
+            HEAD
+          unzip -l "acesso-uporto-2026-${{ steps.tag.outputs.tag }}.zip" | head -20
+
+      - name: Anexar à release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${{ steps.tag.outputs.tag }}" \
+            "acesso-uporto-2026-${{ steps.tag.outputs.tag }}.zip" \
+            --clobber -R "${{ github.repository }}"
