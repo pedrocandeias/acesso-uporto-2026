@@ -1,2 +1,8 @@
 # Claude Code (config e memória locais)
 .claude/
+
+# Ficheiros de lock / sistema
+.~lock.*#
+.DS_Store
+Thumbs.db
+*.swp
