@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ACESSO_THEME_VERSION', '1.0.0');
+define('ACESSO_THEME_VERSION', '1.1.0');
 define('ACESSO_THEME_DIR', get_template_directory());
 define('ACESSO_THEME_URI', get_template_directory_uri());
 
@@ -1111,6 +1111,7 @@ function acesso_get_icon($name, $class = '') {
 require_once ACESSO_THEME_DIR . '/inc/customizer.php';
 require_once ACESSO_THEME_DIR . '/inc/acf-course-fields.php';
 require_once ACESSO_THEME_DIR . '/inc/block-patterns.php';
+require_once ACESSO_THEME_DIR . '/inc/github-update-check.php';
 
 // Cursos Importer (integrated from uporto-cursos-importer plugin)
 require_once ACESSO_THEME_DIR . '/inc/importer/acf-cursos-fields.php';
