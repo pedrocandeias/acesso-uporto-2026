@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/anchor-menu",
+    "version": "1.0.0",
+    "title": "Menu de Navegação",
+    "category": "acesso-blocks",
+    "icon": "menu",
+    "description": "Menu horizontal de links, opcionalmente fixo (sticky). Substitui o ld_custom_menu.",
+    "keywords": ["menu", "nav", "anchor", "ld_custom_menu"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "items": {
+            "type": "array",
+            "default": []
+        },
+        "alignment": {
+            "type": "string",
+            "default": "center"
+        },
+        "sticky": {
+            "type": "boolean",
+            "default": false
+        },
+        "anchorId": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

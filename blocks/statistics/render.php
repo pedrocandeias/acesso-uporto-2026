@@ -103,7 +103,13 @@ $grid_class = 'statistics-grid ' . esc_attr($layout);
         if (animated) return;
 
         var rect = section.getBoundingClientRect();
-        var visible = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        // Evita o operador "&&" no HTML (fica codificado por wptexturize dentro de markup aninhado).
+        var visible = false;
+        if (rect.top < window.innerHeight * 0.8) {
+            if (rect.bottom > 0) {
+                visible = true;
+            }
+        }
 
         if (visible) {
             animated = true;

@@ -1544,3 +1544,314 @@ a.feature-card:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================================================
+   Icon Box Block (migração ld_icon_box)
+   ========================================================================== */
+
+.icon-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 1rem);
+    /* sem height:100% — dentro de core/columns (que estica as colunas) isso esticava a caixa */
+    align-self: flex-start;
+}
+
+.icon-box.align-center { text-align: center; align-items: center; }
+.icon-box.align-left   { text-align: left;   align-items: flex-start; }
+.icon-box.align-right  { text-align: right;  align-items: flex-end; }
+
+/* Ícone ao lado do título/conteúdo */
+.icon-box.position-inline,
+.icon-box.position-side {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: var(--spacing-md, 1rem);
+}
+
+.icon-box.position-inline .icon-box-body,
+.icon-box.position-side .icon-box-body {
+    flex: 1;
+}
+
+.icon-box-icon {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-purple, #572ddf);
+}
+
+.icon-box-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+/* Estilo gradiente: bolha preenchida com o gradiente da marca */
+.icon-box.icon-style-gradient .icon-box-icon {
+    background: var(--gradient-primary, linear-gradient(135deg, #572ddf 0%, #da2489 100%));
+    border-radius: var(--radius-md, 8px);
+    color: var(--color-white, #fff);
+}
+
+.icon-box.icon-style-gradient .icon-box-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Estilo círculo contornado */
+.icon-box.icon-style-outline .icon-box-icon {
+    border: 2px solid var(--color-purple, #572ddf);
+    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+}
+
+.icon-box-title {
+    font-family: var(--font-condensed, 'Barlow Semi Condensed', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-dark, #060221);
+    margin: 0 0 var(--spacing-xs, 0.5rem) 0;
+}
+
+.icon-box-content {
+    font-size: 0.9375rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.icon-box-content p {
+    margin: 0 0 0.5rem 0;
+}
+
+.icon-box-content p:last-child {
+    margin-bottom: 0;
+}
+
+.icon-box-content a {
+    color: var(--color-pink, #da2489);
+    text-decoration: none;
+}
+
+.icon-box-content a:hover {
+    text-decoration: underline;
+}
+
+.icon-box-overlay-link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .icon-box.position-inline,
+    .icon-box.position-side {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+   Tabs Block (migração ld_tabs)
+   ========================================================================== */
+
+.acesso-tabs {
+    margin: var(--spacing-lg, 2rem) 0;
+}
+
+.acesso-tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs, 0.5rem);
+    justify-content: center;
+    border-bottom: 2px solid #eee;
+    margin-bottom: var(--spacing-lg, 2rem);
+}
+
+.acesso-tab-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    padding: var(--spacing-sm, 0.75rem) var(--spacing-md, 1rem);
+    font-family: var(--font-condensed, 'Barlow Semi Condensed', sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.acesso-tab-btn:hover {
+    color: var(--color-purple, #572ddf);
+}
+
+.acesso-tab-btn.is-active {
+    color: var(--color-purple, #572ddf);
+    border-bottom-color: var(--color-pink, #da2489);
+}
+
+.acesso-tab-panel {
+    display: none;
+}
+
+.acesso-tab-panel.is-active {
+    display: block;
+    animation: acesso-tab-fade 0.25s ease;
+}
+
+@keyframes acesso-tab-fade {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Editor: mostra os separadores empilhados com o título visível */
+.acesso-tab-editor-title {
+    font-family: var(--font-condensed, 'Barlow Semi Condensed', sans-serif);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-purple, #572ddf);
+    border-left: 3px solid var(--color-pink, #da2489);
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Modal Block (migração ld_modal_window)
+   ========================================================================== */
+
+.acesso-modal-block {
+    display: inline-block;
+}
+
+.acesso-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(6, 2, 33, 0.8);
+    padding: var(--spacing-lg, 2rem);
+    overflow-y: auto;
+}
+
+.acesso-modal-overlay.is-open {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    animation: acesso-modal-fade 0.2s ease;
+}
+
+@keyframes acesso-modal-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+body.acesso-modal-open {
+    overflow: hidden;
+}
+
+.acesso-modal-box {
+    position: relative;
+    background: var(--color-white, #fff);
+    border-radius: var(--radius-lg, 16px);
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    padding: var(--spacing-xl, 3rem);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.acesso-modal-close {
+    position: absolute;
+    top: var(--spacing-md, 1rem);
+    right: var(--spacing-md, 1rem);
+    appearance: none;
+    background: #f2f2f2;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-dark, #060221);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.acesso-modal-close:hover {
+    background: var(--color-pink, #da2489);
+    color: #fff;
+}
+
+.acesso-modal-content > *:first-child {
+    margin-top: 0;
+}
+
+.acesso-modal-editor {
+    border: 1px dashed #bbb;
+    border-radius: var(--radius-md, 8px);
+    padding: var(--spacing-md, 1rem);
+}
+
+.acesso-modal-editor-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Anchor Menu Block (migração ld_custom_menu)
+   ========================================================================== */
+
+.acesso-anchor-menu {
+    background: #f1f1f1;
+    padding: var(--spacing-xs, 0.5rem) var(--spacing-md, 1rem);
+}
+
+.acesso-anchor-menu.is-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.acesso-anchor-menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md, 1rem);
+}
+
+.acesso-anchor-menu.align-center .acesso-anchor-menu-list { justify-content: center; }
+.acesso-anchor-menu.align-left .acesso-anchor-menu-list   { justify-content: flex-start; }
+.acesso-anchor-menu.align-right .acesso-anchor-menu-list  { justify-content: flex-end; }
+
+.acesso-anchor-menu-item a {
+    display: block;
+    padding: var(--spacing-xs, 0.5rem) var(--spacing-sm, 0.75rem);
+    font-family: var(--font-condensed, 'Barlow Semi Condensed', sans-serif);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-pink, #da2489);
+    text-decoration: none;
+    border-radius: var(--radius-sm, 4px);
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.acesso-anchor-menu-item a:hover,
+.acesso-anchor-menu-item a.is-current {
+    color: var(--color-purple, #572ddf);
+    background: rgba(87, 45, 223, 0.08);
+}

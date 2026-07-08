@@ -150,8 +150,11 @@ if (empty($testimonials)) {
     }
 
     function startAutoplay() {
-        if (autoplay && cards.length > 1) {
-            interval = setInterval(nextSlide, speed);
+        // Sem "&&" (fica codificado por wptexturize dentro de markup aninhado).
+        if (autoplay) {
+            if (cards.length > 1) {
+                interval = setInterval(nextSlide, speed);
+            }
         }
     }
 

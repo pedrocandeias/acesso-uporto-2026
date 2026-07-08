@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/tab",
+    "version": "1.0.0",
+    "title": "Separador (Tab)",
+    "category": "acesso-blocks",
+    "icon": "index-card",
+    "description": "Uma secção de separador. Só pode ser usado dentro do bloco Tabs.",
+    "parent": ["acesso/tabs"],
+    "supports": {
+        "html": false,
+        "reusable": false
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

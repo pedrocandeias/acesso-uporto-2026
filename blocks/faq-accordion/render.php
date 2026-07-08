@@ -64,7 +64,7 @@ if (empty($items)) {
 
                     <div class="faq-content" id="faq-content-<?php echo $block_id . '-' . $index; ?>">
                         <div class="faq-answer">
-                            <?php echo wpautop(esc_html($answer)); ?>
+                            <?php echo wpautop(wp_kses_post($answer)); ?>
                         </div>
                     </div>
                 </div>
@@ -94,9 +94,12 @@ if (empty($items)) {
             if (!allowMultiple) {
                 // Close all other items
                 items.forEach(function(otherItem) {
-                    if (otherItem !== item && otherItem.classList.contains('active')) {
-                        otherItem.classList.remove('active');
-                        otherItem.querySelector('.faq-header').setAttribute('aria-expanded', 'false');
+                    // Sem "&&" (fica codificado por wptexturize dentro de markup aninhado).
+                    if (otherItem !== item) {
+                        if (otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.faq-header').setAttribute('aria-expanded', 'false');
+                        }
                     }
                 });
             }

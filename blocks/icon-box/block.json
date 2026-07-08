@@ -1,0 +1,44 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/icon-box",
+    "version": "1.0.0",
+    "title": "Icon Box",
+    "category": "acesso-blocks",
+    "icon": "info-outline",
+    "description": "Caixa com ícone, título e conteúdo livre. Substitui o ld_icon_box do Visual Composer.",
+    "keywords": ["icon", "box", "feature", "contact", "ld_icon_box"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "icon": {
+            "type": "string",
+            "default": "star"
+        },
+        "title": {
+            "type": "string",
+            "default": ""
+        },
+        "alignment": {
+            "type": "string",
+            "default": "center"
+        },
+        "position": {
+            "type": "string",
+            "default": "top"
+        },
+        "iconStyle": {
+            "type": "string",
+            "default": "gradient"
+        },
+        "link": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

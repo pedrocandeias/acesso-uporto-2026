@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/tabs",
+    "version": "1.0.0",
+    "title": "Tabs",
+    "category": "acesso-blocks",
+    "icon": "index-card",
+    "description": "Separadores com títulos e conteúdo. Substitui o ld_tabs do Visual Composer.",
+    "keywords": ["tabs", "separadores", "ld_tabs"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "wide"
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

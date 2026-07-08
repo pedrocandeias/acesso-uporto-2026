@@ -18,6 +18,8 @@
         initVideoPlayers();
         initRotatingText();
         initCounterAnimation();
+        initTabs();
+        initModals();
     });
 
     /**
@@ -292,6 +294,10 @@
             if (targetId === '#') return;
 
             const targetElement = document.querySelector(targetId);
+            // Deixa os links que abrem um modal para o initModals().
+            if (targetElement && targetElement.classList.contains('acesso-modal-overlay')) {
+                return;
+            }
             if (targetElement) {
                 e.preventDefault();
                 const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
@@ -304,5 +310,90 @@
             }
         });
     });
+
+    /**
+     * Tabs (bloco acesso/tabs)
+     */
+    function initTabs() {
+        document.querySelectorAll('.acesso-tabs').forEach(function(tabs) {
+            const buttons = tabs.querySelectorAll(':scope > .acesso-tabs-nav > .acesso-tab-btn');
+            const panels = tabs.querySelectorAll(':scope > .acesso-tabs-panels > .acesso-tab-panel');
+
+            function activate(index) {
+                buttons.forEach(function(b, i) {
+                    const active = i === index;
+                    b.classList.toggle('is-active', active);
+                    b.setAttribute('aria-selected', active ? 'true' : 'false');
+                });
+                panels.forEach(function(p, i) {
+                    p.classList.toggle('is-active', i === index);
+                });
+            }
+
+            buttons.forEach(function(btn, i) {
+                btn.addEventListener('click', function() { activate(i); });
+                btn.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        const dir = e.key === 'ArrowRight' ? 1 : -1;
+                        const next = (i + dir + buttons.length) % buttons.length;
+                        buttons[next].focus();
+                        activate(next);
+                    }
+                });
+            });
+        });
+    }
+
+    /**
+     * Modais (bloco acesso/modal)
+     */
+    function initModals() {
+        const overlays = document.querySelectorAll('.acesso-modal-overlay');
+        if (!overlays.length) return;
+
+        let lastFocused = null;
+
+        function openModal(overlay) {
+            if (!overlay) return;
+            lastFocused = document.activeElement;
+            overlay.classList.add('is-open');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('acesso-modal-open');
+            const closeBtn = overlay.querySelector('.acesso-modal-close');
+            if (closeBtn) closeBtn.focus();
+        }
+
+        function closeModal(overlay) {
+            overlay.classList.remove('is-open');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('acesso-modal-open');
+            if (lastFocused) lastFocused.focus();
+        }
+
+        overlays.forEach(function(overlay) {
+            const id = overlay.getAttribute('id');
+
+            // Botões-gatilho e quaisquer links <a href="#id">.
+            document.querySelectorAll('[data-modal-target="' + id + '"], a[href="#' + id + '"]').forEach(function(trigger) {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(overlay);
+                });
+            });
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) closeModal(overlay);
+            });
+            const closeBtn = overlay.querySelector('.acesso-modal-close');
+            if (closeBtn) closeBtn.addEventListener('click', function() { closeModal(overlay); });
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.acesso-modal-overlay.is-open').forEach(closeModal);
+            }
+        });
+    }
 
 })();

@@ -217,6 +217,19 @@ function acesso_register_native_blocks() {
 
     // Faculty Cards Block
     register_block_type(ACESSO_THEME_DIR . '/blocks/faculty-cards');
+
+    // Icon Box Block (migração ld_icon_box)
+    register_block_type(ACESSO_THEME_DIR . '/blocks/icon-box');
+
+    // Tabs (migração ld_tabs / ld_tab_section)
+    register_block_type(ACESSO_THEME_DIR . '/blocks/tabs');
+    register_block_type(ACESSO_THEME_DIR . '/blocks/tab');
+
+    // Modal (migração ld_modal_window)
+    register_block_type(ACESSO_THEME_DIR . '/blocks/modal');
+
+    // Menu de navegação (migração ld_custom_menu)
+    register_block_type(ACESSO_THEME_DIR . '/blocks/anchor-menu');
 }
 add_action('init', 'acesso_register_native_blocks');
 

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acesso/modal",
+    "version": "1.0.0",
+    "title": "Modal / Popup",
+    "category": "acesso-blocks",
+    "icon": "external",
+    "description": "Janela modal com conteúdo livre, aberta por um botão ou por qualquer link para o seu id. Substitui o ld_modal_window.",
+    "keywords": ["modal", "popup", "lightbox", "ld_modal_window"],
+    "supports": {
+        "html": false
+    },
+    "attributes": {
+        "anchorId": {
+            "type": "string",
+            "default": ""
+        },
+        "triggerLabel": {
+            "type": "string",
+            "default": "Ver mais"
+        },
+        "showTrigger": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "textdomain": "acesso-uporto",
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}
