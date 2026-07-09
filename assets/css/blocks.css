@@ -16,6 +16,39 @@
 }
 
 /* ==========================================================================
+   Largura do conteúdo das páginas (page.php)
+   ==========================================================================
+   O page.php mostra the_content() num .page-content sem contentor. Os blocos
+   core (colunas, headings, parágrafos) das páginas migradas não têm .container
+   próprio, por isso iam a toda a largura do ecrã. Aqui constrangem-se os blocos
+   de topo à largura de conteúdo; os alinhados wide/full alargam. */
+.page-content > * {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    box-sizing: border-box;
+}
+
+.page-content > .alignwide {
+    max-width: 1400px;
+}
+
+.page-content > .alignfull {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Blocos acesso/* já trazem .container interno — evita padding duplo. */
+.page-content > .wp-block-acesso-tabs,
+.page-content > .wp-block-acesso-anchor-menu {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* ==========================================================================
    Common Section Styles
    ========================================================================== */
 
@@ -440,7 +473,9 @@ a.feature-card:hover {
 .feature-card-inner {
     background: var(--color-white, #fff);
     border-radius: var(--radius-lg, 12px);
-    padding: var(--spacing-xl, 3rem);
+    /* padding moderado: --spacing-xl computa ~96px, demasiado para cartões
+       estreitos (4 por linha) e forçava o texto a uma palavra por linha. */
+    padding: 2rem 1.5rem;
     height: 100%;
     text-align: center;
     box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.08));
