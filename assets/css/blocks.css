@@ -117,7 +117,9 @@
     flex-wrap: wrap;
 }
 
-.btn-hero-primary {
+/* Especificidade .hero-buttons ... para vencer o CSS inline do customizer,
+   que aplica um fundo sólido a .btn-primary (o botão do hero é branco). */
+.hero-buttons .btn-hero-primary {
     background: var(--color-white, #fff);
     color: var(--color-purple, #572ddf);
     padding: 16px 32px;
@@ -130,7 +132,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-hero-primary:hover {
+.hero-buttons .btn-hero-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
@@ -182,14 +184,23 @@
     gap: var(--spacing-lg, 2rem);
 }
 
-.statistics-grid.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.statistics-grid.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.statistics-grid.grid-4 { grid-template-columns: repeat(4, 1fr); }
-.statistics-grid.grid-5 { grid-template-columns: repeat(5, 1fr); }
+/* minmax(0,1fr) — colunas iguais mesmo com rótulos de larguras diferentes
+   (um "1fr" simples = minmax(auto,1fr) e estica com o conteúdo). */
+.statistics-grid.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.statistics-grid.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.statistics-grid.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.statistics-grid.grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
 .statistics-section .stat-item {
+    /* display/flex-direction explícitos para vencer o .stat-item sem escopo
+       do course-blocks.css/style.css (que forçava layout horizontal). */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
     text-align: center;
-    padding: var(--spacing-lg, 2rem);
+    padding: 1.5rem 1rem;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -225,7 +236,7 @@
 
 .statistics-section .stat-number {
     font-family: var(--font-condensed, 'Barlow Semi Condensed', sans-serif);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
     font-weight: 900;
     color: var(--color-dark, #060221);
     line-height: 1;
@@ -409,11 +420,11 @@
     gap: var(--spacing-lg, 2rem);
 }
 
-.feature-cards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.feature-cards-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.feature-cards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
-.feature-cards-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
-.feature-cards-grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
+.feature-cards-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.feature-cards-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.feature-cards-grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.feature-cards-grid.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.feature-cards-grid.cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 
 .feature-card {
     text-decoration: none;
