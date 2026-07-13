@@ -1841,6 +1841,33 @@ body.acesso-modal-open {
     margin-top: 0;
 }
 
+/* Modal cujo conteúdo é um vídeo: o vídeo preenche a área, sem moldura branca
+   à volta (remove o padding do box, o padding da secção e o .container). */
+.acesso-modal-box:has(.video-section) {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    max-width: 960px;
+    overflow: visible;
+}
+
+.acesso-modal-box:has(.video-section) .video-section {
+    padding: 0;
+}
+
+.acesso-modal-box:has(.video-section) .video-section > .container {
+    max-width: none;
+    padding: 0;
+}
+
+/* botão fechar acima do canto do vídeo, sempre visível */
+.acesso-modal-box:has(.video-section) .acesso-modal-close {
+    top: -18px;
+    right: -18px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
 .acesso-modal-editor {
     border: 1px dashed #bbb;
     border-radius: var(--radius-md, 8px);
