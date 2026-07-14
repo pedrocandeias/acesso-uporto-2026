@@ -28,10 +28,18 @@ if (empty($faculties) && taxonomy_exists('faculdades')) {
 
     if (!is_wp_error($terms) && !empty($terms)) {
         foreach ($terms as $term) {
+            // Logo da faculdade (campo ACF na taxonomia: ID de anexo).
+            $img_id = get_term_meta($term->term_id, 'course_taxonomy_image', true)
+                ?: get_term_meta($term->term_id, 'image', true);
+            // Salta termos sem logo (proposta, duplicados, etc.).
+            if (empty($img_id)) {
+                continue;
+            }
+            $img_url = is_numeric($img_id) ? wp_get_attachment_url($img_id) : $img_id;
             $faculties[] = array(
                 'name' => $term->name,
                 'acronym' => get_term_meta($term->term_id, 'acronym', true) ?: '',
-                'image' => get_term_meta($term->term_id, 'image', true) ?: '',
+                'image' => $img_url ?: '',
                 'link' => get_term_link($term),
             );
         }
@@ -66,12 +74,12 @@ $grid_class = 'faculty-cards-grid cols-' . esc_attr($columns);
                 $link = $faculty['link'] ?? '';
                 $has_link = !empty($link);
                 $tag = $has_link ? 'a' : 'div';
-                $link_attr = $has_link ? ' href="' . esc_url($link) . '"' : '';
+                $link_attr = $has_link ? ' href="' . esc_url($link) . '" aria-label="' . esc_attr($name) . '"' : '';
             ?>
                 <<?php echo $tag; ?> class="faculty-card"<?php echo $link_attr; ?>>
                     <div class="faculty-card-inner">
                         <?php if ($image) : ?>
-                            <div class="faculty-card-image" style="background-image: url('<?php echo esc_url($image); ?>');">
+                            <div class="faculty-card-image" title="<?php echo esc_attr($name); ?>" style="background-image: url('<?php echo esc_url($image); ?>');">
                             </div>
                         <?php else : ?>
                             <div class="faculty-card-image faculty-card-placeholder">
@@ -272,6 +280,46 @@ a.faculty-card:hover .faculty-card-inner {
 
 .style-minimal .faculty-card-overlay {
     background: rgba(6,2,33,0.6);
+}
+
+/* Estilo "logos": mural de logos — cartão branco, logo contido e centrado */
+.style-logos .faculty-card-inner {
+    height: 150px;
+    background: var(--color-white, #fff);
+    border: 1px solid #ececec;
+    box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.06));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.75rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.style-logos a.faculty-card:hover .faculty-card-inner {
+    box-shadow: var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.12));
+    transform: translateY(-4px);
+}
+
+.style-logos .faculty-card-image {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.style-logos .faculty-card:hover .faculty-card-image {
+    transform: none;
+}
+
+.style-logos .faculty-card-overlay,
+.style-logos .faculty-card-content {
+    display: none;
 }
 
 /* Responsive */
