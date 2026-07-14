@@ -84,10 +84,22 @@ function acesso_get_latest_release($force = false) {
         return new WP_Error('acesso_parse', $result['error']);
     }
 
+    // URL do zip anexado à release (asset .zip gerado pelo workflow).
+    $zip = '';
+    if (!empty($body['assets']) && is_array($body['assets'])) {
+        foreach ($body['assets'] as $asset) {
+            if (!empty($asset['browser_download_url']) && substr($asset['name'], -4) === '.zip') {
+                $zip = $asset['browser_download_url'];
+                break;
+            }
+        }
+    }
+
     $data = array(
         'version' => ltrim($body['tag_name'], 'vV'),
         'url'     => !empty($body['html_url']) ? $body['html_url'] : 'https://github.com/' . ACESSO_GITHUB_REPO . '/releases',
         'name'    => !empty($body['name']) ? $body['name'] : $body['tag_name'],
+        'zip'     => $zip,
     );
     set_transient(ACESSO_UPDATE_TRANSIENT, $data, ACESSO_UPDATE_CACHE_HOURS * HOUR_IN_SECONDS);
     return $data;

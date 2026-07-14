@@ -1112,6 +1112,7 @@ require_once ACESSO_THEME_DIR . '/inc/customizer.php';
 require_once ACESSO_THEME_DIR . '/inc/acf-course-fields.php';
 require_once ACESSO_THEME_DIR . '/inc/block-patterns.php';
 require_once ACESSO_THEME_DIR . '/inc/github-update-check.php';
+require_once ACESSO_THEME_DIR . '/inc/theme-updater-page.php';
 
 // Cursos Importer (integrated from uporto-cursos-importer plugin)
 require_once ACESSO_THEME_DIR . '/inc/importer/acf-cursos-fields.php';
