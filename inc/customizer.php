@@ -77,6 +77,29 @@ function acesso_customize_register($wp_customize) {
     )));
 
     // =====================================================
+    // APARÊNCIA
+    // =====================================================
+    $wp_customize->add_section('acesso_appearance', array(
+        'title'    => __('Aparência', 'acesso-uporto'),
+        'priority' => 25,
+    ));
+    $wp_customize->add_setting('acesso_corner_style', array(
+        'default'           => 'rounded',
+        'sanitize_callback' => 'acesso_sanitize_corner_style',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_corner_style', array(
+        'label'       => __('Cantos', 'acesso-uporto'),
+        'description' => __('Cantos das caixas, cartões e botões. (Ícones e avatares redondos mantêm-se.)', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'radio',
+        'choices'     => array(
+            'rounded' => __('Redondos (predefinição)', 'acesso-uporto'),
+            'square'  => __('Retangulares', 'acesso-uporto'),
+        ),
+    ));
+
+    // =====================================================
     // COLORS PANEL
     // =====================================================
     $wp_customize->add_panel('acesso_colors_panel', array(
@@ -526,6 +549,13 @@ function acesso_get_google_fonts_list() {
 }
 
 /**
+ * Sanitiza a opção de estilo de cantos.
+ */
+function acesso_sanitize_corner_style($value) {
+    return in_array($value, array('rounded', 'square'), true) ? $value : 'rounded';
+}
+
+/**
  * Output custom CSS from Customizer settings
  */
 function acesso_customizer_css() {
@@ -556,6 +586,9 @@ function acesso_customizer_css() {
     $heading_scale_pct = max(50, min(200, $heading_scale_pct ?: 100));
     $heading_scale     = round($heading_scale_pct / 100, 3);
 
+    // Estilo dos cantos (redondos por defeito / retangulares).
+    $corner_style = acesso_sanitize_corner_style(get_theme_mod('acesso_corner_style', 'rounded'));
+
     ?>
     <style type="text/css" id="acesso-customizer-css">
         :root {
@@ -584,6 +617,13 @@ function acesso_customizer_css() {
             --font-body-weight: <?php echo esc_attr($font_body_weight); ?>;
             --font-heading-weight: <?php echo esc_attr($font_heading_weight); ?>;
             --font-size-base: <?php echo esc_attr($font_size_base); ?>px;
+<?php if ($corner_style === 'square') : ?>
+            /* Cantos retangulares: anula os raios das caixas/cartões/botões */
+            --radius-sm: 0;
+            --radius-md: 0;
+            --radius-lg: 0;
+            --radius-full: 0;
+<?php endif; ?>
         }
 
         /* Apply font family */
