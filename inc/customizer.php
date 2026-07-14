@@ -406,14 +406,32 @@ function acesso_customize_register($wp_customize) {
         'transport'         => 'postMessage',
     ));
     $wp_customize->add_control('acesso_font_size_base', array(
-        'label'   => __('Tamanho Base (px)', 'acesso-uporto'),
-        'description' => __('Tamanho base da fonte em pixels.', 'acesso-uporto'),
+        'label'   => __('Tamanho do Texto do Corpo (px)', 'acesso-uporto'),
+        'description' => __('Tamanho base do texto do corpo em pixels.', 'acesso-uporto'),
         'section' => 'acesso_font_sizes',
         'type'    => 'number',
         'input_attrs' => array(
             'min'  => 12,
             'max'  => 24,
             'step' => 1,
+        ),
+    ));
+
+    // Heading Scale (multiplicador dos títulos)
+    $wp_customize->add_setting('acesso_font_heading_scale', array(
+        'default'           => '100',
+        'sanitize_callback' => 'absint',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_heading_scale', array(
+        'label'       => __('Escala dos Títulos (%)', 'acesso-uporto'),
+        'description' => __('Aumenta ou diminui todos os títulos proporcionalmente, mantendo a responsividade. 100% = tamanho original.', 'acesso-uporto'),
+        'section'     => 'acesso_font_sizes',
+        'type'        => 'number',
+        'input_attrs' => array(
+            'min'  => 70,
+            'max'  => 160,
+            'step' => 5,
         ),
     ));
 }
@@ -533,6 +551,11 @@ function acesso_customizer_css() {
     $font_menu   = get_theme_mod('acesso_font_menu_custom', '') ?: get_theme_mod('acesso_font_menu', '');
     $font_footer = get_theme_mod('acesso_font_footer_custom', '') ?: get_theme_mod('acesso_font_footer', '');
 
+    // Escala dos títulos (multiplicador). 100 = sem alteração.
+    $heading_scale_pct = absint(get_theme_mod('acesso_font_heading_scale', 100));
+    $heading_scale_pct = max(50, min(200, $heading_scale_pct ?: 100));
+    $heading_scale     = round($heading_scale_pct / 100, 3);
+
     ?>
     <style type="text/css" id="acesso-customizer-css">
         :root {
@@ -576,6 +599,16 @@ function acesso_customizer_css() {
             font-family: var(--font-display);
             font-weight: var(--font-heading-weight);
         }
+<?php if ($heading_scale_pct !== 100) : ?>
+        /* Escala dos títulos (mantém o clamp responsivo, multiplicado). */
+        :root { --heading-scale: <?php echo esc_attr($heading_scale); ?>; }
+        :root .hero-title    { font-size: calc(clamp(3rem, 10vw, 8rem) * var(--heading-scale, 1)); }
+        :root .section-title { font-size: calc(clamp(2rem, 4vw, 3rem) * var(--heading-scale, 1)); }
+        :root h1 { font-size: calc(clamp(2.5rem, 5vw, 3.5rem) * var(--heading-scale, 1)); }
+        :root h2 { font-size: calc(clamp(2rem, 4vw, 2.75rem) * var(--heading-scale, 1)); }
+        :root h3 { font-size: calc(clamp(1.5rem, 3vw, 2rem) * var(--heading-scale, 1)); }
+        :root h4 { font-size: calc(1.5rem * var(--heading-scale, 1)); }
+<?php endif; ?>
 <?php if ($font_menu) : ?>
         /* Fonte específica do menu */
         #site-navigation .nav-menu,
