@@ -1,0 +1,250 @@
+- generic [ref=f3e2]:
+  - link "Skip to content" [ref=f3e3] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Acesso2" [ref=f3e7] [cursor=pointer]:
+        - /url: https://acesso2.ddev.site/
+        - img "Acesso2" [ref=f3e8]
+      - navigation [ref=f3e9]:
+        - list [ref=f3e10]:
+          - listitem [ref=f3e11]:
+            - link "Cursos" [ref=f3e12] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/cursos/
+          - listitem [ref=f3e13]:
+            - link "Candidata-te" [ref=f3e14] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/candidaturas-ensino-superior/
+          - listitem [ref=f3e15]:
+            - link "Conhece a Universidade" [ref=f3e16] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/conhece-a-universidade-do-porto/
+          - listitem [ref=f3e17]:
+            - link "Sempre contigo!" [ref=f3e18] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/sempre-contigo/
+          - listitem [ref=f3e19]:
+            - link "Explora!" [ref=f3e20] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/visitas-virtuais/
+  - main [ref=f3e21]:
+    - article [ref=f3e22]:
+      - heading "Sempre contigo!" [level=1] [ref=f3e24]
+      - generic [ref=f3e25]:
+        - generic [ref=f3e26]:
+          - figure [ref=f3e28]
+          - generic [ref=f3e29]:
+            - heading "Desde o início contigo …e para sempre" [level=2] [ref=f3e30]
+            - paragraph [ref=f3e32]: Enquanto estudante da Universidade do Porto, tens acesso privilegiado a um conjunto de serviços e estruturas que te vão acompanhar e apoiar em todo o teu percurso académico, desde a receção à Universidade até à tua graduação.
+            - paragraph [ref=f3e33]:
+              - text: Do
+              - link "alojamento" [ref=f3e34] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/viver/vida-estudantil/alojamento/
+              - text: à
+              - link "alimentação" [ref=f3e35] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/viver/vida-estudantil/cantinas-snack-bares-e-restaurantes/
+              - text: ", sem esquecer as estruturas de"
+              - link "integração académica" [ref=f3e36] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/viver/vida-estudantil/acolhimento-e-integracao/
+              - text: e de
+              - link "apoio ao ensino" [ref=f3e37] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/estudar/apoio-ao-estudo/espacos-de-estudo/
+              - text: ", o nosso"
+              - link "campus" [ref=f3e38] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/conhecer/o-campus/mapa-interativo/
+              - text: está pensado à medida das tuas necessidades!
+        - generic [ref=f3e39]:
+          - generic [ref=f3e40]:
+            - generic [ref=f3e41]:
+              - 'link "Apoio médico: consultas de medicina dentária, aconselhamento alimentar, consultas de psicologia" [ref=f3e42] [cursor=pointer]':
+                - /url: https://www.up.pt/portal/pt/sasup/saude/apresentacao/
+              - img [ref=f3e44]
+              - 'heading "Apoio médico: consultas de medicina dentária, aconselhamento alimentar, consultas de psicologia" [level=3] [ref=f3e47]'
+            - generic [ref=f3e49]:
+              - link "Associações de estudantes" [ref=f3e50] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/viver/vida-estudantil/associacoes-estudantes/
+              - img [ref=f3e52]
+              - heading "Associações de estudantes" [level=3] [ref=f3e55]
+            - generic [ref=f3e57]:
+              - link "Bolsas de estudo" [ref=f3e58] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/sasup/bolsas/apresentacao/
+              - img [ref=f3e60]
+              - heading "Bolsas de estudo" [level=3] [ref=f3e63]
+            - generic [ref=f3e65]:
+              - link "Centro de Desporto da U.Porto" [ref=f3e66] [cursor=pointer]:
+                - /url: https://cdup.up.pt/
+              - img [ref=f3e68]
+              - heading "Centro de Desporto da U.Porto" [level=3] [ref=f3e71]
+            - generic [ref=f3e73]:
+              - link "Integração na Universidade - Programa de Mentoria" [ref=f3e74] [cursor=pointer]:
+                - /url: https://up.pt/mentoriaup/
+              - img [ref=f3e76]
+              - heading "Integração na Universidade – Programa de Mentoria" [level=3] [ref=f3e79]
+            - generic [ref=f3e81]:
+              - link "Núcleo de Apoio à Inclusão (NAI)" [ref=f3e82] [cursor=pointer]:
+                - /url: https://www.up.pt/nai
+              - img [ref=f3e84]
+              - heading "Núcleo de Apoio à Inclusão (NAI)" [level=3] [ref=f3e87]
+          - generic [ref=f3e88]:
+            - generic [ref=f3e89]:
+              - link "Provedor do Estudante" [ref=f3e90] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/conhecer/organizacao/provedorias/
+              - img [ref=f3e92]
+              - heading "Provedor do Estudante" [level=3] [ref=f3e95]
+            - generic [ref=f3e97]:
+              - link "Serviços Académicos" [ref=f3e98] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/estudar/informacoes-academicas/apoio-academico/
+              - img [ref=f3e100]
+              - heading "Serviços Académicos" [level=3] [ref=f3e103]
+            - generic [ref=f3e105]:
+              - link "Serviços de Ação Social" [ref=f3e106] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/sasup/
+              - img [ref=f3e108]
+              - heading "Serviços de Ação Social" [level=3] [ref=f3e111]
+            - generic [ref=f3e113]:
+              - link "Serviços de Relações Internacionais" [ref=f3e114] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/estudar/mobilidade/estudar-la-fora/
+              - img [ref=f3e116]
+              - heading "Serviços de Relações Internacionais" [level=3] [ref=f3e119]
+            - generic [ref=f3e121]:
+              - link "U.Porto Talento e Carreira" [ref=f3e122] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/talento-e-carreira/
+              - img [ref=f3e124]
+              - heading "U.Porto Talento e Carreira" [level=3] [ref=f3e127]
+            - generic [ref=f3e129]:
+              - link "Voluntariado na U.Porto" [ref=f3e130] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/viver/voluntariado/fazer-voluntariado/
+              - img [ref=f3e132]
+              - heading "Voluntariado na U.Porto" [level=3] [ref=f3e135]
+            - generic [ref=f3e137]:
+              - link "U.Porto Alumni" [ref=f3e138] [cursor=pointer]:
+                - /url: https://www.up.pt/portal/pt/alumni/
+              - img [ref=f3e140]
+              - heading "U.Porto Alumni" [level=3] [ref=f3e143]
+        - heading "SERVIÇOS DE AÇÃO SOCIAL" [level=2] [ref=f3e146]
+        - heading "Bolsas de estudo" [level=3] [ref=f3e147]
+        - paragraph [ref=f3e148]: "Na U.Porto terás a possibilidade de te candidatar aos vários programas de apoio aos estudantes:"
+        - generic [ref=f3e149]:
+          - tablist [ref=f3e150]:
+            - tab "Bolsas de estudo" [selected] [ref=f3e151] [cursor=pointer]
+            - tab "Bolsas de Mérito" [ref=f3e152] [cursor=pointer]
+          - tabpanel [ref=f3e154]:
+            - paragraph [ref=f3e155]:
+              - strong [ref=f3e156]: Quem se pode candidatar?
+              - text: Estudantes inscritos no 1.º ou 2.º ciclo (Licenciatura ou Mestrado integrado)
+            - paragraph [ref=f3e157]:
+              - strong [ref=f3e158]: Quando te podes candidatar?
+              - text: Entre 25 de junho e 30 de setembro e/ou nos 20 dias depois da realização da matrícula.
+            - paragraph [ref=f3e159]:
+              - strong [ref=f3e160]: Como te podes candidatar?
+              - text: As candidaturas são feitas online no
+              - link "site da DGES" [ref=f3e161] [cursor=pointer]:
+                - /url: https://www.dges.gov.pt/pt/pagina/bolsas-de-estudo
+              - text: .
+        - generic [ref=f3e162]:
+          - heading "Alimentação e cantinas" [level=2] [ref=f3e163]
+          - paragraph [ref=f3e164]:
+            - text: Nos vários espaços da U.Porto tens à tua disposição uma
+            - link "rede alargada de cantinas, restaurantes, snack-bares e grill" [ref=f3e165] [cursor=pointer]:
+              - /url: https://www.up.pt/portal/pt/sasup/alimentacao/cantinas/
+            - text: ", onde podes usufruir de"
+            - link "refeições de qualidade" [ref=f3e166] [cursor=pointer]:
+              - /url: https://www.up.pt/portal/pt/viver/vida-estudantil/cantinas-snack-bares-e-restaurantes/
+            - text: ", a preços acessíveis."
+          - paragraph [ref=f3e167]: As cantinas da Universidade servem almoços e jantares e têm disponíveis opções de carne, peixe, vegetariano e ainda pratos vegan.
+          - generic [ref=f3e170]:
+            - generic [ref=f3e171]:
+              - generic [ref=f3e172]: "8"
+              - generic [ref=f3e173]: Cantinas
+            - generic [ref=f3e174]:
+              - generic [ref=f3e175]: "4"
+              - generic [ref=f3e176]: snack-bares
+            - generic [ref=f3e177]:
+              - generic [ref=f3e178]: "1"
+              - generic [ref=f3e179]: Restaurante
+            - generic [ref=f3e180]:
+              - generic [ref=f3e181]: "1"
+              - generic [ref=f3e182]: Grill
+        - generic [ref=f3e183]:
+          - heading "Alojamento" [level=2] [ref=f3e184]
+          - paragraph [ref=f3e185]:
+            - text: A Universidade do Porto dispõe de
+            - link "9 residências universitárias e dois estúdios" [ref=f3e186] [cursor=pointer]:
+              - /url: https://www.up.pt/portal/pt/sasup/alojamento/residencias/
+            - text: para o
+            - link "alojamento" [ref=f3e187] [cursor=pointer]:
+              - /url: https://www.up.pt/portal/pt/sasup/alojamento/apresentacao/
+            - text: dos seus estudantes, tendo prioridade os bolseiros abrangidos pelo Sistema das bolsas de estudo que pela distância ou dificuldade de transporte não possam residir com o agregado familiar durante o ano letivo.
+          - paragraph [ref=f3e188]:
+            - text: As candidaturas são feitas depois da matrícula, através dos
+            - link "Serviços de Ação Social da U.Porto" [ref=f3e189] [cursor=pointer]:
+              - /url: https://www.up.pt/portal/pt/sasup/alojamento/candidaturas/
+            - text: .
+          - generic [ref=f3e192]:
+            - generic [ref=f3e193]:
+              - generic [ref=f3e194]: "9"
+              - generic [ref=f3e195]: Residências universitárias
+            - generic [ref=f3e196]:
+              - generic [ref=f3e197]: "2"
+              - generic [ref=f3e198]: Estúdios
+        - generic [ref=f3e199]:
+          - heading "SAÚDE" [level=2] [ref=f3e200]
+          - paragraph [ref=f3e201]: "Enquanto estudante da Universidade do Porto, terás acesso a apoio médico das várias especialidades:"
+          - generic [ref=f3e203]:
+            - generic [ref=f3e204]:
+              - generic [ref=f3e205]:
+                - link "Medicina Geral e Familiar" [ref=f3e206] [cursor=pointer]:
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e208]
+                - heading "Medicina Geral e Familiar" [level=3] [ref=f3e211]
+              - generic [ref=f3e213]:
+                - link "Nutrição" [ref=f3e214] [cursor=pointer]:
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e216]
+                - heading "Nutrição" [level=3] [ref=f3e219]
+              - generic [ref=f3e221]:
+                - link "Medicina Dentária" [ref=f3e222] [cursor=pointer]:
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e224]
+                - heading "Medicina Dentária" [level=3] [ref=f3e227]
+              - generic [ref=f3e229]:
+                - link "Ginecologia/Obstetrícia" [ref=f3e230] [cursor=pointer]:
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e232]
+                - heading "Ginecologia/Obstetrícia" [level=3] [ref=f3e235]
+            - generic [ref=f3e236]:
+              - generic [ref=f3e237]:
+                - link "Psicologia" [ref=f3e238] [cursor=pointer]:
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e240]
+                - heading "Psicologia" [level=3] [ref=f3e243]
+              - generic [ref=f3e245]:
+                - link "Psiquiatria" [ref=f3e246] [cursor=pointer]:
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e248]
+                - heading "Psiquiatria" [level=3] [ref=f3e251]
+              - generic [ref=f3e253]:
+                - 'link "Saúde Sexual: Sexologia Clínica, Género e Sexualidade" [ref=f3e254] [cursor=pointer]':
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e256]
+                - 'heading "Saúde Sexual: Sexologia Clínica, Género e Sexualidade" [level=3] [ref=f3e259]'
+              - generic [ref=f3e261]:
+                - link "Outras" [ref=f3e262] [cursor=pointer]:
+                  - /url: https://www.up.pt/portal/pt/sasup/saude/especialidades/
+                - img [ref=f3e264]
+                - heading "Outras" [level=3] [ref=f3e267]
+  - contentinfo [ref=f3e268]:
+    - generic [ref=f3e270]:
+      - generic [ref=f3e271]:
+        - link "Facebook" [ref=f3e272] [cursor=pointer]:
+          - /url: https://www.facebook.com/universidadedoporto
+          - img [ref=f3e273]
+        - link "Youtube" [ref=f3e275] [cursor=pointer]:
+          - /url: https://www.youtube.com/user/universidadedoporto
+          - img [ref=f3e276]
+        - link "Instagram" [ref=f3e278] [cursor=pointer]:
+          - /url: https://www.instagram.com/uporto/
+          - img [ref=f3e279]
+        - link "Linkedin" [ref=f3e282] [cursor=pointer]:
+          - /url: https://www.linkedin.com/school/universidadedoporto/
+          - img [ref=f3e283]
+      - link "Universidade do Porto" [ref=f3e288] [cursor=pointer]:
+        - /url: https://www.up.pt
+        - img "Universidade do Porto" [ref=f3e289]
+      - paragraph [ref=f3e290]: 2026 © UNIVERSIDADE DO PORTO

@@ -332,6 +332,66 @@ function acesso_customize_register($wp_customize) {
         ),
     ));
 
+    // --- Menu Font Section ---
+    $wp_customize->add_section('acesso_menu_font', array(
+        'title'    => __('Fonte do Menu', 'acesso-uporto'),
+        'panel'    => 'acesso_typography_panel',
+        'priority' => 22,
+    ));
+    $wp_customize->add_setting('acesso_font_menu', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_menu', array(
+        'label'       => __('Fonte do Menu', 'acesso-uporto'),
+        'description' => __('Menu de navegação do cabeçalho. Deixa em "(usar predefinição)" para herdar.', 'acesso-uporto'),
+        'section'     => 'acesso_menu_font',
+        'type'        => 'select',
+        'choices'     => array_merge(array('' => __('(usar predefinição)', 'acesso-uporto')), acesso_get_google_fonts_list()),
+    ));
+    $wp_customize->add_setting('acesso_font_menu_custom', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_menu_custom', array(
+        'label'       => __('Ou outra Google Font', 'acesso-uporto'),
+        'description' => __('Nome exato de qualquer fonte de fonts.google.com. Se preenchido, ignora a lista acima.', 'acesso-uporto'),
+        'section'     => 'acesso_menu_font',
+        'type'        => 'text',
+    ));
+
+    // --- Footer Font Section ---
+    $wp_customize->add_section('acesso_footer_font', array(
+        'title'    => __('Fonte do Rodapé', 'acesso-uporto'),
+        'panel'    => 'acesso_typography_panel',
+        'priority' => 24,
+    ));
+    $wp_customize->add_setting('acesso_font_footer', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_footer', array(
+        'label'       => __('Fonte do Rodapé', 'acesso-uporto'),
+        'description' => __('Rodapé do site. Deixa em "(usar predefinição)" para herdar.', 'acesso-uporto'),
+        'section'     => 'acesso_footer_font',
+        'type'        => 'select',
+        'choices'     => array_merge(array('' => __('(usar predefinição)', 'acesso-uporto')), acesso_get_google_fonts_list()),
+    ));
+    $wp_customize->add_setting('acesso_font_footer_custom', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_footer_custom', array(
+        'label'       => __('Ou outra Google Font', 'acesso-uporto'),
+        'description' => __('Nome exato de qualquer fonte de fonts.google.com. Se preenchido, ignora a lista acima.', 'acesso-uporto'),
+        'section'     => 'acesso_footer_font',
+        'type'        => 'text',
+    ));
+
     // --- Font Size Section ---
     $wp_customize->add_section('acesso_font_sizes', array(
         'title'    => __('Tamanhos de Fonte', 'acesso-uporto'),
@@ -469,6 +529,10 @@ function acesso_customizer_css() {
     $font_heading_weight = get_theme_mod('acesso_font_heading_weight', '700');
     $font_size_base    = get_theme_mod('acesso_font_size_base', '16');
 
+    // Fontes específicas (opcionais) do menu e do rodapé.
+    $font_menu   = get_theme_mod('acesso_font_menu_custom', '') ?: get_theme_mod('acesso_font_menu', '');
+    $font_footer = get_theme_mod('acesso_font_footer_custom', '') ?: get_theme_mod('acesso_font_footer', '');
+
     ?>
     <style type="text/css" id="acesso-customizer-css">
         :root {
@@ -512,6 +576,24 @@ function acesso_customizer_css() {
             font-family: var(--font-display);
             font-weight: var(--font-heading-weight);
         }
+<?php if ($font_menu) : ?>
+        /* Fonte específica do menu */
+        #site-navigation .nav-menu,
+        #site-navigation .nav-menu a,
+        .main-navigation .nav-menu,
+        .main-navigation .nav-menu a {
+            font-family: '<?php echo esc_attr($font_menu); ?>', sans-serif;
+        }
+<?php endif; ?>
+<?php if ($font_footer) : ?>
+        /* Fonte específica do rodapé */
+        .site-footer,
+        .site-footer a,
+        .site-footer p,
+        .footer-copyright {
+            font-family: '<?php echo esc_attr($font_footer); ?>', sans-serif;
+        }
+<?php endif; ?>
 
         /* Apply colors */
         a {
@@ -571,12 +653,22 @@ function acesso_customizer_fonts() {
     $font_body    = get_theme_mod('acesso_font_body_custom', '') ?: get_theme_mod('acesso_font_body', 'Barlow');
     $font_heading = get_theme_mod('acesso_font_heading_custom', '') ?: get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
 
+    $font_menu   = get_theme_mod('acesso_font_menu_custom', '') ?: get_theme_mod('acesso_font_menu', '');
+    $font_footer = get_theme_mod('acesso_font_footer_custom', '') ?: get_theme_mod('acesso_font_footer', '');
+
     // Build font families array (avoid duplicates)
     $fonts = array();
     $fonts[$font_body] = $font_body . ':wght@300;400;500;600;700';
 
     if ($font_heading !== $font_body) {
         $fonts[$font_heading] = $font_heading . ':wght@400;500;600;700;800;900';
+    }
+
+    // Fontes específicas do menu/rodapé (se definidas e ainda não incluídas).
+    foreach (array($font_menu, $font_footer) as $extra) {
+        if ($extra && !isset($fonts[$extra])) {
+            $fonts[$extra] = $extra . ':wght@300;400;500;600;700';
+        }
     }
 
     // Build Google Fonts URL
