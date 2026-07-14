@@ -280,6 +280,15 @@ function acesso_customize_register($wp_customize) {
         'description' => __('Escreve o nome exato de qualquer fonte de fonts.google.com (ex.: Blinker). Se preenchido, ignora a lista acima.', 'acesso-uporto'),
         'section'     => 'acesso_body_font',
         'type'        => 'text',
+        'input_attrs' => array(
+            'autocomplete'   => 'off',
+            'autocorrect'    => 'off',
+            'autocapitalize' => 'off',
+            'spellcheck'     => 'false',
+            'data-lpignore'  => 'true',
+            'data-1p-ignore' => 'true',
+            'data-form-type' => 'other',
+        ),
     ));
 
     // Body Font Weight
@@ -333,6 +342,15 @@ function acesso_customize_register($wp_customize) {
         'description' => __('Escreve o nome exato de qualquer fonte de fonts.google.com (ex.: Pixelify Sans). Se preenchido, ignora a lista acima.', 'acesso-uporto'),
         'section'     => 'acesso_heading_font',
         'type'        => 'text',
+        'input_attrs' => array(
+            'autocomplete'   => 'off',
+            'autocorrect'    => 'off',
+            'autocapitalize' => 'off',
+            'spellcheck'     => 'false',
+            'data-lpignore'  => 'true',
+            'data-1p-ignore' => 'true',
+            'data-form-type' => 'other',
+        ),
     ));
 
     // Heading Font Weight
@@ -383,6 +401,15 @@ function acesso_customize_register($wp_customize) {
         'description' => __('Nome exato de qualquer fonte de fonts.google.com. Se preenchido, ignora a lista acima.', 'acesso-uporto'),
         'section'     => 'acesso_menu_font',
         'type'        => 'text',
+        'input_attrs' => array(
+            'autocomplete'   => 'off',
+            'autocorrect'    => 'off',
+            'autocapitalize' => 'off',
+            'spellcheck'     => 'false',
+            'data-lpignore'  => 'true',
+            'data-1p-ignore' => 'true',
+            'data-form-type' => 'other',
+        ),
     ));
 
     // --- Footer Font Section ---
@@ -413,6 +440,15 @@ function acesso_customize_register($wp_customize) {
         'description' => __('Nome exato de qualquer fonte de fonts.google.com. Se preenchido, ignora a lista acima.', 'acesso-uporto'),
         'section'     => 'acesso_footer_font',
         'type'        => 'text',
+        'input_attrs' => array(
+            'autocomplete'   => 'off',
+            'autocorrect'    => 'off',
+            'autocapitalize' => 'off',
+            'spellcheck'     => 'false',
+            'data-lpignore'  => 'true',
+            'data-1p-ignore' => 'true',
+            'data-form-type' => 'other',
+        ),
     ));
 
     // --- Font Size Section ---
