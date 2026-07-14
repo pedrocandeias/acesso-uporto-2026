@@ -82,6 +82,61 @@
                     "fontFamily": "'Barlow Semi Condensed', sans-serif",
                     "slug": "barlow-condensed",
                     "name": "Barlow Semi Condensed"
+                },
+                {
+                    "fontFamily": "'Inter', sans-serif",
+                    "slug": "inter",
+                    "name": "Inter"
+                },
+                {
+                    "fontFamily": "'Poppins', sans-serif",
+                    "slug": "poppins",
+                    "name": "Poppins"
+                },
+                {
+                    "fontFamily": "'Montserrat', sans-serif",
+                    "slug": "montserrat",
+                    "name": "Montserrat"
+                },
+                {
+                    "fontFamily": "'Roboto', sans-serif",
+                    "slug": "roboto",
+                    "name": "Roboto"
+                },
+                {
+                    "fontFamily": "'Playfair Display', serif",
+                    "slug": "playfair-display",
+                    "name": "Playfair Display"
+                },
+                {
+                    "fontFamily": "'Lora', serif",
+                    "slug": "lora",
+                    "name": "Lora"
+                },
+                {
+                    "fontFamily": "'Merriweather', serif",
+                    "slug": "merriweather",
+                    "name": "Merriweather"
+                },
+                {
+                    "fontFamily": "'Oswald', sans-serif",
+                    "slug": "oswald",
+                    "name": "Oswald"
+                },
+                {
+                    "fontFamily": "'Bebas Neue', sans-serif",
+                    "slug": "bebas-neue",
+                    "name": "Bebas Neue"
+                },
+                {
+                    "fontFamily": "'Pixelify Sans', sans-serif",
+                    "slug": "pixelify-sans",
+                    "name": "Pixelify Sans"
+                },
+                {
+                    "fontFamily": "'Blinker', sans-serif",
+                    "slug": "blinker",
+                    "name": "Blinker"
                 }
             ],
             "fontSizes": [
@@ -120,7 +175,14 @@
         "spacing": {
             "padding": true,
             "margin": true,
-            "units": ["px", "em", "rem", "%", "vw", "vh"],
+            "units": [
+                "px",
+                "em",
+                "rem",
+                "%",
+                "vw",
+                "vh"
+            ],
             "spacingSizes": [
                 {
                     "slug": "10",
@@ -317,12 +379,17 @@
         {
             "name": "blank",
             "title": "Blank",
-            "postTypes": ["page", "post"]
+            "postTypes": [
+                "page",
+                "post"
+            ]
         },
         {
             "name": "full-width",
             "title": "Full Width",
-            "postTypes": ["page"]
+            "postTypes": [
+                "page"
+            ]
         }
     ]
 }
