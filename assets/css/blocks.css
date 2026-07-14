@@ -37,6 +37,9 @@
 
 .page-content > .alignfull {
     max-width: none;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
     padding-left: 0;
     padding-right: 0;
 }
@@ -1708,7 +1711,7 @@ a.feature-card:hover {
    ========================================================================== */
 
 .acesso-tabs {
-    margin: var(--spacing-lg, 2rem) 0;
+    margin: var(--spacing-lg, 2rem) auto;
 }
 
 .acesso-tabs-nav {

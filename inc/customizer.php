@@ -656,31 +656,32 @@ function acesso_customizer_fonts() {
     $font_menu   = get_theme_mod('acesso_font_menu_custom', '') ?: get_theme_mod('acesso_font_menu', '');
     $font_footer = get_theme_mod('acesso_font_footer_custom', '') ?: get_theme_mod('acesso_font_footer', '');
 
-    // Build font families array (avoid duplicates)
-    $fonts = array();
-    $fonts[$font_body] = $font_body . ':wght@300;400;500;600;700';
+    // Fontes já auto-alojadas no tema (assets/fonts/fonts.css) — não pedir à Google.
+    $bundled = array('Barlow', 'Barlow Semi Condensed');
 
-    if ($font_heading !== $font_body) {
+    // Construir só as fontes ADICIONAIS (não incluídas) para carregar da Google.
+    $fonts = array();
+    if ($font_body && !in_array($font_body, $bundled, true)) {
+        $fonts[$font_body] = $font_body . ':wght@300;400;500;600;700';
+    }
+    if ($font_heading && !in_array($font_heading, $bundled, true) && !isset($fonts[$font_heading])) {
         $fonts[$font_heading] = $font_heading . ':wght@400;500;600;700;800;900';
     }
-
-    // Fontes específicas do menu/rodapé (se definidas e ainda não incluídas).
     foreach (array($font_menu, $font_footer) as $extra) {
-        if ($extra && !isset($fonts[$extra])) {
+        if ($extra && !in_array($extra, $bundled, true) && !isset($fonts[$extra])) {
             $fonts[$extra] = $extra . ':wght@300;400;500;600;700';
         }
     }
 
-    // Build Google Fonts URL
+    // Se todas as fontes escolhidas já estão auto-alojadas, não há pedido à Google.
+    if (empty($fonts)) {
+        return;
+    }
+
     $font_families = array_values($fonts);
     $font_string = implode('&family=', array_map('urlencode', $font_families));
-
     $google_fonts_url = 'https://fonts.googleapis.com/css2?family=' . $font_string . '&display=swap';
 
-    // Dequeue default fonts if set
-    wp_dequeue_style('acesso-google-fonts');
-
-    // Enqueue customized fonts
     wp_enqueue_style(
         'acesso-customizer-fonts',
         $google_fonts_url,

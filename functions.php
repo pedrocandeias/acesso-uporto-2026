@@ -105,19 +105,21 @@ add_action('after_setup_theme', 'acesso_theme_setup');
  * Enqueue Scripts and Styles
  */
 function acesso_enqueue_assets() {
-    // Google Fonts - Barlow
+    // Fontes predefinidas auto-alojadas (Barlow + Barlow Semi Condensed).
+    // Fontes adicionais escolhidas no personalizador são carregadas da Google
+    // dinamicamente por acesso_customizer_fonts().
     wp_enqueue_style(
-        'acesso-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@600;700;900&display=swap',
+        'acesso-fonts-local',
+        ACESSO_THEME_URI . '/assets/fonts/fonts.css',
         array(),
-        null
+        ACESSO_THEME_VERSION
     );
 
     // Main stylesheet
     wp_enqueue_style(
         'acesso-style',
         get_stylesheet_uri(),
-        array('acesso-google-fonts'),
+        array('acesso-fonts-local'),
         ACESSO_THEME_VERSION
     );
 
@@ -159,16 +161,16 @@ add_action('wp_enqueue_scripts', 'acesso_enqueue_assets');
  */
 function acesso_enqueue_editor_assets() {
     wp_enqueue_style(
-        'acesso-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@600;700;900&display=swap',
+        'acesso-fonts-local',
+        ACESSO_THEME_URI . '/assets/fonts/fonts.css',
         array(),
-        null
+        ACESSO_THEME_VERSION
     );
 
     wp_enqueue_style(
         'acesso-editor-style',
         ACESSO_THEME_URI . '/assets/css/editor.css',
-        array('acesso-google-fonts'),
+        array('acesso-fonts-local'),
         ACESSO_THEME_VERSION
     );
 
