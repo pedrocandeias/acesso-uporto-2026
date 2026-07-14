@@ -1931,3 +1931,24 @@ body.acesso-modal-open {
     color: var(--color-purple, #572ddf);
     background: rgba(87, 45, 223, 0.08);
 }
+
+
+/* ==========================================================================
+   Fundos de pixels (ruído) — utilitários
+   ==========================================================================
+   Aplica a qualquer bloco pelo campo "Classe(s) CSS adicional(is)" (painel
+   Avançado do bloco). Ex.: pixel-bg-navy. */
+.pixel-bg-gold, .pixel-bg-navy, .pixel-bg-coral, .pixel-bg-purple,
+.pixel-bg-pink, .pixel-bg-cyan, .pixel-bg-red, .pixel-bg-yellow {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.pixel-bg-gold   { background-image: url('../images/pixel-bg/pixel-gold.svg'); }
+.pixel-bg-navy   { background-image: url('../images/pixel-bg/pixel-navy.svg'); }
+.pixel-bg-coral  { background-image: url('../images/pixel-bg/pixel-coral.svg'); }
+.pixel-bg-purple { background-image: url('../images/pixel-bg/pixel-purple.svg'); }
+.pixel-bg-pink   { background-image: url('../images/pixel-bg/pixel-pink.svg'); }
+.pixel-bg-cyan   { background-image: url('../images/pixel-bg/pixel-cyan.svg'); }
+.pixel-bg-red    { background-image: url('../images/pixel-bg/pixel-red.svg'); }
+.pixel-bg-yellow { background-image: url('../images/pixel-bg/pixel-yellow.svg'); }
