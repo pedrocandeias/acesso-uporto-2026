@@ -9,6 +9,7 @@
     var TextControl = wp.components.TextControl;
     var TextareaControl = wp.components.TextareaControl;
     var RangeControl = wp.components.RangeControl;
+    var SelectControl = wp.components.SelectControl;
     var Button = wp.components.Button;
     var ColorPicker = wp.components.ColorPicker;
     var __ = wp.i18n.__;
@@ -86,6 +87,53 @@
                                 }
                             })
                         ),
+                        attributes.backgroundImage && el(SelectControl, {
+                            label: __('Tamanho da imagem', 'acesso-uporto'),
+                            value: attributes.backgroundSize,
+                            options: [
+                                { label: __('Cobrir (cover)', 'acesso-uporto'), value: 'cover' },
+                                { label: __('Conter (contain)', 'acesso-uporto'), value: 'contain' },
+                                { label: __('Automático', 'acesso-uporto'), value: 'auto' },
+                                { label: '100%', value: '100%' }
+                            ],
+                            onChange: function (value) { setAttributes({ backgroundSize: value }); }
+                        }),
+                        attributes.backgroundImage && el(SelectControl, {
+                            label: __('Posição', 'acesso-uporto'),
+                            value: attributes.backgroundPosition,
+                            options: [
+                                { label: __('Centro', 'acesso-uporto'), value: 'center center' },
+                                { label: __('Topo', 'acesso-uporto'), value: 'center top' },
+                                { label: __('Fundo', 'acesso-uporto'), value: 'center bottom' },
+                                { label: __('Esquerda', 'acesso-uporto'), value: 'left center' },
+                                { label: __('Direita', 'acesso-uporto'), value: 'right center' },
+                                { label: __('Topo esquerda', 'acesso-uporto'), value: 'left top' },
+                                { label: __('Topo direita', 'acesso-uporto'), value: 'right top' },
+                                { label: __('Fundo esquerda', 'acesso-uporto'), value: 'left bottom' },
+                                { label: __('Fundo direita', 'acesso-uporto'), value: 'right bottom' }
+                            ],
+                            onChange: function (value) { setAttributes({ backgroundPosition: value }); }
+                        }),
+                        attributes.backgroundImage && el(SelectControl, {
+                            label: __('Repetição', 'acesso-uporto'),
+                            value: attributes.backgroundRepeat,
+                            options: [
+                                { label: __('Não repetir', 'acesso-uporto'), value: 'no-repeat' },
+                                { label: __('Repetir (ambas)', 'acesso-uporto'), value: 'repeat' },
+                                { label: __('Repetir horizontal', 'acesso-uporto'), value: 'repeat-x' },
+                                { label: __('Repetir vertical', 'acesso-uporto'), value: 'repeat-y' }
+                            ],
+                            onChange: function (value) { setAttributes({ backgroundRepeat: value }); }
+                        }),
+                        attributes.backgroundImage && el(SelectControl, {
+                            label: __('Fixação', 'acesso-uporto'),
+                            value: attributes.backgroundAttachment,
+                            options: [
+                                { label: __('Normal (desliza)', 'acesso-uporto'), value: 'scroll' },
+                                { label: __('Fixa (parallax)', 'acesso-uporto'), value: 'fixed' }
+                            ],
+                            onChange: function (value) { setAttributes({ backgroundAttachment: value }); }
+                        }),
                         el(RangeControl, {
                             label: __('Opacidade do Overlay (%)', 'acesso-uporto'),
                             value: attributes.overlayOpacity,
@@ -183,8 +231,9 @@
                             className: 'hero-preview',
                             style: {
                                 backgroundImage: attributes.backgroundImage ? 'url(' + attributes.backgroundImage + ')' : 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')',
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
+                                backgroundSize: attributes.backgroundImage ? attributes.backgroundSize : 'cover',
+                                backgroundPosition: attributes.backgroundImage ? attributes.backgroundPosition : 'center',
+                                backgroundRepeat: attributes.backgroundImage ? attributes.backgroundRepeat : 'no-repeat',
                                 minHeight: '300px',
                                 padding: '40px',
                                 position: 'relative',

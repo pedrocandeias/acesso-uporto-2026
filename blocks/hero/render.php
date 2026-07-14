@@ -19,6 +19,11 @@ $gradient_end = $attributes['gradientEnd'] ?? '#da2489';
 $overlay_opacity = ($attributes['overlayOpacity'] ?? 70) / 100;
 $min_height = $attributes['minHeight'] ?? '100vh';
 
+$bg_size       = $attributes['backgroundSize'] ?? 'cover';
+$bg_position   = $attributes['backgroundPosition'] ?? 'center center';
+$bg_repeat     = $attributes['backgroundRepeat'] ?? 'no-repeat';
+$bg_attachment = $attributes['backgroundAttachment'] ?? 'scroll';
+
 $block_id = 'hero-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(
@@ -27,7 +32,14 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
 ));
 
 $background_style = $background_image
-    ? "background-image: url('" . esc_url($background_image) . "');"
+    ? sprintf(
+        "background-image: url('%s'); background-size: %s; background-position: %s; background-repeat: %s; background-attachment: %s;",
+        esc_url($background_image),
+        esc_attr($bg_size),
+        esc_attr($bg_position),
+        esc_attr($bg_repeat),
+        esc_attr($bg_attachment)
+    )
     : '';
 ?>
 

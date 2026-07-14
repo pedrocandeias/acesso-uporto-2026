@@ -22,9 +22,21 @@ $wrapper_attributes = get_block_wrapper_attributes(array(
     'class' => 'cta-section style-' . esc_attr($style),
 ));
 
+$bg_size       = $attributes['backgroundSize'] ?? 'cover';
+$bg_position   = $attributes['backgroundPosition'] ?? 'center center';
+$bg_repeat     = $attributes['backgroundRepeat'] ?? 'no-repeat';
+$bg_attachment = $attributes['backgroundAttachment'] ?? 'scroll';
+
 $background_style = '';
 if ($style === 'image' && $background_image) {
-    $background_style = "background-image: url('" . esc_url($background_image) . "');";
+    $background_style = sprintf(
+        "background-image: url('%s'); background-size: %s; background-position: %s; background-repeat: %s; background-attachment: %s;",
+        esc_url($background_image),
+        esc_attr($bg_size),
+        esc_attr($bg_position),
+        esc_attr($bg_repeat),
+        esc_attr($bg_attachment)
+    );
 }
 ?>
 
