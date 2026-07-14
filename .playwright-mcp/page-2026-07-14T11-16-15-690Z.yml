@@ -1,0 +1,128 @@
+- generic [ref=f1e2]:
+  - link "Skip to content" [ref=f1e3] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - link "Acesso2" [ref=f1e7] [cursor=pointer]:
+        - /url: https://acesso2.ddev.site/
+        - img "Acesso2" [ref=f1e8]
+      - navigation [ref=f1e9]:
+        - list [ref=f1e10]:
+          - listitem [ref=f1e11]:
+            - link "Cursos" [ref=f1e12] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/cursos/
+          - listitem [ref=f1e13]:
+            - link "Candidata-te" [ref=f1e14] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/candidaturas-ensino-superior/
+          - listitem [ref=f1e15]:
+            - link "Conhece a Universidade" [ref=f1e16] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/conhece-a-universidade-do-porto/
+          - listitem [ref=f1e17]:
+            - link "Sempre contigo!" [ref=f1e18] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/sempre-contigo/
+          - listitem [ref=f1e19]:
+            - link "Explora!" [ref=f1e20] [cursor=pointer]:
+              - /url: https://acesso2.ddev.site/visitas-virtuais/
+  - main [ref=f1e21]:
+    - article [ref=f1e22]:
+      - heading "Candidaturas" [level=1] [ref=f1e24]
+      - generic [ref=f1e26]:
+        - heading "COMO POSSO CANDIDATAR-ME?" [level=2] [ref=f1e27]
+        - paragraph [ref=f1e28]:
+          - text: O acesso aos cursos de Licenciatura (1.º Ciclo) ou Mestrado Integrado da U.Porto é feita através do
+          - link "Concurso Nacional de Acesso ao Ensino Superior" [ref=f1e29] [cursor=pointer]:
+            - /url: https://www.dges.gov.pt/pt/pagina/informacao-geral-publico?plid=593
+          - text: organizado pela Direção-Geral do Ensino Superior (DGES).
+        - paragraph [ref=f1e30]:
+          - strong [ref=f1e31]:
+            - text: A candidatura é realizada exclusivamente
+            - emphasis [ref=f1e32]: online
+            - text: ","
+            - link "no site da DGES" [ref=f1e33] [cursor=pointer]:
+              - /url: https://www.dges.gov.pt/online
+            - text: ", em 3 momentos:"
+          - text: 1.ª Fase > 6 a 20 de agosto 2021*;
+          - text: 2.ª Fase > 27 de setembro a 8 de outubro 2021*;
+          - text: 3.ª Fase > 21 a 25 de outubro 2021*.
+        - paragraph [ref=f1e34]: (* datas sujeitas a confirmação por parte da DGES)
+        - paragraph [ref=f1e35]:
+          - text: Podes obter mais informações
+          - link "no site da DGES" [ref=f1e36] [cursor=pointer]:
+            - /url: https://www.dges.gov.pt/pt/pagina/informacao-geral-publico?plid=593
+          - text: ", junto do"
+          - link "Gabinete de Acesso ao Ensino Superior na U.Porto" [ref=f1e37] [cursor=pointer]:
+            - /url: https://sigarra.up.pt/up/pt/web_base.gera_pagina?P_pagina=1006753
+          - text: e/ou dos
+          - link "serviços académicos" [ref=f1e38] [cursor=pointer]:
+            - /url: https://sigarra.up.pt/up/pt/web_base.gera_pagina?p_pagina=apoio-academico
+          - text: da faculdade onde pretendes ingressar.
+        - heading "NÓS AJUDAMOS-TE!" [level=2] [ref=f1e39]
+        - paragraph [ref=f1e40]:
+          - text: Sabias que a U.Porto disponibiliza um
+          - link "Gabinete de Acesso ao Ensino Superior (GAES-UP)" [ref=f1e41] [cursor=pointer]:
+            - /url: https://sigarra.up.pt/up/pt/web_base.gera_pagina?P_pagina=1006753
+          - text: para te ajudar em todo o processo de candidatura? Contacta-nos!
+        - heading "Gabinete de Acesso ao Ensino Superior (GAES-UP)" [level=3] [ref=f1e42]
+        - generic [ref=f1e43]:
+          - generic [ref=f1e45]:
+            - img [ref=f1e47]
+            - generic [ref=f1e49]:
+              - heading "Telefone" [level=3] [ref=f1e50]
+              - paragraph [ref=f1e52]: 220 408 198/053
+          - generic [ref=f1e54]:
+            - img [ref=f1e56]
+            - generic [ref=f1e59]:
+              - heading "E-mail" [level=3] [ref=f1e60]
+              - paragraph [ref=f1e62]:
+                - link "acesso.es@reit.up.pt" [ref=f1e63] [cursor=pointer]:
+                  - /url: mailto:acesso.es@reit.up.pt
+          - generic [ref=f1e65]:
+            - img [ref=f1e67]
+            - generic [ref=f1e69]:
+              - heading "WhatsApp" [level=3] [ref=f1e70]
+              - generic [ref=f1e71]:
+                - paragraph [ref=f1e72]: 96 718 04 16
+                - paragraph [ref=f1e73]: Só para questões relacionadas com o preenchimento do formulário online
+          - generic [ref=f1e75]:
+            - img [ref=f1e77]
+            - generic [ref=f1e80]:
+              - heading "Morada" [level=3] [ref=f1e81]
+              - paragraph [ref=f1e83]:
+                - text: Reitoria da U.Porto
+                - text: Praça de Gomes Teixeira
+                - text: 4099-002 Porto
+        - generic [ref=f1e84]:
+          - img [ref=f1e86]
+          - generic [ref=f1e89]:
+            - heading "Horário de atendimento" [level=3] [ref=f1e90]
+            - generic [ref=f1e91]:
+              - paragraph [ref=f1e92]:
+                - strong [ref=f1e93]: "Telefónico:"
+                - text: 2.ª e 6.ª, 14h30 às 17h00; 3.ª e 5.ª, 9h30 às 12h00
+              - paragraph [ref=f1e94]:
+                - strong [ref=f1e95]: "Presencial*:"
+                - text: Sujeito a
+                - link "marcação prévia" [ref=f1e96] [cursor=pointer]:
+                  - /url: https://outlook.office365.com/owa/calendar/ServiodeFormaoeOrganizaoAcadmicaUPorto@UPorto.onmicrosoft.com/bookings/s/Ipybi1dMS0W6CKqenbENSQ2
+              - paragraph [ref=f1e97]:
+                - strong [ref=f1e99]: "*"
+                - text: Em resultado da pandemia do COVID-19, o atendimento presencial está reservado exclusivamente para situações em que o mesmo não possa ocorrer por via telefónica e online.
+  - contentinfo [ref=f1e100]:
+    - generic [ref=f1e102]:
+      - generic [ref=f1e103]:
+        - link "Facebook" [ref=f1e104] [cursor=pointer]:
+          - /url: https://www.facebook.com/universidadedoporto
+          - img [ref=f1e105]
+        - link "Youtube" [ref=f1e107] [cursor=pointer]:
+          - /url: https://www.youtube.com/user/universidadedoporto
+          - img [ref=f1e108]
+        - link "Instagram" [ref=f1e110] [cursor=pointer]:
+          - /url: https://www.instagram.com/uporto/
+          - img [ref=f1e111]
+        - link "Linkedin" [ref=f1e114] [cursor=pointer]:
+          - /url: https://www.linkedin.com/school/universidadedoporto/
+          - img [ref=f1e115]
+      - link "Universidade do Porto" [ref=f1e120] [cursor=pointer]:
+        - /url: https://www.up.pt
+        - img "Universidade do Porto" [ref=f1e121]
+      - paragraph [ref=f1e122]: 2026 © UNIVERSIDADE DO PORTO

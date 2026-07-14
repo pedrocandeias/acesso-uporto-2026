@@ -489,7 +489,11 @@ function acesso_customizer_css() {
 
             /* Typography */
             --font-primary: '<?php echo esc_attr($font_body); ?>', sans-serif;
+            --font-condensed: '<?php echo esc_attr($font_heading); ?>', sans-serif;
             --font-display: '<?php echo esc_attr($font_heading); ?>', sans-serif;
+            /* Sobrepor os presets do theme.json (usados por headings e blocos via .wp-block-*) */
+            --wp--preset--font-family--barlow: '<?php echo esc_attr($font_body); ?>', sans-serif;
+            --wp--preset--font-family--barlow-condensed: '<?php echo esc_attr($font_heading); ?>', sans-serif;
             --font-body-weight: <?php echo esc_attr($font_body_weight); ?>;
             --font-heading-weight: <?php echo esc_attr($font_heading_weight); ?>;
             --font-size-base: <?php echo esc_attr($font_size_base); ?>px;
