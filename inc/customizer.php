@@ -246,6 +246,19 @@ function acesso_customize_register($wp_customize) {
         'choices' => acesso_get_google_fonts_list(),
     ));
 
+    // Body Font — nome personalizado (qualquer Google Font)
+    $wp_customize->add_setting('acesso_font_body_custom', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_body_custom', array(
+        'label'       => __('Ou outra Google Font', 'acesso-uporto'),
+        'description' => __('Escreve o nome exato de qualquer fonte de fonts.google.com (ex.: Blinker). Se preenchido, ignora a lista acima.', 'acesso-uporto'),
+        'section'     => 'acesso_body_font',
+        'type'        => 'text',
+    ));
+
     // Body Font Weight
     $wp_customize->add_setting('acesso_font_body_weight', array(
         'default'           => '400',
@@ -284,6 +297,19 @@ function acesso_customize_register($wp_customize) {
         'section' => 'acesso_heading_font',
         'type'    => 'select',
         'choices' => acesso_get_google_fonts_list(),
+    ));
+
+    // Heading Font — nome personalizado (qualquer Google Font)
+    $wp_customize->add_setting('acesso_font_heading_custom', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_font_heading_custom', array(
+        'label'       => __('Ou outra Google Font', 'acesso-uporto'),
+        'description' => __('Escreve o nome exato de qualquer fonte de fonts.google.com (ex.: Pixelify Sans). Se preenchido, ignora a lista acima.', 'acesso-uporto'),
+        'section'     => 'acesso_heading_font',
+        'type'        => 'text',
     ));
 
     // Heading Font Weight
@@ -361,6 +387,23 @@ function acesso_get_google_fonts_list() {
         'Space Grotesk'       => 'Space Grotesk',
         'Manrope'             => 'Manrope',
         'Figtree'             => 'Figtree',
+        'Blinker'             => 'Blinker',
+        'Mulish'              => 'Mulish',
+        'Karla'               => 'Karla',
+        'Kanit'               => 'Kanit',
+        'Josefin Sans'        => 'Josefin Sans',
+        'Quicksand'           => 'Quicksand',
+        'Cabin'               => 'Cabin',
+        'Fira Sans'           => 'Fira Sans',
+        'PT Sans'             => 'PT Sans',
+        'Titillium Web'       => 'Titillium Web',
+        'Sora'                => 'Sora',
+        'Lexend'              => 'Lexend',
+        'Public Sans'         => 'Public Sans',
+        'Red Hat Display'     => 'Red Hat Display',
+        'Albert Sans'         => 'Albert Sans',
+        'Onest'               => 'Onest',
+        'Schibsted Grotesk'   => 'Schibsted Grotesk',
         // Serif fonts
         'Playfair Display'    => 'Playfair Display',
         'Merriweather'        => 'Merriweather',
@@ -369,11 +412,38 @@ function acesso_get_google_fonts_list() {
         'Libre Baskerville'   => 'Libre Baskerville',
         'Source Serif Pro'    => 'Source Serif Pro',
         'Crimson Text'        => 'Crimson Text',
-        // Display fonts
+        'EB Garamond'         => 'EB Garamond',
+        'Cormorant Garamond'  => 'Cormorant Garamond',
+        'Bitter'              => 'Bitter',
+        'Spectral'            => 'Spectral',
+        'Frank Ruhl Libre'    => 'Frank Ruhl Libre',
+        // Display / decorative fonts
         'Oswald'              => 'Oswald',
         'Bebas Neue'          => 'Bebas Neue',
         'Anton'               => 'Anton',
         'Archivo Black'       => 'Archivo Black',
+        'Pixelify Sans'       => 'Pixelify Sans',
+        'Righteous'           => 'Righteous',
+        'Fredoka'             => 'Fredoka',
+        'Comfortaa'           => 'Comfortaa',
+        'Bungee'              => 'Bungee',
+        'Press Start 2P'      => 'Press Start 2P',
+        'Orbitron'            => 'Orbitron',
+        'Audiowide'           => 'Audiowide',
+        'Sixtyfour'           => 'Sixtyfour',
+        'Silkscreen'          => 'Silkscreen',
+        'VT323'               => 'VT323',
+        'Monoton'             => 'Monoton',
+        'Lobster'             => 'Lobster',
+        'Pacifico'            => 'Pacifico',
+        'Caveat'              => 'Caveat',
+        'Dancing Script'      => 'Dancing Script',
+        'Permanent Marker'    => 'Permanent Marker',
+        // Monospace
+        'JetBrains Mono'      => 'JetBrains Mono',
+        'Space Mono'          => 'Space Mono',
+        'IBM Plex Mono'       => 'IBM Plex Mono',
+        'Roboto Mono'         => 'Roboto Mono',
     );
 }
 
@@ -393,9 +463,9 @@ function acesso_customizer_css() {
     $gradient_end   = get_theme_mod('acesso_gradient_end', '#da2489');
     $gradient_dir   = get_theme_mod('acesso_gradient_direction', '135deg');
 
-    $font_body         = get_theme_mod('acesso_font_body', 'Barlow');
+    $font_body         = get_theme_mod('acesso_font_body_custom', '') ?: get_theme_mod('acesso_font_body', 'Barlow');
     $font_body_weight  = get_theme_mod('acesso_font_body_weight', '400');
-    $font_heading      = get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
+    $font_heading      = get_theme_mod('acesso_font_heading_custom', '') ?: get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
     $font_heading_weight = get_theme_mod('acesso_font_heading_weight', '700');
     $font_size_base    = get_theme_mod('acesso_font_size_base', '16');
 
@@ -494,8 +564,8 @@ add_action('wp_head', 'acesso_customizer_css', 100);
  * Enqueue Google Fonts based on Customizer settings
  */
 function acesso_customizer_fonts() {
-    $font_body    = get_theme_mod('acesso_font_body', 'Barlow');
-    $font_heading = get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
+    $font_body    = get_theme_mod('acesso_font_body_custom', '') ?: get_theme_mod('acesso_font_body', 'Barlow');
+    $font_heading = get_theme_mod('acesso_font_heading_custom', '') ?: get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
 
     // Build font families array (avoid duplicates)
     $fonts = array();
