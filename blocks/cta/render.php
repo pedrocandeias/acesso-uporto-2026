@@ -19,7 +19,9 @@ $overlay_opacity = ($attributes['overlayOpacity'] ?? 85) / 100;
 $pixel_bg = $attributes['pixelBackground'] ?? '';
 $pixel_colors = array('gold', 'navy', 'coral', 'purple', 'pink', 'cyan', 'red', 'yellow');
 if ($pixel_bg && in_array($pixel_bg, $pixel_colors, true)) {
-    $background_image = ACESSO_THEME_URI . '/assets/images/pixel-bg/pixel-' . $pixel_bg . '.svg';
+    $pixel_path = ACESSO_THEME_DIR . '/assets/images/pixel-bg/pixel-' . $pixel_bg . '.svg';
+    $pixel_ver  = file_exists($pixel_path) ? filemtime($pixel_path) : ACESSO_THEME_VERSION;
+    $background_image = ACESSO_THEME_URI . '/assets/images/pixel-bg/pixel-' . $pixel_bg . '.svg?ver=' . $pixel_ver;
     $style = 'image';
 }
 

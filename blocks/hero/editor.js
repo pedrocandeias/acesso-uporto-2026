@@ -298,7 +298,7 @@
                             className: 'hero-preview',
                             style: {
                                 backgroundImage: attributes.pixelBackground
-                                    ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg)'
+                                    ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg?v=2)'
                                     : (attributes.backgroundImage ? 'url(' + attributes.backgroundImage + ')' : (attributes.useGradient ? 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')' : attributes.gradientStart)),
                                 backgroundSize: attributes.backgroundImage ? attributes.backgroundSize : 'cover',
                                 backgroundPosition: attributes.backgroundImage ? attributes.backgroundPosition : 'center',
