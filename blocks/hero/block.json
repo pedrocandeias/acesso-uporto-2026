@@ -73,6 +73,10 @@
             "type": "string",
             "default": ""
         },
+        "useGradient": {
+            "type": "boolean",
+            "default": true
+        },
         "gradientStart": {
             "type": "string",
             "default": "#572ddf"
@@ -88,7 +92,17 @@
         "minHeight": {
             "type": "string",
             "default": "100vh"
-        }
+        },
+        "rotatingColor": { "type": "string", "default": "" },
+        "rotatingSize": { "type": "string", "default": "" },
+        "titleColor": { "type": "string", "default": "" },
+        "titleSize": { "type": "string", "default": "" },
+        "taglineColor": { "type": "string", "default": "" },
+        "taglineSize": { "type": "string", "default": "" },
+        "primaryBtnBg": { "type": "string", "default": "" },
+        "primaryBtnColor": { "type": "string", "default": "" },
+        "secondaryBtnColor": { "type": "string", "default": "" },
+        "buttonSize": { "type": "string", "default": "" }
     },
     "textdomain": "acesso-uporto",
     "editorScript": "file:./editor.js",

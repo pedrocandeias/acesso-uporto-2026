@@ -10,8 +10,10 @@
     var TextareaControl = wp.components.TextareaControl;
     var RangeControl = wp.components.RangeControl;
     var SelectControl = wp.components.SelectControl;
+    var ToggleControl = wp.components.ToggleControl;
     var Button = wp.components.Button;
     var ColorPicker = wp.components.ColorPicker;
+    var PanelColorSettings = wp.blockEditor.PanelColorSettings;
     var __ = wp.i18n.__;
     var el = wp.element.createElement;
 
@@ -215,14 +217,22 @@
                     el(
                         PanelBody,
                         { title: __('Cores do Gradiente', 'acesso-uporto'), initialOpen: false },
-                        el('p', null, __('Cor Inicial', 'acesso-uporto')),
+                        el(ToggleControl, {
+                            label: __('Usar gradiente', 'acesso-uporto'),
+                            help: attributes.useGradient
+                                ? __('Fundo em gradiente (cor inicial → cor final).', 'acesso-uporto')
+                                : __('Fundo de cor sólida (usa a "Cor Inicial").', 'acesso-uporto'),
+                            checked: attributes.useGradient,
+                            onChange: function (value) { setAttributes({ useGradient: value }); }
+                        }),
+                        el('p', null, attributes.useGradient ? __('Cor Inicial', 'acesso-uporto') : __('Cor Sólida', 'acesso-uporto')),
                         el(ColorPicker, {
                             color: attributes.gradientStart,
                             onChangeComplete: function (value) { setAttributes({ gradientStart: value.hex }); },
                             disableAlpha: true
                         }),
-                        el('p', { style: { marginTop: '20px' } }, __('Cor Final', 'acesso-uporto')),
-                        el(ColorPicker, {
+                        attributes.useGradient && el('p', { style: { marginTop: '20px' } }, __('Cor Final', 'acesso-uporto')),
+                        attributes.useGradient && el(ColorPicker, {
                             color: attributes.gradientEnd,
                             onChangeComplete: function (value) { setAttributes({ gradientEnd: value.hex }); },
                             disableAlpha: true
@@ -237,6 +247,46 @@
                             onChange: function (value) { setAttributes({ minHeight: value }); },
                             help: __('Ex: 100vh, 600px, 80vh', 'acesso-uporto')
                         })
+                    ),
+                    PanelColorSettings && el(PanelColorSettings, {
+                        title: __('Cores do Texto e Botões', 'acesso-uporto'),
+                        initialOpen: false,
+                        colorSettings: [
+                            { label: __('Palavras rotativas', 'acesso-uporto'), value: attributes.rotatingColor, onChange: function (v) { setAttributes({ rotatingColor: v || '' }); } },
+                            { label: __('Título', 'acesso-uporto'), value: attributes.titleColor, onChange: function (v) { setAttributes({ titleColor: v || '' }); } },
+                            { label: __('Tagline', 'acesso-uporto'), value: attributes.taglineColor, onChange: function (v) { setAttributes({ taglineColor: v || '' }); } },
+                            { label: __('Fundo do botão primário', 'acesso-uporto'), value: attributes.primaryBtnBg, onChange: function (v) { setAttributes({ primaryBtnBg: v || '' }); } },
+                            { label: __('Texto do botão primário', 'acesso-uporto'), value: attributes.primaryBtnColor, onChange: function (v) { setAttributes({ primaryBtnColor: v || '' }); } },
+                            { label: __('Botão secundário (contorno)', 'acesso-uporto'), value: attributes.secondaryBtnColor, onChange: function (v) { setAttributes({ secondaryBtnColor: v || '' }); } }
+                        ]
+                    }),
+                    el(
+                        PanelBody,
+                        { title: __('Tamanhos do Texto', 'acesso-uporto'), initialOpen: false },
+                        el(TextControl, {
+                            label: __('Palavras rotativas', 'acesso-uporto'),
+                            value: attributes.rotatingSize || '',
+                            onChange: function (value) { setAttributes({ rotatingSize: value }); },
+                            help: __('ex.: 24px, 1.5rem', 'acesso-uporto')
+                        }),
+                        el(TextControl, {
+                            label: __('Título', 'acesso-uporto'),
+                            value: attributes.titleSize || '',
+                            onChange: function (value) { setAttributes({ titleSize: value }); },
+                            help: __('ex.: 96px, 6rem', 'acesso-uporto')
+                        }),
+                        el(TextControl, {
+                            label: __('Tagline', 'acesso-uporto'),
+                            value: attributes.taglineSize || '',
+                            onChange: function (value) { setAttributes({ taglineSize: value }); },
+                            help: __('ex.: 18px, 1.25rem', 'acesso-uporto')
+                        }),
+                        el(TextControl, {
+                            label: __('Botões', 'acesso-uporto'),
+                            value: attributes.buttonSize || '',
+                            onChange: function (value) { setAttributes({ buttonSize: value }); },
+                            help: __('ex.: 16px, 1rem', 'acesso-uporto')
+                        })
                     )
                 ),
                 el(
@@ -249,7 +299,7 @@
                             style: {
                                 backgroundImage: attributes.pixelBackground
                                     ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg)'
-                                    : (attributes.backgroundImage ? 'url(' + attributes.backgroundImage + ')' : 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')'),
+                                    : (attributes.backgroundImage ? 'url(' + attributes.backgroundImage + ')' : (attributes.useGradient ? 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')' : attributes.gradientStart)),
                                 backgroundSize: attributes.backgroundImage ? attributes.backgroundSize : 'cover',
                                 backgroundPosition: attributes.backgroundImage ? attributes.backgroundPosition : 'center',
                                 backgroundRepeat: attributes.backgroundImage ? attributes.backgroundRepeat : 'no-repeat',
@@ -272,7 +322,7 @@
                                 left: 0,
                                 right: 0,
                                 bottom: 0,
-                                background: 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')',
+                                background: attributes.useGradient ? 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')' : attributes.gradientStart,
                                 opacity: attributes.overlayOpacity / 100
                             }
                         }),
