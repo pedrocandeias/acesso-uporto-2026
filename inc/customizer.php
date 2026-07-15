@@ -456,7 +456,7 @@ function acesso_customize_register($wp_customize) {
     ));
     $wp_customize->add_control('acesso_font_size_base', array(
         'label'   => __('Tamanho do Texto do Corpo (px)', 'acesso-uporto'),
-        'description' => __('Tamanho base do texto do corpo em pixels.', 'acesso-uporto'),
+        'description' => __('Tamanho base (baseline). Todo o texto em rem escala a partir daqui; textos com tamanho próprio fixo mantêm-se.', 'acesso-uporto'),
         'section' => 'acesso_font_sizes',
         'type'    => 'number',
         'input_attrs' => array(
@@ -669,6 +669,11 @@ function acesso_customizer_css() {
         }
 
         /* Apply font family */
+<?php if ((int) $font_size_base !== 16) : ?>
+        /* Baseline: a raiz define o tamanho base para que todo o texto em rem
+           escale (exceto o que tenha tamanho próprio fixo). */
+        html { font-size: <?php echo esc_attr($font_size_base); ?>px; }
+<?php endif; ?>
         body {
             font-family: var(--font-primary);
             font-weight: var(--font-body-weight);
