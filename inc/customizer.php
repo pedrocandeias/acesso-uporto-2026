@@ -17,36 +17,9 @@ function acesso_customize_register($wp_customize) {
     // =====================================================
     // LOGO & IDENTITY SECTION
     // =====================================================
-    $wp_customize->add_section('acesso_logo_section', array(
-        'title'    => __('Logo e Identidade', 'acesso-uporto'),
-        'priority' => 20,
-    ));
-
-    // Main Logo
-    $wp_customize->add_setting('acesso_logo', array(
-        'default'           => '',
-        'sanitize_callback' => 'esc_url_raw',
-        'transport'         => 'refresh',
-    ));
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'acesso_logo', array(
-        'label'       => __('Logo Principal', 'acesso-uporto'),
-        'description' => __('Logo usado no cabeçalho (recomendado: PNG com fundo transparente).', 'acesso-uporto'),
-        'section'     => 'acesso_logo_section',
-    )));
-
-    // Logo for dark backgrounds
-    $wp_customize->add_setting('acesso_logo_light', array(
-        'default'           => '',
-        'sanitize_callback' => 'esc_url_raw',
-        'transport'         => 'refresh',
-    ));
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'acesso_logo_light', array(
-        'label'       => __('Logo Claro (para fundos escuros)', 'acesso-uporto'),
-        'description' => __('Versão clara do logo para uso em fundos escuros ou no footer.', 'acesso-uporto'),
-        'section'     => 'acesso_logo_section',
-    )));
-
-    // Logo Height
+    // O logo e o favicon usam a "Identidade do Site" do WordPress
+    // (custom_logo + site_icon). Aqui só se acrescenta a altura do logo
+    // a essa mesma secção, para não haver controlos de logo duplicados.
     $wp_customize->add_setting('acesso_logo_height', array(
         'default'           => '50',
         'sanitize_callback' => 'absint',
@@ -55,26 +28,15 @@ function acesso_customize_register($wp_customize) {
     $wp_customize->add_control('acesso_logo_height', array(
         'label'       => __('Altura do Logo (px)', 'acesso-uporto'),
         'description' => __('Altura máxima do logo no cabeçalho.', 'acesso-uporto'),
-        'section'     => 'acesso_logo_section',
+        'section'     => 'title_tagline',
         'type'        => 'number',
+        'priority'    => 8,
         'input_attrs' => array(
             'min'  => 30,
             'max'  => 150,
             'step' => 5,
         ),
     ));
-
-    // Favicon
-    $wp_customize->add_setting('acesso_favicon', array(
-        'default'           => '',
-        'sanitize_callback' => 'esc_url_raw',
-        'transport'         => 'refresh',
-    ));
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'acesso_favicon', array(
-        'label'       => __('Favicon', 'acesso-uporto'),
-        'description' => __('Ícone do site (recomendado: 512x512px PNG).', 'acesso-uporto'),
-        'section'     => 'acesso_logo_section',
-    )));
 
     // =====================================================
     // APARÊNCIA
@@ -875,30 +837,20 @@ add_action('customize_preview_init', 'acesso_customizer_preview_js');
  * @param string $type 'default' or 'light' for dark backgrounds
  * @return string Logo HTML or empty string
  */
-function acesso_get_logo($type = 'default') {
-    $logo_url = '';
-
-    if ($type === 'light') {
-        $logo_url = get_theme_mod('acesso_logo_light', '');
-    }
-
-    if (empty($logo_url)) {
-        $logo_url = get_theme_mod('acesso_logo', '');
-    }
-
-    // Fallback to WordPress custom logo
-    if (empty($logo_url) && has_custom_logo()) {
-        return get_custom_logo();
-    }
-
-    if (empty($logo_url)) {
+function acesso_get_logo() {
+    // Usa o logo do core (Identidade do Site → custom_logo).
+    $logo_id = get_theme_mod('custom_logo');
+    if (!$logo_id) {
         return '';
     }
-
+    $logo_url = wp_get_attachment_image_url($logo_id, 'full');
+    if (!$logo_url) {
+        return '';
+    }
     $logo_height = get_theme_mod('acesso_logo_height', '50');
 
     return sprintf(
-        '<a href="%s" class="site-logo" rel="home"><img src="%s" alt="%s" style="max-height: %spx;"></a>',
+        '<a href="%s" class="site-logo custom-logo-link" rel="home"><img src="%s" alt="%s" class="custom-logo" style="max-height: %spx; width: auto;"></a>',
         esc_url(home_url('/')),
         esc_url($logo_url),
         esc_attr(get_bloginfo('name')),
@@ -906,14 +858,3 @@ function acesso_get_logo($type = 'default') {
     );
 }
 
-/**
- * Output favicon if set
- */
-function acesso_output_favicon() {
-    $favicon = get_theme_mod('acesso_favicon', '');
-    if (!empty($favicon)) {
-        echo '<link rel="icon" href="' . esc_url($favicon) . '" type="image/png">' . "\n";
-        echo '<link rel="apple-touch-icon" href="' . esc_url($favicon) . '">' . "\n";
-    }
-}
-add_action('wp_head', 'acesso_output_favicon', 1);
