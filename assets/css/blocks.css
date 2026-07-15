@@ -1944,11 +1944,11 @@ body.acesso-modal-open {
     background-position: center;
     background-repeat: no-repeat;
 }
-.pixel-bg-gold   { background-image: url('../images/pixel-bg/pixel-gold.svg?v=2'); }
-.pixel-bg-navy   { background-image: url('../images/pixel-bg/pixel-navy.svg?v=2'); }
-.pixel-bg-coral  { background-image: url('../images/pixel-bg/pixel-coral.svg?v=2'); }
-.pixel-bg-purple { background-image: url('../images/pixel-bg/pixel-purple.svg?v=2'); }
-.pixel-bg-pink   { background-image: url('../images/pixel-bg/pixel-pink.svg?v=2'); }
-.pixel-bg-cyan   { background-image: url('../images/pixel-bg/pixel-cyan.svg?v=2'); }
-.pixel-bg-red    { background-image: url('../images/pixel-bg/pixel-red.svg?v=2'); }
-.pixel-bg-yellow { background-image: url('../images/pixel-bg/pixel-yellow.svg?v=2'); }
+.pixel-bg-gold   { background-image: url('../images/pixel-bg/pixel-gold.svg?v=3'); }
+.pixel-bg-navy   { background-image: url('../images/pixel-bg/pixel-navy.svg?v=3'); }
+.pixel-bg-coral  { background-image: url('../images/pixel-bg/pixel-coral.svg?v=3'); }
+.pixel-bg-purple { background-image: url('../images/pixel-bg/pixel-purple.svg?v=3'); }
+.pixel-bg-pink   { background-image: url('../images/pixel-bg/pixel-pink.svg?v=3'); }
+.pixel-bg-cyan   { background-image: url('../images/pixel-bg/pixel-cyan.svg?v=3'); }
+.pixel-bg-red    { background-image: url('../images/pixel-bg/pixel-red.svg?v=3'); }
+.pixel-bg-yellow { background-image: url('../images/pixel-bg/pixel-yellow.svg?v=3'); }

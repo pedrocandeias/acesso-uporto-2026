@@ -226,7 +226,7 @@
                             className: 'cta-preview',
                             style: {
                                 background: attributes.pixelBackground
-                                    ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg?v=2) center/cover'
+                                    ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg?v=3) center/cover'
                                     : (attributes.style === 'image' && attributes.backgroundImage
                                         ? 'url(' + attributes.backgroundImage + ') ' + attributes.backgroundPosition + '/' + attributes.backgroundSize + ' ' + attributes.backgroundRepeat
                                         : currentStyle.bg),
