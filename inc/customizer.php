@@ -151,6 +151,34 @@ function acesso_customize_register($wp_customize) {
         'section'  => 'acesso_primary_colors',
     )));
 
+    // --- Text & Element Colors Section ---
+    $wp_customize->add_section('acesso_text_colors', array(
+        'title'    => __('Cores de Texto e Elementos', 'acesso-uporto'),
+        'panel'    => 'acesso_colors_panel',
+        'priority' => 15,
+    ));
+
+    $acesso_text_color_fields = array(
+        'acesso_color_text'        => array('#060221', __('Cor do Texto', 'acesso-uporto'), __('Cor do texto do corpo.', 'acesso-uporto')),
+        'acesso_color_heading'     => array('#060221', __('Cor dos Títulos', 'acesso-uporto'), __('Cor dos títulos e cabeçalhos.', 'acesso-uporto')),
+        'acesso_color_link'        => array('#572ddf', __('Cor dos Links', 'acesso-uporto'), __('Cor das ligações.', 'acesso-uporto')),
+        'acesso_color_link_hover'  => array('#da2489', __('Cor dos Links (rato em cima)', 'acesso-uporto'), __('Cor das ligações no hover.', 'acesso-uporto')),
+        'acesso_color_button_bg'   => array('#572ddf', __('Fundo dos Botões', 'acesso-uporto'), __('Cor de fundo dos botões primários.', 'acesso-uporto')),
+        'acesso_color_button_text' => array('#ffffff', __('Texto dos Botões', 'acesso-uporto'), __('Cor do texto dos botões primários.', 'acesso-uporto')),
+    );
+    foreach ($acesso_text_color_fields as $acesso_tc_id => $acesso_tc_cfg) {
+        $wp_customize->add_setting($acesso_tc_id, array(
+            'default'           => $acesso_tc_cfg[0],
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport'         => 'refresh',
+        ));
+        $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $acesso_tc_id, array(
+            'label'       => $acesso_tc_cfg[1],
+            'description' => $acesso_tc_cfg[2],
+            'section'     => 'acesso_text_colors',
+        )));
+    }
+
     // --- Accent Colors Section ---
     $wp_customize->add_section('acesso_accent_colors', array(
         'title'    => __('Cores de Destaque', 'acesso-uporto'),
@@ -607,6 +635,14 @@ function acesso_customizer_css() {
     $gradient_end   = get_theme_mod('acesso_gradient_end', '#da2489');
     $gradient_dir   = get_theme_mod('acesso_gradient_direction', '135deg');
 
+    // Cores de texto e elementos.
+    $color_text        = get_theme_mod('acesso_color_text', '#060221');
+    $color_heading     = get_theme_mod('acesso_color_heading', '#060221');
+    $color_link        = get_theme_mod('acesso_color_link', '#572ddf');
+    $color_link_hover  = get_theme_mod('acesso_color_link_hover', '#da2489');
+    $color_button_bg   = get_theme_mod('acesso_color_button_bg', '#572ddf');
+    $color_button_text = get_theme_mod('acesso_color_button_text', '#ffffff');
+
     $font_body         = get_theme_mod('acesso_font_body_custom', '') ?: get_theme_mod('acesso_font_body', 'Barlow');
     $font_body_weight  = get_theme_mod('acesso_font_body_weight', '400');
     $font_heading      = get_theme_mod('acesso_font_heading_custom', '') ?: get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
@@ -635,6 +671,14 @@ function acesso_customizer_css() {
             --color-cyan: <?php echo esc_attr($cyan); ?>;
             --color-lavender: <?php echo esc_attr($lavender); ?>;
             --color-coral: <?php echo esc_attr($coral); ?>;
+
+            /* Text & element colors */
+            --color-text: <?php echo esc_attr($color_text); ?>;
+            --color-heading: <?php echo esc_attr($color_heading); ?>;
+            --color-link: <?php echo esc_attr($color_link); ?>;
+            --color-link-hover: <?php echo esc_attr($color_link_hover); ?>;
+            --color-btn-bg: <?php echo esc_attr($color_button_bg); ?>;
+            --color-btn-text: <?php echo esc_attr($color_button_text); ?>;
 
             /* Legacy color names for compatibility */
             --color-purple: <?php echo esc_attr($primary); ?>;
@@ -667,6 +711,7 @@ function acesso_customizer_css() {
             font-family: var(--font-primary);
             font-weight: var(--font-body-weight);
             font-size: var(--font-size-base);
+            color: var(--color-text);
         }
 
         h1, h2, h3, h4, h5, h6,
@@ -674,6 +719,14 @@ function acesso_customizer_css() {
         .hero-title {
             font-family: var(--font-display);
             font-weight: var(--font-heading-weight);
+        }
+
+        /* Cor dos títulos/cabeçalhos (.hero-title fica branco sobre o hero) */
+        h1, h2, h3, h4, h5, h6, .wp-block-heading,
+        .section-title, .feature-title, .icon-box-title, .faq-question,
+        .stat-value, .statistics-section .stat-number, .timeline-title,
+        .testimonial-name, .course-name, .phase-value {
+            color: var(--color-heading);
         }
 <?php if ($heading_scale_pct !== 100) : ?>
         /* Escala dos títulos (mantém o clamp responsivo, multiplicado). */
@@ -706,21 +759,23 @@ function acesso_customizer_css() {
 
         /* Apply colors */
         a {
-            color: var(--color-primary);
+            color: var(--color-link);
         }
         a:hover {
-            color: var(--color-secondary);
+            color: var(--color-link-hover);
         }
 
         .btn-primary,
         button[type="submit"],
         input[type="submit"] {
-            background: var(--color-primary);
+            background: var(--color-btn-bg);
+            color: var(--color-btn-text);
         }
         .btn-primary:hover,
         button[type="submit"]:hover,
         input[type="submit"]:hover {
-            background: var(--color-secondary);
+            background: var(--color-btn-bg);
+            filter: brightness(0.92);
         }
 
         /* Gradient backgrounds */
