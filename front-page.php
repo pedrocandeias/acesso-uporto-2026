@@ -19,8 +19,10 @@ get_header();
         // Get the page content
         $content = get_the_content();
 
-        // Check if page has custom content
-        if (!empty(trim(strip_tags($content, '<div><section><figure><img>')))) {
+        // A página tem conteúdo se tiver blocos (mesmo blocos dinâmicos
+        // self-closing, cujo HTML "cru" é vazio) ou texto/HTML. Assim as edições
+        // à página inicial no Gutenberg passam a refletir-se no site.
+        if (has_blocks($content) || trim(strip_tags($content)) !== '') {
             // Page has custom content, display it
             the_content();
         } else {
