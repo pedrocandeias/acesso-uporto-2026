@@ -15,6 +15,14 @@ $style = $attributes['style'] ?? 'gradient';
 $background_image = $attributes['backgroundImage'] ?? '';
 $overlay_opacity = ($attributes['overlayOpacity'] ?? 85) / 100;
 
+// Fundo de pixels: implica estilo "imagem" e sobrepõe a imagem carregada.
+$pixel_bg = $attributes['pixelBackground'] ?? '';
+$pixel_colors = array('gold', 'navy', 'coral', 'purple', 'pink', 'cyan', 'red', 'yellow');
+if ($pixel_bg && in_array($pixel_bg, $pixel_colors, true)) {
+    $background_image = ACESSO_THEME_URI . '/assets/images/pixel-bg/pixel-' . $pixel_bg . '.svg';
+    $style = 'image';
+}
+
 $block_id = 'cta-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(

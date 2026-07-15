@@ -24,6 +24,13 @@ $bg_position   = $attributes['backgroundPosition'] ?? 'center center';
 $bg_repeat     = $attributes['backgroundRepeat'] ?? 'no-repeat';
 $bg_attachment = $attributes['backgroundAttachment'] ?? 'scroll';
 
+// Fundo de pixels (sobrepõe a imagem carregada quando escolhido).
+$pixel_bg = $attributes['pixelBackground'] ?? '';
+$pixel_colors = array('gold', 'navy', 'coral', 'purple', 'pink', 'cyan', 'red', 'yellow');
+if ($pixel_bg && in_array($pixel_bg, $pixel_colors, true)) {
+    $background_image = ACESSO_THEME_URI . '/assets/images/pixel-bg/pixel-' . $pixel_bg . '.svg';
+}
+
 $block_id = 'hero-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(

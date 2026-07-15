@@ -106,6 +106,23 @@
                             options: styleOptions,
                             onChange: function (value) { setAttributes({ style: value }); }
                         }),
+                        el(SelectControl, {
+                            label: __('Fundo de pixels', 'acesso-uporto'),
+                            help: __('Aplica uma textura de pixels (usa o estilo imagem).', 'acesso-uporto'),
+                            value: attributes.pixelBackground,
+                            options: [
+                                { label: __('Nenhum', 'acesso-uporto'), value: '' },
+                                { label: 'Gold', value: 'gold' },
+                                { label: 'Navy', value: 'navy' },
+                                { label: 'Coral', value: 'coral' },
+                                { label: 'Purple', value: 'purple' },
+                                { label: 'Pink', value: 'pink' },
+                                { label: 'Cyan', value: 'cyan' },
+                                { label: 'Red', value: 'red' },
+                                { label: 'Yellow', value: 'yellow' }
+                            ],
+                            onChange: function (value) { setAttributes({ pixelBackground: value }); }
+                        }),
                         attributes.style === 'image' && el(
                             MediaUploadCheck,
                             null,
@@ -208,9 +225,11 @@
                         {
                             className: 'cta-preview',
                             style: {
-                                background: attributes.style === 'image' && attributes.backgroundImage
-                                    ? 'url(' + attributes.backgroundImage + ') ' + attributes.backgroundPosition + '/' + attributes.backgroundSize + ' ' + attributes.backgroundRepeat
-                                    : currentStyle.bg,
+                                background: attributes.pixelBackground
+                                    ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg) center/cover'
+                                    : (attributes.style === 'image' && attributes.backgroundImage
+                                        ? 'url(' + attributes.backgroundImage + ') ' + attributes.backgroundPosition + '/' + attributes.backgroundSize + ' ' + attributes.backgroundRepeat
+                                        : currentStyle.bg),
                                 color: currentStyle.text,
                                 padding: '60px 40px',
                                 borderRadius: '12px',

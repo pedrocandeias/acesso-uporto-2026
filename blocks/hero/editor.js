@@ -87,6 +87,23 @@
                                 }
                             })
                         ),
+                        el(SelectControl, {
+                            label: __('Fundo de pixels', 'acesso-uporto'),
+                            help: __('Aplica uma textura de pixels; sobrepõe a imagem carregada.', 'acesso-uporto'),
+                            value: attributes.pixelBackground,
+                            options: [
+                                { label: __('Nenhum', 'acesso-uporto'), value: '' },
+                                { label: 'Gold', value: 'gold' },
+                                { label: 'Navy', value: 'navy' },
+                                { label: 'Coral', value: 'coral' },
+                                { label: 'Purple', value: 'purple' },
+                                { label: 'Pink', value: 'pink' },
+                                { label: 'Cyan', value: 'cyan' },
+                                { label: 'Red', value: 'red' },
+                                { label: 'Yellow', value: 'yellow' }
+                            ],
+                            onChange: function (value) { setAttributes({ pixelBackground: value }); }
+                        }),
                         attributes.backgroundImage && el(SelectControl, {
                             label: __('Tamanho da imagem', 'acesso-uporto'),
                             value: attributes.backgroundSize,
@@ -230,7 +247,9 @@
                         {
                             className: 'hero-preview',
                             style: {
-                                backgroundImage: attributes.backgroundImage ? 'url(' + attributes.backgroundImage + ')' : 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')',
+                                backgroundImage: attributes.pixelBackground
+                                    ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg)'
+                                    : (attributes.backgroundImage ? 'url(' + attributes.backgroundImage + ')' : 'linear-gradient(135deg, ' + attributes.gradientStart + ', ' + attributes.gradientEnd + ')'),
                                 backgroundSize: attributes.backgroundImage ? attributes.backgroundSize : 'cover',
                                 backgroundPosition: attributes.backgroundImage ? attributes.backgroundPosition : 'center',
                                 backgroundRepeat: attributes.backgroundImage ? attributes.backgroundRepeat : 'no-repeat',

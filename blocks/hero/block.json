@@ -37,6 +37,10 @@
             "type": "string",
             "default": "scroll"
         },
+        "pixelBackground": {
+            "type": "string",
+            "default": ""
+        },
         "rotatingWords": {
             "type": "array",
             "default": ["Conhecimento", "Investigação", "Inovação", "Futuro"]
