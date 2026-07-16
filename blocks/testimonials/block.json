@@ -7,10 +7,31 @@
     "category": "acesso-blocks",
     "icon": "format-quote",
     "description": "Student testimonials carousel with photos and quotes.",
-    "keywords": ["testimonials", "students", "quotes", "carousel"],
+    "keywords": [
+        "testimonials",
+        "students",
+        "quotes",
+        "carousel"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "sectionTitle": {
@@ -41,7 +62,7 @@
             "type": "number",
             "default": 5000
         },
-        "style": {
+        "variant": {
             "type": "string",
             "default": "cards"
         },

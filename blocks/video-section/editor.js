@@ -144,14 +144,14 @@
                         }),
                         el(SelectControl, {
                             label: __('Estilo', 'acesso-uporto'),
-                            value: attributes.style,
+                            value: attributes.variant,
                             options: [
                                 { label: __('Padrão', 'acesso-uporto'), value: 'default' },
                                 { label: __('Com Sombra', 'acesso-uporto'), value: 'shadow' },
                                 { label: __('Arredondado', 'acesso-uporto'), value: 'rounded' },
                                 { label: __('Full Width', 'acesso-uporto'), value: 'fullwidth' }
                             ],
-                            onChange: function (value) { setAttributes({ style: value }); }
+                            onChange: function (value) { setAttributes({ variant: value }); }
                         }),
                         el(ToggleControl, {
                             label: __('Autoplay (sem som)', 'acesso-uporto'),

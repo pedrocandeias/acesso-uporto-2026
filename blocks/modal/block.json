@@ -7,9 +7,27 @@
     "category": "acesso-blocks",
     "icon": "external",
     "description": "Janela modal com conteúdo livre, aberta por um botão ou por qualquer link para o seu id. Substitui o ld_modal_window.",
-    "keywords": ["modal", "popup", "lightbox", "ld_modal_window"],
+    "keywords": [
+        "modal",
+        "popup",
+        "lightbox",
+        "ld_modal_window"
+    ],
     "supports": {
-        "html": false
+        "html": false,
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "anchorId": {

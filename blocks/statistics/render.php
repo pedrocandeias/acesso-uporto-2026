@@ -8,14 +8,22 @@
 $section_title = $attributes['sectionTitle'] ?? '';
 $stats = $attributes['stats'] ?? [];
 $layout = $attributes['layout'] ?? 'grid-4';
-$style = $attributes['style'] ?? 'default';
+$variant = $attributes['variant'] ?? 'default';
+// Backward compat: this visual variant was a string attribute named "style" before the
+// rename to "variant". WordPress now treats the reserved "style" as an object (spacing/
+// typography supports) and strips the legacy string from $attributes, so recover it from
+// the raw parsed block attributes. A string value unambiguously means legacy saved content.
+$legacy_variant = isset($block->parsed_block['attrs']['style']) ? $block->parsed_block['attrs']['style'] : null;
+if (is_string($legacy_variant) && $legacy_variant !== '') {
+    $variant = $legacy_variant;
+}
 $animate = $attributes['animateOnScroll'] ?? true;
 
 $block_id = 'statistics-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(
     'id' => $block_id,
-    'class' => 'statistics-section style-' . esc_attr($style),
+    'class' => 'statistics-section style-' . esc_attr($variant),
 ));
 
 // Icon SVGs
@@ -48,7 +56,7 @@ $grid_class = 'statistics-grid ' . esc_attr($layout);
                 $icon = $stat['icon'] ?? 'star';
             ?>
                 <div class="stat-item<?php echo $animate ? ' animate-on-scroll' : ''; ?>" data-number="<?php echo esc_attr($number); ?>">
-                    <?php if ($style === 'icons' && isset($icons[$icon])) : ?>
+                    <?php if ($variant === 'icons' && isset($icons[$icon])) : ?>
                         <div class="stat-icon">
                             <?php echo $icons[$icon]; ?>
                         </div>

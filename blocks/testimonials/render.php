@@ -10,14 +10,22 @@ $section_subtitle = $attributes['sectionSubtitle'] ?? '';
 $testimonials = $attributes['testimonials'] ?? [];
 $autoplay = $attributes['autoplay'] ?? true;
 $autoplay_speed = $attributes['autoplaySpeed'] ?? 5000;
-$style = $attributes['style'] ?? 'cards';
+$variant = $attributes['variant'] ?? 'cards';
+// Backward compat: this visual variant was a string attribute named "style" before the
+// rename to "variant". WordPress now treats the reserved "style" as an object (spacing/
+// typography supports) and strips the legacy string from $attributes, so recover it from
+// the raw parsed block attributes. A string value unambiguously means legacy saved content.
+$legacy_variant = isset($block->parsed_block['attrs']['style']) ? $block->parsed_block['attrs']['style'] : null;
+if (is_string($legacy_variant) && $legacy_variant !== '') {
+    $variant = $legacy_variant;
+}
 $bg_color = $attributes['backgroundColor'] ?? '#f9f9f9';
 
 $block_id = 'testimonials-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(
     'id' => $block_id,
-    'class' => 'testimonials-section style-' . esc_attr($style),
+    'class' => 'testimonials-section style-' . esc_attr($variant),
 ));
 
 if (empty($testimonials)) {
@@ -38,7 +46,7 @@ if (empty($testimonials)) {
             </div>
         <?php endif; ?>
 
-        <div class="testimonials-wrapper <?php echo $style === 'carousel' ? 'testimonials-carousel' : 'testimonials-grid'; ?>"
+        <div class="testimonials-wrapper <?php echo $variant === 'carousel' ? 'testimonials-carousel' : 'testimonials-grid'; ?>"
              data-autoplay="<?php echo $autoplay ? 'true' : 'false'; ?>"
              data-speed="<?php echo esc_attr($autoplay_speed); ?>">
 
@@ -84,7 +92,7 @@ if (empty($testimonials)) {
             <?php endforeach; ?>
         </div>
 
-        <?php if ($style === 'carousel' && count($testimonials) > 1) : ?>
+        <?php if ($variant === 'carousel' && count($testimonials) > 1) : ?>
             <div class="testimonials-nav">
                 <button class="testimonial-nav-btn testimonial-prev" aria-label="<?php esc_attr_e('Anterior', 'acesso-uporto'); ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">

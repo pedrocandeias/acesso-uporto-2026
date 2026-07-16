@@ -7,10 +7,31 @@
     "category": "acesso-blocks",
     "icon": "menu",
     "description": "Menu horizontal de links, opcionalmente fixo (sticky). Substitui o ld_custom_menu.",
-    "keywords": ["menu", "nav", "anchor", "ld_custom_menu"],
+    "keywords": [
+        "menu",
+        "nav",
+        "anchor",
+        "ld_custom_menu"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "items": {

@@ -7,10 +7,32 @@
     "category": "acesso-blocks",
     "icon": "grid-view",
     "description": "Grid of feature cards with icons, titles and descriptions.",
-    "keywords": ["features", "cards", "grid", "services", "benefits"],
+    "keywords": [
+        "features",
+        "cards",
+        "grid",
+        "services",
+        "benefits"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "sectionTitle": {
@@ -24,17 +46,37 @@
         "features": {
             "type": "array",
             "default": [
-                {"icon": "building", "title": "15 Faculdades", "description": "+ 1 Business School", "link": ""},
-                {"icon": "groups", "title": "+35.700", "description": "Estudantes Inscritos", "link": ""},
-                {"icon": "science", "title": "48", "description": "Centros de Investigação", "link": ""},
-                {"icon": "library", "title": "18", "description": "Bibliotecas", "link": ""}
+                {
+                    "icon": "building",
+                    "title": "15 Faculdades",
+                    "description": "+ 1 Business School",
+                    "link": ""
+                },
+                {
+                    "icon": "groups",
+                    "title": "+35.700",
+                    "description": "Estudantes Inscritos",
+                    "link": ""
+                },
+                {
+                    "icon": "science",
+                    "title": "48",
+                    "description": "Centros de Investigação",
+                    "link": ""
+                },
+                {
+                    "icon": "library",
+                    "title": "18",
+                    "description": "Bibliotecas",
+                    "link": ""
+                }
             ]
         },
         "columns": {
             "type": "number",
             "default": 4
         },
-        "style": {
+        "variant": {
             "type": "string",
             "default": "default"
         },

@@ -7,10 +7,32 @@
     "category": "acesso-blocks",
     "icon": "info-outline",
     "description": "Caixa com ícone, título e conteúdo livre. Substitui o ld_icon_box do Visual Composer.",
-    "keywords": ["icon", "box", "feature", "contact", "ld_icon_box"],
+    "keywords": [
+        "icon",
+        "box",
+        "feature",
+        "contact",
+        "ld_icon_box"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "icon": {

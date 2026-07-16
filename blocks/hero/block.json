@@ -7,10 +7,31 @@
     "category": "acesso-blocks",
     "icon": "cover-image",
     "description": "Full-width hero section with rotating text animation and gradient overlay.",
-    "keywords": ["hero", "banner", "header", "slider"],
+    "keywords": [
+        "hero",
+        "banner",
+        "header",
+        "slider"
+    ],
     "supports": {
         "html": false,
-        "align": ["full", "wide"]
+        "align": [
+            "full",
+            "wide"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "backgroundImage": {
@@ -43,7 +64,12 @@
         },
         "rotatingWords": {
             "type": "array",
-            "default": ["Conhecimento", "Investigação", "Inovação", "Futuro"]
+            "default": [
+                "Conhecimento",
+                "Investigação",
+                "Inovação",
+                "Futuro"
+            ]
         },
         "staticTextBefore": {
             "type": "string",
@@ -93,16 +119,46 @@
             "type": "string",
             "default": "100vh"
         },
-        "rotatingColor": { "type": "string", "default": "" },
-        "rotatingSize": { "type": "string", "default": "" },
-        "titleColor": { "type": "string", "default": "" },
-        "titleSize": { "type": "string", "default": "" },
-        "taglineColor": { "type": "string", "default": "" },
-        "taglineSize": { "type": "string", "default": "" },
-        "primaryBtnBg": { "type": "string", "default": "" },
-        "primaryBtnColor": { "type": "string", "default": "" },
-        "secondaryBtnColor": { "type": "string", "default": "" },
-        "buttonSize": { "type": "string", "default": "" }
+        "rotatingColor": {
+            "type": "string",
+            "default": ""
+        },
+        "rotatingSize": {
+            "type": "string",
+            "default": ""
+        },
+        "titleColor": {
+            "type": "string",
+            "default": ""
+        },
+        "titleSize": {
+            "type": "string",
+            "default": ""
+        },
+        "taglineColor": {
+            "type": "string",
+            "default": ""
+        },
+        "taglineSize": {
+            "type": "string",
+            "default": ""
+        },
+        "primaryBtnBg": {
+            "type": "string",
+            "default": ""
+        },
+        "primaryBtnColor": {
+            "type": "string",
+            "default": ""
+        },
+        "secondaryBtnColor": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonSize": {
+            "type": "string",
+            "default": ""
+        }
     },
     "textdomain": "acesso-uporto",
     "editorScript": "file:./editor.js",

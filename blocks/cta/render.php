@@ -11,7 +11,15 @@ $primary_btn_text = $attributes['primaryButtonText'] ?? '';
 $primary_btn_url = $attributes['primaryButtonUrl'] ?? '';
 $secondary_btn_text = $attributes['secondaryButtonText'] ?? '';
 $secondary_btn_url = $attributes['secondaryButtonUrl'] ?? '';
-$style = $attributes['style'] ?? 'gradient';
+$variant = $attributes['variant'] ?? 'gradient';
+// Backward compat: this visual variant was a string attribute named "style" before the
+// rename to "variant". WordPress now treats the reserved "style" as an object (spacing/
+// typography supports) and strips the legacy string from $attributes, so recover it from
+// the raw parsed block attributes. A string value unambiguously means legacy saved content.
+$legacy_variant = isset($block->parsed_block['attrs']['style']) ? $block->parsed_block['attrs']['style'] : null;
+if (is_string($legacy_variant) && $legacy_variant !== '') {
+    $variant = $legacy_variant;
+}
 $background_image = $attributes['backgroundImage'] ?? '';
 $overlay_opacity = ($attributes['overlayOpacity'] ?? 85) / 100;
 
@@ -22,14 +30,14 @@ if ($pixel_bg && in_array($pixel_bg, $pixel_colors, true)) {
     $pixel_path = ACESSO_THEME_DIR . '/assets/images/pixel-bg/pixel-' . $pixel_bg . '.svg';
     $pixel_ver  = file_exists($pixel_path) ? filemtime($pixel_path) : ACESSO_THEME_VERSION;
     $background_image = ACESSO_THEME_URI . '/assets/images/pixel-bg/pixel-' . $pixel_bg . '.svg?ver=' . $pixel_ver;
-    $style = 'image';
+    $variant = 'image';
 }
 
 $block_id = 'cta-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(
     'id' => $block_id,
-    'class' => 'cta-section style-' . esc_attr($style),
+    'class' => 'cta-section style-' . esc_attr($variant),
 ));
 
 $bg_size       = $attributes['backgroundSize'] ?? 'cover';
@@ -38,7 +46,7 @@ $bg_repeat     = $attributes['backgroundRepeat'] ?? 'no-repeat';
 $bg_attachment = $attributes['backgroundAttachment'] ?? 'scroll';
 
 $background_style = '';
-if ($style === 'image' && $background_image) {
+if ($variant === 'image' && $background_image) {
     $background_style = sprintf(
         "background-image: url('%s'); background-size: %s; background-position: %s; background-repeat: %s; background-attachment: %s;",
         esc_url($background_image),
@@ -51,7 +59,7 @@ if ($style === 'image' && $background_image) {
 ?>
 
 <section <?php echo $wrapper_attributes; ?> <?php echo $background_style ? 'style="' . $background_style . '"' : ''; ?>>
-    <?php if ($style === 'image' && $background_image) : ?>
+    <?php if ($variant === 'image' && $background_image) : ?>
         <div class="cta-overlay" style="opacity: <?php echo esc_attr($overlay_opacity); ?>;"></div>
     <?php endif; ?>
 

@@ -7,10 +7,25 @@
     "category": "acesso-blocks",
     "icon": "index-card",
     "description": "Uma secção de separador. Só pode ser usado dentro do bloco Tabs.",
-    "parent": ["acesso/tabs"],
+    "parent": [
+        "acesso/tabs"
+    ],
     "supports": {
         "html": false,
-        "reusable": false
+        "reusable": false,
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "title": {

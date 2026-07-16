@@ -37,7 +37,7 @@
                 className: 'cta-editor-preview'
             });
 
-            var currentStyle = styleColors[attributes.style] || styleColors.gradient;
+            var currentStyle = styleColors[attributes.variant] || styleColors.gradient;
 
             var onSelectImage = function (media) {
                 setAttributes({
@@ -102,9 +102,9 @@
                         { title: __('Estilo', 'acesso-uporto'), initialOpen: false },
                         el(SelectControl, {
                             label: __('Estilo', 'acesso-uporto'),
-                            value: attributes.style,
+                            value: attributes.variant,
                             options: styleOptions,
-                            onChange: function (value) { setAttributes({ style: value }); }
+                            onChange: function (value) { setAttributes({ variant: value }); }
                         }),
                         el(SelectControl, {
                             label: __('Fundo de pixels', 'acesso-uporto'),
@@ -123,7 +123,7 @@
                             ],
                             onChange: function (value) { setAttributes({ pixelBackground: value }); }
                         }),
-                        attributes.style === 'image' && el(
+                        attributes.variant === 'image' && el(
                             MediaUploadCheck,
                             null,
                             el(MediaUpload, {
@@ -161,7 +161,7 @@
                                 }
                             })
                         ),
-                        attributes.style === 'image' && attributes.backgroundImage && el(SelectControl, {
+                        attributes.variant === 'image' && attributes.backgroundImage && el(SelectControl, {
                             label: __('Tamanho da imagem', 'acesso-uporto'),
                             value: attributes.backgroundSize,
                             options: [
@@ -172,7 +172,7 @@
                             ],
                             onChange: function (value) { setAttributes({ backgroundSize: value }); }
                         }),
-                        attributes.style === 'image' && attributes.backgroundImage && el(SelectControl, {
+                        attributes.variant === 'image' && attributes.backgroundImage && el(SelectControl, {
                             label: __('Posição', 'acesso-uporto'),
                             value: attributes.backgroundPosition,
                             options: [
@@ -188,7 +188,7 @@
                             ],
                             onChange: function (value) { setAttributes({ backgroundPosition: value }); }
                         }),
-                        attributes.style === 'image' && attributes.backgroundImage && el(SelectControl, {
+                        attributes.variant === 'image' && attributes.backgroundImage && el(SelectControl, {
                             label: __('Repetição', 'acesso-uporto'),
                             value: attributes.backgroundRepeat,
                             options: [
@@ -199,7 +199,7 @@
                             ],
                             onChange: function (value) { setAttributes({ backgroundRepeat: value }); }
                         }),
-                        attributes.style === 'image' && attributes.backgroundImage && el(SelectControl, {
+                        attributes.variant === 'image' && attributes.backgroundImage && el(SelectControl, {
                             label: __('Fixação', 'acesso-uporto'),
                             value: attributes.backgroundAttachment,
                             options: [
@@ -208,7 +208,7 @@
                             ],
                             onChange: function (value) { setAttributes({ backgroundAttachment: value }); }
                         }),
-                        attributes.style === 'image' && el(RangeControl, {
+                        attributes.variant === 'image' && el(RangeControl, {
                             label: __('Opacidade do Overlay (%)', 'acesso-uporto'),
                             value: attributes.overlayOpacity,
                             onChange: function (value) { setAttributes({ overlayOpacity: value }); },
@@ -227,7 +227,7 @@
                             style: {
                                 background: attributes.pixelBackground
                                     ? 'url(/wp-content/themes/acesso-uporto-2026/assets/images/pixel-bg/pixel-' + attributes.pixelBackground + '.svg?v=3) center/cover'
-                                    : (attributes.style === 'image' && attributes.backgroundImage
+                                    : (attributes.variant === 'image' && attributes.backgroundImage
                                         ? 'url(' + attributes.backgroundImage + ') ' + attributes.backgroundPosition + '/' + attributes.backgroundSize + ' ' + attributes.backgroundRepeat
                                         : currentStyle.bg),
                                 color: currentStyle.text,
@@ -238,7 +238,7 @@
                                 overflow: 'hidden'
                             }
                         },
-                        attributes.style === 'image' && attributes.backgroundImage && el('div', {
+                        attributes.variant === 'image' && attributes.backgroundImage && el('div', {
                             style: {
                                 position: 'absolute',
                                 top: 0,
@@ -260,8 +260,8 @@
                             },
                                 attributes.primaryButtonText && el('span', {
                                     style: {
-                                        background: attributes.style === 'light' ? 'linear-gradient(135deg, #572ddf, #da2489)' : '#fff',
-                                        color: attributes.style === 'light' ? '#fff' : '#572ddf',
+                                        background: attributes.variant === 'light' ? 'linear-gradient(135deg, #572ddf, #da2489)' : '#fff',
+                                        color: attributes.variant === 'light' ? '#fff' : '#572ddf',
                                         padding: '14px 28px',
                                         borderRadius: '50px',
                                         fontWeight: 600,
@@ -270,8 +270,8 @@
                                 }, attributes.primaryButtonText),
                                 attributes.secondaryButtonText && el('span', {
                                     style: {
-                                        border: '2px solid ' + (attributes.style === 'light' ? '#060221' : '#fff'),
-                                        color: attributes.style === 'light' ? '#060221' : '#fff',
+                                        border: '2px solid ' + (attributes.variant === 'light' ? '#060221' : '#fff'),
+                                        color: attributes.variant === 'light' ? '#060221' : '#fff',
                                         padding: '12px 26px',
                                         borderRadius: '50px',
                                         fontWeight: 600,

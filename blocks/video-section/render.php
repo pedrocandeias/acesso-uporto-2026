@@ -10,14 +10,22 @@ $section_subtitle = $attributes['sectionSubtitle'] ?? '';
 $video_url = $attributes['videoUrl'] ?? '';
 $poster_image = $attributes['posterImage'] ?? '';
 $aspect_ratio = $attributes['aspectRatio'] ?? '16-9';
-$style = $attributes['style'] ?? 'default';
+$variant = $attributes['variant'] ?? 'default';
+// Backward compat: this visual variant was a string attribute named "style" before the
+// rename to "variant". WordPress now treats the reserved "style" as an object (spacing/
+// typography supports) and strips the legacy string from $attributes, so recover it from
+// the raw parsed block attributes. A string value unambiguously means legacy saved content.
+$legacy_variant = isset($block->parsed_block['attrs']['style']) ? $block->parsed_block['attrs']['style'] : null;
+if (is_string($legacy_variant) && $legacy_variant !== '') {
+    $variant = $legacy_variant;
+}
 $autoplay = $attributes['autoplay'] ?? false;
 
 $block_id = 'video-section-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(
     'id' => $block_id,
-    'class' => 'video-section style-' . esc_attr($style) . ' aspect-' . esc_attr($aspect_ratio),
+    'class' => 'video-section style-' . esc_attr($variant) . ' aspect-' . esc_attr($aspect_ratio),
 ));
 
 if (empty($video_url)) {

@@ -7,10 +7,31 @@
     "category": "acesso-blocks",
     "icon": "editor-help",
     "description": "Frequently asked questions accordion with expandable items.",
-    "keywords": ["faq", "accordion", "questions", "answers", "help"],
+    "keywords": [
+        "faq",
+        "accordion",
+        "questions",
+        "answers",
+        "help"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide"]
+        "align": [
+            "wide"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "sectionTitle": {
@@ -38,7 +59,7 @@
             "type": "boolean",
             "default": false
         },
-        "style": {
+        "variant": {
             "type": "string",
             "default": "default"
         },

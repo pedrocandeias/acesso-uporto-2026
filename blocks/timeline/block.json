@@ -7,10 +7,32 @@
     "category": "acesso-blocks",
     "icon": "clock",
     "description": "Timeline section for displaying phases, dates and milestones.",
-    "keywords": ["timeline", "phases", "dates", "schedule", "milestones"],
+    "keywords": [
+        "timeline",
+        "phases",
+        "dates",
+        "schedule",
+        "milestones"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "sectionTitle": {
@@ -54,7 +76,7 @@
             "type": "string",
             "default": "horizontal"
         },
-        "style": {
+        "variant": {
             "type": "string",
             "default": "default"
         }

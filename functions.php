@@ -1108,9 +1108,36 @@ function acesso_get_icon($name, $class = '') {
 }
 
 /**
+ * Compatibilidade retroativa: o atributo de variante visual dos blocos acesso/*
+ * chamava-se "style", nome agora reservado pelo WordPress para os estilos de
+ * espaçamento/tipografia (objeto). Conteúdo já gravado guarda "style" como
+ * string (ex.: "logos", "dark"); o WordPress descarta essa string por não
+ * corresponder ao esquema (objeto) antes de o render.php a ver. Este filtro
+ * migra, no momento da renderização, a string legada para o novo atributo
+ * "variant", sem reescrever a base de dados.
+ */
+function acesso_migrate_legacy_block_variant($parsed_block) {
+    if (
+        isset($parsed_block['blockName'])
+        && strpos($parsed_block['blockName'], 'acesso/') === 0
+        && isset($parsed_block['attrs']['style'])
+        && is_string($parsed_block['attrs']['style'])
+        && $parsed_block['attrs']['style'] !== ''
+    ) {
+        if (!isset($parsed_block['attrs']['variant'])) {
+            $parsed_block['attrs']['variant'] = $parsed_block['attrs']['style'];
+        }
+        unset($parsed_block['attrs']['style']);
+    }
+    return $parsed_block;
+}
+add_filter('render_block_data', 'acesso_migrate_legacy_block_variant');
+
+/**
  * Include Additional Files
  */
 require_once ACESSO_THEME_DIR . '/inc/customizer.php';
+require_once ACESSO_THEME_DIR . '/inc/custom-code.php';
 require_once ACESSO_THEME_DIR . '/inc/acf-course-fields.php';
 require_once ACESSO_THEME_DIR . '/inc/block-patterns.php';
 require_once ACESSO_THEME_DIR . '/inc/github-update-check.php';

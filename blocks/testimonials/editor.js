@@ -70,13 +70,13 @@
                         }),
                         el(SelectControl, {
                             label: __('Estilo', 'acesso-uporto'),
-                            value: attributes.style,
+                            value: attributes.variant,
                             options: [
                                 { label: __('Cards', 'acesso-uporto'), value: 'cards' },
                                 { label: __('Carousel', 'acesso-uporto'), value: 'carousel' },
                                 { label: __('Destaque', 'acesso-uporto'), value: 'featured' }
                             ],
-                            onChange: function (value) { setAttributes({ style: value }); }
+                            onChange: function (value) { setAttributes({ variant: value }); }
                         }),
                         el(ToggleControl, {
                             label: __('Autoplay', 'acesso-uporto'),
@@ -215,7 +215,7 @@
                         ),
                         el('small', { style: { color: '#888', display: 'block', marginTop: '10px' } },
                             attributes.testimonials.length + ' ' + __('testemunhos', 'acesso-uporto') + ' | ' +
-                            __('Estilo:', 'acesso-uporto') + ' ' + attributes.style
+                            __('Estilo:', 'acesso-uporto') + ' ' + attributes.variant
                         )
                     )
                 )

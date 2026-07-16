@@ -9,14 +9,22 @@ $section_title = $attributes['sectionTitle'] ?? '';
 $section_subtitle = $attributes['sectionSubtitle'] ?? '';
 $features = $attributes['features'] ?? [];
 $columns = $attributes['columns'] ?? 4;
-$style = $attributes['style'] ?? 'default';
+$variant = $attributes['variant'] ?? 'default';
+// Backward compat: this visual variant was a string attribute named "style" before the
+// rename to "variant". WordPress now treats the reserved "style" as an object (spacing/
+// typography supports) and strips the legacy string from $attributes, so recover it from
+// the raw parsed block attributes. A string value unambiguously means legacy saved content.
+$legacy_variant = isset($block->parsed_block['attrs']['style']) ? $block->parsed_block['attrs']['style'] : null;
+if (is_string($legacy_variant) && $legacy_variant !== '') {
+    $variant = $legacy_variant;
+}
 $show_icons = $attributes['showIcons'] ?? true;
 
 $block_id = 'feature-cards-' . uniqid();
 
 $wrapper_attributes = get_block_wrapper_attributes(array(
     'id' => $block_id,
-    'class' => 'feature-cards-section style-' . esc_attr($style),
+    'class' => 'feature-cards-section style-' . esc_attr($variant),
 ));
 
 if (empty($features)) {

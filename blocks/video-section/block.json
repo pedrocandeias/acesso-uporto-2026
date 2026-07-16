@@ -7,10 +7,32 @@
     "category": "acesso-blocks",
     "icon": "video-alt3",
     "description": "Video embed section with poster image and play button.",
-    "keywords": ["video", "youtube", "vimeo", "embed", "media"],
+    "keywords": [
+        "video",
+        "youtube",
+        "vimeo",
+        "embed",
+        "media"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "sectionTitle": {
@@ -37,7 +59,7 @@
             "type": "string",
             "default": "16-9"
         },
-        "style": {
+        "variant": {
             "type": "string",
             "default": "default"
         },

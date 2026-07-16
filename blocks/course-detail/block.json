@@ -7,10 +7,31 @@
     "category": "acesso-blocks",
     "icon": "id-alt",
     "description": "Display comprehensive course information.",
-    "keywords": ["course", "detail", "info", "curso"],
+    "keywords": [
+        "course",
+        "detail",
+        "info",
+        "curso"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "courseSource": {

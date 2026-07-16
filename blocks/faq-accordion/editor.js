@@ -77,14 +77,14 @@
                         }),
                         el(SelectControl, {
                             label: __('Estilo', 'acesso-uporto'),
-                            value: attributes.style,
+                            value: attributes.variant,
                             options: [
                                 { label: __('Padrão', 'acesso-uporto'), value: 'default' },
                                 { label: __('Cards', 'acesso-uporto'), value: 'cards' },
                                 { label: __('Minimalista', 'acesso-uporto'), value: 'minimal' },
                                 { label: __('Com Bordas', 'acesso-uporto'), value: 'bordered' }
                             ],
-                            onChange: function (value) { setAttributes({ style: value }); }
+                            onChange: function (value) { setAttributes({ variant: value }); }
                         }),
                         el(ToggleControl, {
                             label: __('Permitir Múltiplos Abertos', 'acesso-uporto'),

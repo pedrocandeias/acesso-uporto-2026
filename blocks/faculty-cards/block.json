@@ -7,10 +7,32 @@
     "category": "acesso-blocks",
     "icon": "building",
     "description": "Grid of faculty cards with images, names and links.",
-    "keywords": ["faculty", "faculties", "schools", "cards", "grid"],
+    "keywords": [
+        "faculty",
+        "faculties",
+        "schools",
+        "cards",
+        "grid"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "sectionTitle": {
@@ -29,7 +51,7 @@
             "type": "number",
             "default": 4
         },
-        "style": {
+        "variant": {
             "type": "string",
             "default": "default"
         },

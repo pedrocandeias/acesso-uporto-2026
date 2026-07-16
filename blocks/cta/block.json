@@ -7,10 +7,31 @@
     "category": "acesso-blocks",
     "icon": "megaphone",
     "description": "Call to action section with title, text, and button.",
-    "keywords": ["cta", "call to action", "button", "banner"],
+    "keywords": [
+        "cta",
+        "call to action",
+        "button",
+        "banner"
+    ],
     "supports": {
         "html": false,
-        "align": ["wide", "full"]
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true,
+            "__experimentalTextTransform": true
+        }
     },
     "attributes": {
         "title": {
@@ -37,7 +58,7 @@
             "type": "string",
             "default": ""
         },
-        "style": {
+        "variant": {
             "type": "string",
             "default": "gradient"
         },
