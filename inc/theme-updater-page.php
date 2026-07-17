@@ -17,13 +17,36 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Regista a página no menu Ferramentas.
+ * Capacidade exigida para ver e usar a página de atualização do tema.
+ *
+ *   - Single-site: 'update_themes' (o padrão dos administradores).
+ *   - Multisite:   'manage_options' — porque o core reserva 'update_themes' ao
+ *     Super Admin (map_meta_cap → do_not_allow quando is_multisite() e o
+ *     utilizador não é super admin). Como o alvo aqui é um ADMINISTRADOR DE
+ *     SUBSITE (não super admin), o gate desce para uma capacidade que ele tem;
+ *     a instalação é depois feita diretamente pelo Theme_Upgrader, que não faz
+ *     verificações de super-admin internas.
+ *
+ * ⚠ MULTISITE: os ficheiros do tema são PARTILHADOS por toda a rede — atualizar
+ * aqui muda o tema em TODOS os sites da rede. Só é apropriado numa rede de um
+ * único dono/organização. Usa o filtro 'acesso_theme_update_cap' para endurecer
+ * (ex.: devolver 'do_not_allow' ou uma capacidade personalizada).
+ */
+function acesso_theme_update_cap() {
+    $default = is_multisite() ? 'manage_options' : 'update_themes';
+    return apply_filters('acesso_theme_update_cap', $default);
+}
+
+/**
+ * Regista a página em "Ferramentas → Atualizar Tema", no dashboard de cada site
+ * (em multisite, no subsite onde o tema está ativo — não no Painel de Rede,
+ * para o admin de subsite lhe poder aceder sem ser Super Admin).
  */
 function acesso_register_update_page() {
     add_management_page(
         __('Atualizar Tema', 'acesso-uporto'),
         __('Atualizar Tema', 'acesso-uporto'),
-        'update_themes',
+        acesso_theme_update_cap(),
         'acesso-theme-update',
         'acesso_render_update_page'
     );
@@ -76,7 +99,7 @@ function acesso_run_theme_update($package) {
  * @return array{success:bool,messages:array}|null
  */
 function acesso_handle_update_submit() {
-    if (empty($_POST['acesso_update_action']) || !current_user_can('update_themes')) {
+    if (empty($_POST['acesso_update_action']) || !current_user_can(acesso_theme_update_cap())) {
         return null;
     }
     check_admin_referer('acesso_theme_update');
@@ -122,7 +145,7 @@ function acesso_handle_update_submit() {
  * Render da página.
  */
 function acesso_render_update_page() {
-    if (!current_user_can('update_themes')) {
+    if (!current_user_can(acesso_theme_update_cap())) {
         wp_die(esc_html__('Sem permissões para atualizar temas.', 'acesso-uporto'));
     }
 

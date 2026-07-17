@@ -125,7 +125,7 @@ function acesso_update_available() {
  * Força uma nova verificação através de ?acesso_check_theme_update=1.
  */
 function acesso_maybe_force_update_check() {
-    if (isset($_GET['acesso_check_theme_update']) && current_user_can('update_themes')) {
+    if (isset($_GET['acesso_check_theme_update']) && current_user_can(acesso_theme_update_cap())) {
         delete_transient(ACESSO_UPDATE_TRANSIENT);
         acesso_get_latest_release(true);
     }
@@ -136,7 +136,7 @@ add_action('admin_init', 'acesso_maybe_force_update_check');
  * Aviso no painel quando há uma versão mais recente no GitHub.
  */
 function acesso_github_update_notice() {
-    if (!current_user_can('update_themes')) {
+    if (!current_user_can(acesso_theme_update_cap())) {
         return;
     }
 

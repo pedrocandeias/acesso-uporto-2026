@@ -1,5 +1,12 @@
-# Ficheiros de desenvolvimento — excluídos do zip distribuível (git archive)
+# Ficheiros de desenvolvimento — excluídos do zip distribuível (git archive).
+# NOTA: a pasta .git nunca entra num `git archive` (não faz parte da árvore),
+# por isso o release é sempre livre de .git — e instalar/atualizar a partir
+# dele nunca deixa um .git no destino que bloqueie o próximo update.
 /.github            export-ignore
 /.gitattributes     export-ignore
 /.gitignore         export-ignore
+/.vscode            export-ignore
+/.claude            export-ignore
+/bin                export-ignore
+/dist               export-ignore
 *.csv               export-ignore
