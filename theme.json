@@ -13,66 +13,96 @@
             "palette": [
                 {
                     "slug": "purple",
-                    "color": "#572ddf",
-                    "name": "Purple"
+                    "color": "#262261",
+                    "name": "Navy"
                 },
                 {
                     "slug": "pink",
-                    "color": "#da2489",
-                    "name": "Pink"
+                    "color": "#E8196D",
+                    "name": "Magenta"
                 },
                 {
                     "slug": "dark",
-                    "color": "#060221",
-                    "name": "Dark"
+                    "color": "#111111",
+                    "name": "Ink"
                 },
                 {
                     "slug": "cyan",
-                    "color": "#00d084",
+                    "color": "#00ADEE",
                     "name": "Cyan"
                 },
                 {
                     "slug": "lavender",
-                    "color": "#8887e2",
-                    "name": "Lavender"
+                    "color": "#2B2E6F",
+                    "name": "Azul"
                 },
                 {
                     "slug": "coral",
-                    "color": "#ff6b6b",
-                    "name": "Coral"
+                    "color": "#FF0000",
+                    "name": "Vermelho"
+                },
+                {
+                    "slug": "yellow",
+                    "color": "#FFF100",
+                    "name": "Amarelo"
+                },
+                {
+                    "slug": "lime",
+                    "color": "#D6DE23",
+                    "name": "Lima"
+                },
+                {
+                    "slug": "green",
+                    "color": "#009345",
+                    "name": "Verde"
+                },
+                {
+                    "slug": "light-gray",
+                    "color": "#ededed",
+                    "name": "Painel"
+                },
+                {
+                    "slug": "paper",
+                    "color": "#f1efe6",
+                    "name": "Papel"
                 },
                 {
                     "slug": "white",
                     "color": "#ffffff",
                     "name": "White"
-                },
-                {
-                    "slug": "light-gray",
-                    "color": "#f5f5f5",
-                    "name": "Light Gray"
                 }
             ],
             "gradients": [
                 {
                     "slug": "purple-pink",
-                    "gradient": "linear-gradient(135deg, #572ddf 0%, #da2489 100%)",
-                    "name": "Purple to Pink"
+                    "gradient": "linear-gradient(135deg, #262261 0%, #E8196D 100%)",
+                    "name": "Navy para Magenta"
                 },
                 {
                     "slug": "pink-purple",
-                    "gradient": "linear-gradient(135deg, #da2489 0%, #572ddf 100%)",
-                    "name": "Pink to Purple"
+                    "gradient": "linear-gradient(135deg, #E8196D 0%, #262261 100%)",
+                    "name": "Magenta para Navy"
                 },
                 {
                     "slug": "purple-dark",
-                    "gradient": "linear-gradient(180deg, #572ddf 0%, #060221 100%)",
-                    "name": "Purple to Dark"
+                    "gradient": "linear-gradient(180deg, #262261 0%, #111111 100%)",
+                    "name": "Navy para Ink"
                 }
             ]
         },
         "typography": {
             "customFontSize": true,
             "fontFamilies": [
+                {
+                    "fontFamily": "'Jersey 10', 'Blinker', sans-serif",
+                    "slug": "jersey-10",
+                    "name": "Jersey 10"
+                },
+                {
+                    "fontFamily": "'Blinker', sans-serif",
+                    "slug": "blinker",
+                    "name": "Blinker"
+                },
                 {
                     "fontFamily": "'Barlow', sans-serif",
                     "slug": "barlow",
@@ -132,11 +162,6 @@
                     "fontFamily": "'Pixelify Sans', sans-serif",
                     "slug": "pixelify-sans",
                     "name": "Pixelify Sans"
-                },
-                {
-                    "fontFamily": "'Blinker', sans-serif",
-                    "slug": "blinker",
-                    "name": "Blinker"
                 }
             ],
             "fontSizes": [
@@ -239,11 +264,11 @@
     },
     "styles": {
         "color": {
-            "background": "var(--wp--preset--color--white)",
+            "background": "var(--wp--preset--color--paper)",
             "text": "var(--wp--preset--color--dark)"
         },
         "typography": {
-            "fontFamily": "var(--wp--preset--font-family--barlow)",
+            "fontFamily": "var(--wp--preset--font-family--blinker)",
             "fontSize": "var(--wp--preset--font-size--medium)",
             "lineHeight": "1.9"
         },
@@ -253,39 +278,39 @@
         "elements": {
             "h1": {
                 "typography": {
-                    "fontFamily": "var(--wp--preset--font-family--barlow-condensed)",
-                    "fontSize": "clamp(2.5rem, 5vw, 3.5rem)",
-                    "fontWeight": "600",
-                    "lineHeight": "1.2"
+                    "fontFamily": "var(--wp--preset--font-family--jersey-10)",
+                    "fontSize": "clamp(3rem, 7vw, 5.25rem)",
+                    "fontWeight": "400",
+                    "lineHeight": "1.05"
                 },
                 "color": {
-                    "text": "var(--wp--preset--color--dark)"
+                    "text": "var(--wp--preset--color--purple)"
                 }
             },
             "h2": {
                 "typography": {
-                    "fontFamily": "var(--wp--preset--font-family--barlow-condensed)",
-                    "fontSize": "clamp(2rem, 4vw, 2.75rem)",
-                    "fontWeight": "700",
-                    "lineHeight": "1.2"
+                    "fontFamily": "var(--wp--preset--font-family--jersey-10)",
+                    "fontSize": "clamp(2.25rem, 4.5vw, 3rem)",
+                    "fontWeight": "400",
+                    "lineHeight": "1.05"
                 },
                 "color": {
-                    "text": "var(--wp--preset--color--dark)"
+                    "text": "var(--wp--preset--color--purple)"
                 }
             },
             "h3": {
                 "typography": {
-                    "fontFamily": "var(--wp--preset--font-family--barlow-condensed)",
-                    "fontSize": "clamp(1.5rem, 3vw, 2rem)",
-                    "fontWeight": "700",
-                    "lineHeight": "1.3"
+                    "fontFamily": "var(--wp--preset--font-family--blinker)",
+                    "fontSize": "clamp(1.25rem, 2.4vw, 1.5rem)",
+                    "fontWeight": "900",
+                    "lineHeight": "1.25"
                 }
             },
             "h4": {
                 "typography": {
-                    "fontFamily": "var(--wp--preset--font-family--barlow-condensed)",
-                    "fontSize": "1.5rem",
-                    "fontWeight": "700"
+                    "fontFamily": "var(--wp--preset--font-family--blinker)",
+                    "fontSize": "1.1875rem",
+                    "fontWeight": "900"
                 }
             },
             "link": {
@@ -300,30 +325,35 @@
             },
             "button": {
                 "typography": {
-                    "fontFamily": "var(--wp--preset--font-family--barlow)",
-                    "fontSize": "1rem",
-                    "fontWeight": "600",
+                    "fontFamily": "var(--wp--preset--font-family--blinker)",
+                    "fontSize": "0.9375rem",
+                    "fontWeight": "900",
                     "textTransform": "uppercase",
-                    "letterSpacing": "0.5px"
+                    "letterSpacing": "0.05em",
+                    "lineHeight": "1"
                 },
                 "color": {
-                    "background": "var(--wp--preset--color--purple)",
-                    "text": "var(--wp--preset--color--white)"
+                    "background": "var(--wp--preset--color--yellow)",
+                    "text": "var(--wp--preset--color--dark)"
                 },
                 "border": {
-                    "radius": "50px"
+                    "radius": "0",
+                    "width": "3px",
+                    "style": "solid",
+                    "color": "var(--wp--preset--color--dark)"
                 },
                 "spacing": {
                     "padding": {
                         "top": "0.875rem",
                         "bottom": "0.875rem",
-                        "left": "2rem",
-                        "right": "2rem"
+                        "left": "1.375rem",
+                        "right": "1.375rem"
                     }
                 },
                 ":hover": {
                     "color": {
-                        "background": "var(--wp--preset--color--pink)"
+                        "background": "var(--wp--preset--color--yellow)",
+                        "text": "var(--wp--preset--color--dark)"
                     }
                 }
             }
@@ -331,16 +361,17 @@
         "blocks": {
             "core/button": {
                 "border": {
-                    "radius": "50px"
+                    "radius": "0"
                 },
                 "typography": {
-                    "fontWeight": "600",
+                    "fontFamily": "var(--wp--preset--font-family--blinker)",
+                    "fontWeight": "900",
                     "textTransform": "uppercase"
                 }
             },
             "core/heading": {
                 "typography": {
-                    "fontFamily": "var(--wp--preset--font-family--barlow-condensed)"
+                    "fontFamily": "var(--wp--preset--font-family--jersey-10)"
                 }
             },
             "core/paragraph": {

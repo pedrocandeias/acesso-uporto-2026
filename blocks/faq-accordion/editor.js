@@ -175,7 +175,7 @@
                             }
                         },
                         el('div', { style: { textAlign: 'center', marginBottom: '20px' } },
-                            el('span', { className: 'dashicons dashicons-editor-help', style: { fontSize: '32px', color: '#572ddf' } }),
+                            el('span', { className: 'dashicons dashicons-editor-help', style: { fontSize: '32px', color: '#262261' } }),
                             el('h3', { style: { margin: '10px 0 5px' } }, attributes.sectionTitle || __('FAQ', 'acesso-uporto')),
                             attributes.sectionSubtitle && el('p', { style: { color: '#666', margin: 0 } }, attributes.sectionSubtitle)
                         ),
@@ -188,7 +188,7 @@
                                         padding: '15px',
                                         marginBottom: '10px',
                                         borderRadius: '8px',
-                                        borderLeft: '3px solid #572ddf'
+                                        borderLeft: '3px solid #262261'
                                     }
                                 },
                                     el('div', {
@@ -202,7 +202,7 @@
                                             style: {
                                                 width: '24px',
                                                 height: '24px',
-                                                background: 'linear-gradient(135deg, #572ddf, #da2489)',
+                                                background: '#262261',
                                                 color: '#fff',
                                                 borderRadius: '50%',
                                                 display: 'flex',

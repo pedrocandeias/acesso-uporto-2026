@@ -44,11 +44,11 @@ $icons = array(
 
 // Color map
 $colors = array(
-    'cyan' => '#00d084',
-    'lavender' => '#8887e2',
-    'coral' => '#ff6b6b',
-    'purple' => '#572ddf',
-    'pink' => '#da2489',
+    'cyan' => '#00ADEE',
+    'lavender' => '#2B2E6F',
+    'coral' => '#FF0000',
+    'purple' => '#262261',
+    'pink' => '#E8196D',
     'green' => '#34d399',
 );
 ?>

@@ -296,7 +296,9 @@ get_header();
 <style>
 /* Header */
 .single-curso .curso-header {
-    background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-pink) 100%);
+    background-color: var(--color-navy);
+    background-image: var(--noise-navy);
+    image-rendering: var(--texture-rendering, pixelated);
     color: var(--color-white);
     padding: calc(80px + var(--spacing-xl)) 0 var(--spacing-xl);
 }
@@ -330,7 +332,7 @@ get_header();
     padding: 4px 12px;
     font-size: 0.75rem;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: var(--ui-text-transform, uppercase);
     letter-spacing: 0.5px;
     border-radius: var(--radius-full);
 }
@@ -389,7 +391,7 @@ get_header();
 .curso-section {
     margin-bottom: var(--spacing-lg);
     padding-bottom: var(--spacing-lg);
-    border-bottom: 1px solid #eee;
+    border-bottom: 3px solid var(--color-ink);
 }
 
 .curso-section:last-child {
@@ -408,7 +410,7 @@ get_header();
     font-size: 0.75rem;
     font-weight: 600;
     padding: 2px 8px;
-    background: #f5f5f5;
+    background: var(--color-panel);
     border-radius: var(--radius-full);
     color: #666;
 }
@@ -466,7 +468,7 @@ get_header();
     display: flex;
     justify-content: space-between;
     padding: var(--spacing-xs) 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 3px solid var(--color-ink);
 }
 
 .criterio-item:last-child {
@@ -501,17 +503,18 @@ get_header();
 }
 
 .curso-card {
-    background: var(--color-white);
+    background: var(--color-panel);
+    border: var(--border-hard);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-hard);
 }
 
 .curso-card h3 {
     font-size: 1.125rem;
     margin-bottom: var(--spacing-md);
     padding-bottom: var(--spacing-sm);
-    border-bottom: 2px solid var(--color-purple);
+    border-bottom: 3px solid var(--color-ink);
 }
 
 .curso-card h4 {
@@ -519,66 +522,90 @@ get_header();
     margin-bottom: var(--spacing-sm);
 }
 
-/* Stats Card */
-.stat-item {
+/* Stats Card
+   Escopo obrigatório: o bloco de cursos (course-blocks.css) também define
+   .stat-item, mas como cartão em flex-row com ícone. Sem o escopo, a etiqueta,
+   os valores e a legenda desta barra lateral alinhavam-se lado a lado e o
+   "1ª Fase | 2ª Fase" saía fora do cartão. */
+.curso-stats-card .stat-item {
+    display: block;
     padding: var(--spacing-sm) 0;
-    border-bottom: 1px solid #eee;
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid var(--color-ink);
+    border-radius: 0;
+    box-shadow: none;
 }
 
-.stat-item:last-child {
+.curso-stats-card .stat-item:last-child {
     border-bottom: none;
 }
 
-.stat-label {
+.curso-stats-card .stat-highlight {
+    background: var(--color-yellow);
+    border: 3px solid var(--color-ink);
+    padding: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.curso-stats-card .stat-label {
     display: block;
-    font-size: 0.75rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-family: var(--font-ui);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: #444;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.08em;
     margin-bottom: 4px;
 }
 
-.stat-label small {
+.curso-stats-card .stat-label small {
     font-weight: normal;
     text-transform: none;
 }
 
-.stat-phases {
+.curso-stats-card .stat-phases {
     display: flex;
     align-items: baseline;
+    flex-wrap: wrap;
     gap: var(--spacing-xs);
 }
 
-.stat-value {
+.curso-stats-card .stat-value {
+    font-family: var(--font-ui);
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--color-ink);
+}
+
+.curso-stats-card .stat-highlight .stat-value {
     font-size: 1.75rem;
+}
+
+.curso-stats-card .stat-value-secondary {
+    font-size: 1.125rem;
     font-weight: 700;
-    color: var(--color-dark);
+    color: #444;
 }
 
-.stat-highlight .stat-value {
-    font-size: 2rem;
+.curso-stats-card .phase-divider {
+    color: #999;
 }
 
-.stat-value-secondary {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #666;
-}
-
-.phase-divider {
-    color: #ccc;
-}
-
-.stat-help {
+.curso-stats-card .stat-help {
     display: block;
     font-size: 0.6875rem;
-    color: #999;
+    font-weight: 600;
+    color: #555;
     margin-top: 4px;
 }
 
 /* CTA Card */
 .curso-cta-card {
-    background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-pink) 100%);
+    background-color: var(--color-navy);
+    background-image: var(--noise-navy);
+    image-rendering: var(--texture-rendering, pixelated);
     color: var(--color-white);
 }
 
@@ -603,15 +630,16 @@ get_header();
     margin-bottom: 0;
 }
 
+/* Sobre o cartão navy, o botão principal mantém a cor de destaque do
+   design system em vez de inverter para branco. */
 .curso-cta-card .btn-primary {
-    background: var(--color-white);
-    color: var(--color-purple);
+    background: var(--color-btn-bg, var(--color-yellow));
+    color: var(--color-btn-text, var(--color-ink));
 }
 
 .curso-cta-card .btn-secondary {
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.5);
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-ink);
 }
 
 /* Share Card */
@@ -626,7 +654,7 @@ get_header();
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f5;
+    background: var(--color-panel);
     border-radius: 50%;
     color: #666;
     transition: all var(--transition-fast);

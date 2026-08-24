@@ -2,6 +2,129 @@
 
 All notable changes to the Acesso U.Porto 2026 theme.
 
+## [1.3.0] - 2026-08-24
+
+Alinhamento do tema com o design system **"Receção 2026 — Retro Gaming"**
+(claude.ai/design). O sistema é plano: sem gradientes, cantos a 0, contorno
+"ink" de 3px, sombra dura de 6px, canto mordido a pixel nos botões e textura de
+ruído pixelizado nas bandas escuras.
+
+O design system é da campanha, não do tema: tudo o que o define passou a ser
+uma opção do Personalizador, agrupada num **preset**. Para a campanha do ano
+seguinte acrescenta-se uma entrada em `acesso_style_presets()` e escolhe-se em
+Aparência → Design System — sem tocar em CSS.
+
+### Added
+
+- feat(customizer): presets de design system
+  - `acesso_style_presets()` — cada campanha é uma entrada com os valores de
+    arranque de todas as opções de estilo
+  - dois presets de origem: "Receção 2026 — Retro Gaming (8-bit)" e
+    "Clássico — cantos suaves, gradiente" (a linguagem anterior do tema)
+  - o preset define as predefinições; o que se guardar no Personalizador
+    sobrepõe-se; "Repor as predefinições" limpa as sobreposições sem perder a
+    campanha escolhida
+
+- feat(customizer): Aparência passa a controlar a forma do design system
+  - espessura do contorno (0–8px), estilo da sombra (dura / suave / nenhuma),
+    deslocamento da sombra, canto "mordido" dos botões (0–12px)
+  - textura de fundo (ruído de pixels / nenhuma)
+  - régua sob os títulos de secção (tracejada / contínua / nenhuma)
+  - sombra nos títulos grandes, interface em caixa alta
+
+- feat(customizer): secção "Superfícies" nas cores
+  - cor de destaque, fundo dos cartões e fundo do site, que antes eram
+    literais no CSS
+  - mais dois destaques (lima e verde) para completar a paleta
+
+- feat(editor): a paleta do editor segue o Personalizador
+  - `acesso_color_palette()` / `acesso_color_gradients()` alimentam o
+    `add_theme_support` e são injetadas no theme.json pelo filtro
+    `wp_theme_json_data_theme`, porque o theme.json é estático e ganharia às
+    cores da campanha em vigor
+  - os tipos escolhidos no Personalizador seguem para o editor pela mesma via
+
+### Added (design system)
+- feat(fonts): Jersey 10 (display) e Blinker 900 auto-alojados
+  - assets/fonts/jersey-10-400-latin.woff2
+  - assets/fonts/blinker-900-latin.woff2
+  - registadas em assets/fonts/fonts.css; Jersey 10 na lista do Personalizador
+
+- feat(tokens): paleta e primitivas do design system em style.css
+  - `--color-yellow/red/lime/green/cyan/blue/navy/magenta/ink/panel/paper`
+  - `--border-hard`, `--shadow-hard(-sm/-lg)`, `--pixel-notch`, `--pixel-clip`
+  - `--pixel-clip-shadow`: polígono que inclui a goteira da sombra, porque o
+    `clip-path` recorta tudo o que é pintado a seguir (box-shadow incluído)
+  - `--noise-paper` / `--noise-navy`: textura de pixels tileable (SVG turbulence)
+
+- feat(components): `.badge-pixel`, `.pixel-rule` e `.hud-bar` (barra de nível)
+
+- feat(customizer): "Repor as predefinições do design system" na Aparência
+  - apaga os theme_mods de estilo ao guardar, repondo os valores do preset
+  - predefinições centralizadas em `acesso_theme_defaults()`, que devolve os
+    tokens do preset ativo
+
+- feat(menu): o menu passa a usar a fonte de display (Jersey 10) por
+  predefinição, com corpo fluido — o menu horizontal só dá lugar ao hamburger
+  aos 992px e entre os 993px e os 1400px não há espaço para o corpo máximo
+
+### Changed
+- **BREAKING (visual)**: paleta, tipografia e forma de todos os componentes
+  - primária navy `#262261`, secundária magenta `#E8196D`, botões amarelo
+    `#FFF100` sobre ink `#111111`; fundo do site papel `#f1efe6` com ruído
+  - H1/H2, títulos de secção, contadores e títulos de fase em Jersey 10;
+    H3–H6, botões, etiquetas e navegação em Blinker Black
+  - cantos retangulares passam a ser a predefinição (era "redondos")
+  - gradientes ficam planos por predefinição (navy → navy); o controlo do
+    Personalizador continua lá para quem os quiser de volta
+- theme.json: paleta, gradientes, fontes e estilo do botão do core alinhados
+- editor: paleta do editor e assets/css/editor.css espelham o frontend
+- blocos restilizados: hero, statistics, testimonials, feature-cards, timeline,
+  cta, video-section, faq-accordion, icon-box, tabs, modal, anchor-menu,
+  faculty-cards, course-cards, course-accordion, course-detail
+- templates restilizados: archive-cursos, single-cursos, search, 404
+- slugs de cor antigos (`purple`, `pink`, `lavender`, `coral`) mantêm-se e
+  passam a apontar para as cores novas, para não partir conteúdo publicado com
+  classes `has-<slug>-background-color`
+
+### Fixed (responsivo)
+- o hero rebentava no telemóvel: os tamanhos escolhidos no bloco são px fixos
+  (94px), e uma palavra longa a 94px não cabe em 375px. `render.php` converte
+  agora qualquer px acima de 32 num `clamp()` que atinge o tamanho pedido aos
+  1200px de largura e encolhe abaixo disso
+- `.section` usava o shorthand `padding`, o que anulava o padding lateral de
+  um `.container.section` — o conteúdo de /cursos encostava às margens do
+  ecrã, em desktop e em mobile
+- as sombras dos títulos eram px fixos: 7px num título de 138px lê-se bem, mas
+  num de 32px no telemóvel parecia texto duplicado. Passaram a `em`, pelo que
+  acompanham o corpo da letra
+- `.alignfull` usa `100vw`, que inclui a barra de scroll e provocava scroll
+  horizontal; `body { overflow-x: clip }` corta o excesso sem criar um
+  contentor de scroll (ao contrário de `hidden`, não parte `position: sticky`)
+- o `.stat-item` do bloco de cursos (cartão em flex-row) colidia com o
+  `.stat-item` da barra lateral de um curso: a etiqueta, os valores e o
+  "1ª Fase | 2ª Fase" alinhavam-se lado a lado e saíam fora do cartão. As
+  regras da barra lateral passaram a ter escopo `.curso-stats-card`
+- o menu em fonte de display tem corpo fluido — o menu horizontal só dá lugar
+  ao hamburger aos 992px e entre os 993px e os 1400px não cabia
+- `.container` reduz as goteiras para 1rem abaixo dos 576px
+- o botão principal do cartão "Candidata-te" invertia para branco em vez de
+  usar a cor de destaque do design system
+- `.video-section.style-rounded` tinha 24px fixos e ignorava a opção de cantos
+
+### Fixed
+- os tokens `--color-navy`, `--color-ink`, `--color-yellow`, `--color-panel` e
+  `--color-paper` não eram emitidos pelo Personalizador, pelo que todo o CSS
+  que os usava ficava preso aos literais do `style.css`
+- `.hero-section::before` deixou de pedir `assets/images/hero-pattern.svg`,
+  um ficheiro que não existe no tema (pedido 404 em todas as páginas com hero)
+- títulos sobre bandas escuras (hero, CTA) deixaram de herdar a "cor dos
+  títulos" do Personalizador, que os tornava ilegíveis
+- blocks.css redefinia `--color-navy`/`--color-gold` no `:root`, sobrepondo os
+  tokens do style.css; o bloco foi removido (nenhuma regra os usava)
+- a lista de fontes já auto-alojadas estava incompleta, pelo que o tema pedia à
+  Google fontes que já servia localmente (Inter, Poppins, Oswald, Blinker, …)
+
 ## [1.2.1] - 2026-01-29
 
 ### Added

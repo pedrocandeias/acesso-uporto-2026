@@ -22,9 +22,9 @@
     ];
 
     var styleColors = {
-        gradient: { bg: 'linear-gradient(135deg, #572ddf 0%, #da2489 100%)', text: '#fff' },
-        dark: { bg: '#060221', text: '#fff' },
-        light: { bg: '#f9f9f9', text: '#060221' },
+        gradient: { bg: '#262261', text: '#fff' },
+        dark: { bg: '#111111', text: '#fff' },
+        light: { bg: '#ededed', text: '#111111' },
         image: { bg: 'linear-gradient(135deg, rgba(87,45,223,0.9), rgba(218,36,137,0.9))', text: '#fff' }
     };
 
@@ -260,8 +260,8 @@
                             },
                                 attributes.primaryButtonText && el('span', {
                                     style: {
-                                        background: attributes.variant === 'light' ? 'linear-gradient(135deg, #572ddf, #da2489)' : '#fff',
-                                        color: attributes.variant === 'light' ? '#fff' : '#572ddf',
+                                        background: attributes.variant === 'light' ? '#262261' : '#fff',
+                                        color: attributes.variant === 'light' ? '#fff' : '#262261',
                                         padding: '14px 28px',
                                         borderRadius: '50px',
                                         fontWeight: 600,
@@ -270,8 +270,8 @@
                                 }, attributes.primaryButtonText),
                                 attributes.secondaryButtonText && el('span', {
                                     style: {
-                                        border: '2px solid ' + (attributes.variant === 'light' ? '#060221' : '#fff'),
-                                        color: attributes.variant === 'light' ? '#060221' : '#fff',
+                                        border: '2px solid ' + (attributes.variant === 'light' ? '#111111' : '#fff'),
+                                        color: attributes.variant === 'light' ? '#111111' : '#fff',
                                         padding: '12px 26px',
                                         borderRadius: '50px',
                                         fontWeight: 600,

@@ -313,3 +313,21 @@
   font-display: swap;
   src: url(./blinker-700-latin.woff2) format('woff2');
 }
+
+/* Receção 2026 — Retro Gaming: display (Jersey 10) + peso Black do Blinker */
+
+@font-face {
+  font-family: 'Blinker';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(./blinker-900-latin.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Jersey 10';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./jersey-10-400-latin.woff2) format('woff2');
+}

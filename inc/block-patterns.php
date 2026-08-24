@@ -56,7 +56,7 @@ function acesso_register_block_patterns() {
             'title'       => __('Hero Section', 'acesso-uporto'),
             'description' => __('Secção hero com texto rotativo e botões.', 'acesso-uporto'),
             'categories'  => array('acesso-uporto'),
-            'content'     => '<!-- wp:acesso/hero {"rotatingWords":["Conhecimento","Investigação","Inovação","Futuro"],"staticTextBefore":"ISTO É","mainTitle":"U.PORTO","tagline":"...e tu também podes ser!","primaryButtonText":"Explorar Cursos","primaryButtonUrl":"#cursos","secondaryButtonText":"Ver Vídeo","secondaryButtonUrl":"#video","gradientStart":"#572ddf","gradientEnd":"#da2489"} /-->',
+            'content'     => '<!-- wp:acesso/hero {"rotatingWords":["Conhecimento","Investigação","Inovação","Futuro"],"staticTextBefore":"ISTO É","mainTitle":"U.PORTO","tagline":"...e tu também podes ser!","primaryButtonText":"Explorar Cursos","primaryButtonUrl":"#cursos","secondaryButtonText":"Ver Vídeo","secondaryButtonUrl":"#video","gradientStart":"#262261","gradientEnd":"#262261"} /-->',
         )
     );
 
@@ -105,7 +105,7 @@ add_action('init', 'acesso_register_block_patterns');
 function acesso_get_default_home_content() {
     ob_start();
     ?>
-<!-- wp:acesso/hero {"align":"full","rotatingWords":["Conhecimento","Investigação","Inovação","Futuro"],"staticTextBefore":"ISTO É","mainTitle":"U.PORTO","tagline":"...e tu também podes ser!","primaryButtonText":"Explorar Cursos","primaryButtonUrl":"#cursos","secondaryButtonText":"Ver Vídeo","secondaryButtonUrl":"#video","gradientStart":"#572ddf","gradientEnd":"#da2489","overlayOpacity":75,"minHeight":"100vh"} /-->
+<!-- wp:acesso/hero {"align":"full","rotatingWords":["Conhecimento","Investigação","Inovação","Futuro"],"staticTextBefore":"ISTO É","mainTitle":"U.PORTO","tagline":"...e tu também podes ser!","primaryButtonText":"Explorar Cursos","primaryButtonUrl":"#cursos","secondaryButtonText":"Ver Vídeo","secondaryButtonUrl":"#video","gradientStart":"#262261","gradientEnd":"#262261","overlayOpacity":75,"minHeight":"100vh"} /-->
 
 <!-- wp:acesso/statistics {"align":"wide","sectionTitle":"A U.Porto em Números","stats":[{"number":"15","suffix":"","label":"Faculdades + 1 Business School","icon":"building"},{"number":"35700","suffix":"+","label":"Estudantes Inscritos","icon":"groups"},{"number":"48","suffix":"","label":"Centros de Investigação","icon":"science"},{"number":"300","suffix":"+","label":"Cursos de Licenciatura e Mestrado","icon":"graduation"},{"number":"18","suffix":"","label":"Bibliotecas","icon":"library"}],"layout":"grid-5","style":"icons","animateOnScroll":true} /-->
 

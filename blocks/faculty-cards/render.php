@@ -179,7 +179,7 @@ a.faculty-card:hover .faculty-card-inner {
 }
 
 .faculty-card-placeholder {
-    background: var(--gradient-primary, linear-gradient(135deg, #572ddf 0%, #da2489 100%));
+    background: var(--color-blue, #2B2E6F);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,7 +192,7 @@ a.faculty-card:hover .faculty-card-inner {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to top, rgba(6,2,33,0.9) 0%, rgba(6,2,33,0.3) 50%, transparent 100%);
+    background: linear-gradient(to top, rgba(17,17,17,0.9) 0%, rgba(17,17,17,0.3) 50%, transparent 100%);
 }
 
 .faculty-card-content {
@@ -206,33 +206,38 @@ a.faculty-card:hover .faculty-card-inner {
 
 .faculty-acronym {
     display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    background: rgba(255,255,255,0.2);
-    padding: 4px 10px;
-    border-radius: var(--radius-full, 50px);
+    font-family: var(--font-ui, 'Blinker', sans-serif);
+    font-size: 0.6875rem;
+    font-weight: var(--font-ui-weight, 900);
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.1em;
+    background: var(--color-yellow, #FFF100);
+    color: var(--color-ink, #111111);
+    border: 2px solid var(--color-ink, #111111);
+    padding: 4px 9px;
+    border-radius: var(--radius-sm, 0);
     margin-bottom: var(--spacing-xs, 0.5rem);
 }
 
 .faculty-name {
-    font-family: var(--font-condensed, 'Barlow Semi Condensed', sans-serif);
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-family: var(--font-ui, 'Blinker', sans-serif);
+    font-size: 1.1875rem;
+    font-weight: var(--font-ui-weight, 900);
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.25;
 }
 
 .faculty-link-icon {
     position: absolute;
     bottom: var(--spacing-lg, 2rem);
     right: var(--spacing-lg, 2rem);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--color-white, #fff);
-    color: var(--color-purple, #572ddf);
+    width: 38px;
+    height: 38px;
+    border-radius: 0;
+    border: 2px solid var(--color-ink, #111111);
+    box-shadow: 3px 3px 0 var(--color-ink, #111111);
+    background: var(--color-yellow, #FFF100);
+    color: var(--color-ink, #111111);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -248,12 +253,13 @@ a.faculty-card:hover .faculty-card-inner {
 
 /* Style Variants */
 .style-overlay .faculty-card-overlay {
-    background: linear-gradient(135deg, rgba(87,45,223,0.8) 0%, rgba(218,36,137,0.8) 100%);
+    background: rgba(38,34,97,0.82);
 }
 
 .style-cards .faculty-card-inner {
     height: auto;
-    box-shadow: var(--shadow-md, 0 4px 20px rgba(0,0,0,0.1));
+    border: var(--border-hard, 3px solid #111);
+    box-shadow: var(--shadow-hard, 6px 6px 0 #111);
 }
 
 .style-cards .faculty-card-image {
@@ -267,19 +273,16 @@ a.faculty-card:hover .faculty-card-inner {
 
 .style-cards .faculty-card-content {
     position: relative;
-    background: var(--color-white, #fff);
-    color: var(--color-dark, #060221);
+    background: var(--color-panel, #ededed);
+    color: var(--color-ink, #111111);
+    border-top: 3px solid var(--color-ink, #111111);
     padding: var(--spacing-md, 1rem);
 }
 
-.style-cards .faculty-acronym {
-    background: var(--gradient-primary, linear-gradient(135deg, #572ddf 0%, #da2489 100%));
-    color: var(--color-white, #fff);
-}
-
+.style-cards .faculty-acronym,
 .style-cards .faculty-link-icon {
-    background: var(--gradient-primary, linear-gradient(135deg, #572ddf 0%, #da2489 100%));
-    color: var(--color-white, #fff);
+    background: var(--color-yellow, #FFF100);
+    color: var(--color-ink, #111111);
 }
 
 .style-minimal .faculty-card-inner {
@@ -287,15 +290,15 @@ a.faculty-card:hover .faculty-card-inner {
 }
 
 .style-minimal .faculty-card-overlay {
-    background: rgba(6,2,33,0.6);
+    background: rgba(17,17,17,0.6);
 }
 
 /* Estilo "logos": mural de logos — cartão branco, logo contido e centrado */
 .style-logos .faculty-card-inner {
     height: 150px;
     background: var(--color-white, #fff);
-    border: 1px solid #ececec;
-    box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.06));
+    border: var(--border-hard, 3px solid #111);
+    box-shadow: var(--shadow-hard-sm, 4px 4px 0 #111);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -32,11 +32,11 @@
     ];
 
     var colorMap = {
-        cyan: '#00d084',
-        lavender: '#8887e2',
-        coral: '#ff6b6b',
-        purple: '#572ddf',
-        pink: '#da2489',
+        cyan: '#00ADEE',
+        lavender: '#2B2E6F',
+        coral: '#FF0000',
+        purple: '#262261',
+        pink: '#E8196D',
         green: '#34d399'
     };
 
@@ -127,7 +127,7 @@
                                         marginBottom: '15px',
                                         background: '#f0f0f0',
                                         borderRadius: '4px',
-                                        borderLeft: '3px solid ' + (colorMap[phase.color] || '#572ddf')
+                                        borderLeft: '3px solid ' + (colorMap[phase.color] || '#262261')
                                     }
                                 },
                                 el('strong', { style: { display: 'block', marginBottom: '10px' } },
@@ -217,7 +217,7 @@
                                             width: '50px',
                                             height: '50px',
                                             borderRadius: '50%',
-                                            background: colorMap[phase.color] || '#572ddf',
+                                            background: colorMap[phase.color] || '#262261',
                                             margin: '0 auto 10px',
                                             display: 'flex',
                                             alignItems: 'center',
@@ -227,7 +227,7 @@
                                     },
                                         el('span', { className: 'dashicons dashicons-calendar-alt' })
                                     ),
-                                    el('div', { style: { fontSize: '0.75rem', color: colorMap[phase.color] || '#572ddf', fontWeight: 600 } }, phase.label),
+                                    el('div', { style: { fontSize: '0.75rem', color: colorMap[phase.color] || '#262261', fontWeight: 600 } }, phase.label),
                                     el('div', { style: { fontWeight: 600 } }, phase.title),
                                     el('div', { style: { fontSize: '0.875rem', color: '#666' } }, phase.dates)
                                 );

@@ -105,11 +105,11 @@
         },
         "gradientStart": {
             "type": "string",
-            "default": "#572ddf"
+            "default": "#262261"
         },
         "gradientEnd": {
             "type": "string",
-            "default": "#da2489"
+            "default": "#262261"
         },
         "overlayOpacity": {
             "type": "number",

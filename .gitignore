@@ -11,3 +11,6 @@ Thumbs.db
 /*.jpeg
 /*.jpg
 /*.png
+
+# Artefactos do Playwright MCP
+/.playwright-mcp/

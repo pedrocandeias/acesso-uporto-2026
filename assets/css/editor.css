@@ -9,28 +9,87 @@
    ========================================================================== */
 
 :root {
-    --color-purple: #572ddf;
-    --color-pink: #da2489;
-    --color-dark: #060221;
+    /* Paleta "Receção 2026 / Retro Gaming" — espelha o style.css do frontend. */
+    --color-yellow: #FFF100;
+    --color-red: #FF0000;
+    --color-lime: #D6DE23;
+    --color-green: #009345;
+    --color-cyan: #00ADEE;
+    --color-blue: #2B2E6F;
+    --color-navy: #262261;
+    --color-magenta: #E8196D;
+    --color-ink: #111111;
+    --color-panel: #ededed;
+    --color-paper: #f1efe6;
     --color-white: #ffffff;
-    --color-cyan: #00d084;
-    --color-lavender: #8887e2;
-    --color-coral: #ff6b6b;
 
-    --gradient-primary: linear-gradient(135deg, var(--color-purple) 0%, var(--color-pink) 100%);
+    /* Aliases legados (slugs antigos da paleta do editor) */
+    --color-purple: var(--color-navy);
+    --color-pink: var(--color-magenta);
+    --color-dark: var(--color-ink);
+    --color-lavender: var(--color-blue);
+    --color-coral: var(--color-red);
 
-    --font-primary: 'Barlow', sans-serif;
-    --font-condensed: 'Barlow Semi Condensed', sans-serif;
+    --gradient-primary: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy) 100%);
+
+    --font-primary: 'Blinker', system-ui, sans-serif;
+    --font-display: 'Jersey 10', 'Blinker', sans-serif;
+    --font-condensed: var(--font-display);
+    --font-ui: var(--font-primary);
+    --font-ui-weight: 900;
 
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --spacing-lg: 4rem;
 
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
-    --radius-full: 50px;
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-full: 0;
+
+    --border-width: 3px;
+    --border-hard: var(--border-width) solid var(--color-ink);
+    --shadow-hard: 6px 6px 0 var(--color-ink);
+    --shadow-hard-sm: 4px 4px 0 var(--color-ink);
+    --shadow-hard-lg: 8px 8px 0 var(--color-ink);
+    --pixel-notch: 5px;
+    --border-band: 4px solid var(--color-ink);
+    --border-band-accent: 4px solid var(--color-yellow);
+    --shadow-offset: 6px;
+    --pixel-clip: polygon(
+        0 var(--pixel-notch), var(--pixel-notch) var(--pixel-notch), var(--pixel-notch) 0,
+        calc(100% - var(--pixel-notch)) 0, calc(100% - var(--pixel-notch)) var(--pixel-notch),
+        100% var(--pixel-notch), 100% calc(100% - var(--pixel-notch)),
+        calc(100% - var(--pixel-notch)) calc(100% - var(--pixel-notch)),
+        calc(100% - var(--pixel-notch)) 100%, var(--pixel-notch) 100%,
+        var(--pixel-notch) calc(100% - var(--pixel-notch)), 0 calc(100% - var(--pixel-notch))
+    );
+    --pixel-clip-shadow: polygon(
+        0 var(--pixel-notch), var(--pixel-notch) var(--pixel-notch), var(--pixel-notch) 0,
+        calc(100% - var(--pixel-notch)) 0, calc(100% - var(--pixel-notch)) var(--pixel-notch),
+        100% var(--pixel-notch), 100% var(--shadow-offset),
+        calc(100% + var(--shadow-offset)) var(--shadow-offset),
+        calc(100% + var(--shadow-offset)) calc(100% + var(--shadow-offset)),
+        var(--shadow-offset) calc(100% + var(--shadow-offset)),
+        var(--shadow-offset) 100%, var(--pixel-notch) 100%,
+        var(--pixel-notch) calc(100% - var(--pixel-notch)), 0 calc(100% - var(--pixel-notch))
+    );
+    --shadow-sm: var(--shadow-hard-sm);
+    --shadow-md: var(--shadow-hard);
+    --shadow-lg: var(--shadow-hard-lg);
+
+    --ui-text-transform: uppercase;
+    --texture-rendering: pixelated;
+    --section-rule-display: block;
+    --section-rule: repeating-linear-gradient(90deg,
+        var(--color-ink) 0 14px, transparent 14px 22px);
+    --section-rule-on-dark: repeating-linear-gradient(90deg,
+        var(--color-yellow) 0 14px, transparent 14px 22px);
+    --text-shadow-hero: 0.05em 0.05em 0 var(--color-ink);
+    --text-shadow-display: 0.06em 0.06em 0 var(--color-ink);
+    --text-shadow-section: 0.06em 0.06em 0 rgba(17, 17, 17, 0.18);
+    --text-shadow-section-on-dark: 0.06em 0.06em 0 rgba(17, 17, 17, 0.35);
 }
 
 /* ==========================================================================
@@ -41,7 +100,8 @@
     font-family: var(--font-primary);
     font-size: 16px;
     line-height: 1.9;
-    color: var(--color-dark);
+    color: var(--color-ink);
+    background-color: var(--color-paper);
 }
 
 .editor-styles-wrapper h1,
@@ -50,55 +110,78 @@
 .editor-styles-wrapper h4,
 .editor-styles-wrapper h5,
 .editor-styles-wrapper h6 {
-    font-family: var(--font-condensed);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-dark);
+    line-height: 1.15;
+    color: var(--color-navy);
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+}
+
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    line-height: 1.25;
 }
 
 .editor-styles-wrapper h1 {
-    font-size: 3.5rem;
-    font-weight: 600;
+    font-size: 5.25rem;
 }
 
 .editor-styles-wrapper h2 {
-    font-size: 2.75rem;
+    font-size: 3rem;
 }
 
 .editor-styles-wrapper h3 {
-    font-size: 2rem;
-}
-
-.editor-styles-wrapper h4 {
     font-size: 1.5rem;
 }
 
+.editor-styles-wrapper h4 {
+    font-size: 1.1875rem;
+}
+
 .editor-styles-wrapper a {
-    color: var(--color-purple);
+    color: var(--color-navy);
 }
 
 .editor-styles-wrapper a:hover {
-    color: var(--color-pink);
+    color: var(--color-magenta);
 }
 
 /* ==========================================================================
    Button Styles in Editor
    ========================================================================== */
 
+.editor-styles-wrapper .wp-block-button__link:not([class*="-background-color"]) {
+    background: var(--color-yellow);
+}
+
+.editor-styles-wrapper .wp-block-button__link:not(.has-text-color) {
+    color: var(--color-ink);
+}
+
 .editor-styles-wrapper .wp-block-button__link {
-    background: var(--gradient-primary);
-    border-radius: var(--radius-full);
-    padding: 0.875rem 2rem;
-    font-family: var(--font-primary);
-    font-weight: 600;
+    border: var(--border-hard);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-hard);
+    clip-path: var(--pixel-clip-shadow);
+    padding: 0.875rem 1.375rem;
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    font-size: 0.9375rem;
+    line-height: 1;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
 }
 
 .editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
-    background: transparent;
-    border: 2px solid var(--color-purple);
-    color: var(--color-purple);
+    background: var(--color-white);
+    color: var(--color-ink);
 }
 
 /* ==========================================================================
@@ -177,6 +260,46 @@
 
 .has-white-background-color {
     background-color: var(--color-white);
+}
+
+.has-yellow-color {
+    color: var(--color-yellow);
+}
+
+.has-yellow-background-color {
+    background-color: var(--color-yellow);
+}
+
+.has-lime-color {
+    color: var(--color-lime);
+}
+
+.has-lime-background-color {
+    background-color: var(--color-lime);
+}
+
+.has-green-color {
+    color: var(--color-green);
+}
+
+.has-green-background-color {
+    background-color: var(--color-green);
+}
+
+.has-light-gray-color {
+    color: var(--color-panel);
+}
+
+.has-light-gray-background-color {
+    background-color: var(--color-panel);
+}
+
+.has-paper-color {
+    color: var(--color-paper);
+}
+
+.has-paper-background-color {
+    background-color: var(--color-paper);
 }
 
 /* Gradient */

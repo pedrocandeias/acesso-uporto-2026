@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('ACESSO_THEME_VERSION', '1.2.1');
+define('ACESSO_THEME_VERSION', '1.3.0');
 define('ACESSO_THEME_DIR', get_template_directory());
 define('ACESSO_THEME_URI', get_template_directory_uri());
 
@@ -41,53 +41,14 @@ function acesso_theme_setup() {
     add_theme_support('responsive-embeds');
     add_theme_support('align-wide');
 
-    // Add editor color palette
-    add_theme_support('editor-color-palette', array(
-        array(
-            'name'  => __('Purple', 'acesso-uporto'),
-            'slug'  => 'purple',
-            'color' => '#572ddf',
-        ),
-        array(
-            'name'  => __('Pink', 'acesso-uporto'),
-            'slug'  => 'pink',
-            'color' => '#da2489',
-        ),
-        array(
-            'name'  => __('Dark', 'acesso-uporto'),
-            'slug'  => 'dark',
-            'color' => '#060221',
-        ),
-        array(
-            'name'  => __('Cyan', 'acesso-uporto'),
-            'slug'  => 'cyan',
-            'color' => '#00d084',
-        ),
-        array(
-            'name'  => __('Lavender', 'acesso-uporto'),
-            'slug'  => 'lavender',
-            'color' => '#8887e2',
-        ),
-        array(
-            'name'  => __('Coral', 'acesso-uporto'),
-            'slug'  => 'coral',
-            'color' => '#ff6b6b',
-        ),
-        array(
-            'name'  => __('White', 'acesso-uporto'),
-            'slug'  => 'white',
-            'color' => '#ffffff',
-        ),
-    ));
-
-    // Add editor gradient presets
-    add_theme_support('editor-gradient-presets', array(
-        array(
-            'name'     => __('Purple to Pink', 'acesso-uporto'),
-            'gradient' => 'linear-gradient(135deg, #572ddf 0%, #da2489 100%)',
-            'slug'     => 'purple-pink',
-        ),
-    ));
+    // Paleta e gradientes do editor: derivados do Personalizador, para que
+    // acompanhem a campanha em vigor. O theme.json ganha a isto no editor de
+    // blocos e é atualizado pelo filtro acesso_filter_theme_json(); este
+    // add_theme_support serve os contextos que não leem theme.json.
+    if (function_exists('acesso_color_palette')) {
+        add_theme_support('editor-color-palette', acesso_color_palette());
+        add_theme_support('editor-gradient-presets', acesso_color_gradients());
+    }
 
     // Register navigation menus
     register_nav_menus(array(

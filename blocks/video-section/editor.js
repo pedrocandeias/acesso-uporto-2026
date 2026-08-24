@@ -185,7 +185,7 @@
                                 style: {
                                     position: 'relative',
                                     paddingBottom: attributes.aspectRatio === '16-9' ? '56.25%' : attributes.aspectRatio === '4-3' ? '75%' : attributes.aspectRatio === '21-9' ? '42.86%' : '100%',
-                                    background: thumbnailUrl ? 'url(' + thumbnailUrl + ') center/cover' : 'linear-gradient(135deg, #572ddf 0%, #da2489 100%)',
+                                    background: thumbnailUrl ? 'url(' + thumbnailUrl + ') center/cover' : '#262261',
                                     borderRadius: '12px',
                                     overflow: 'hidden'
                                 }
@@ -210,7 +210,7 @@
                                 },
                                 el('span', {
                                     className: 'dashicons dashicons-controls-play',
-                                    style: { fontSize: '32px', color: '#572ddf', marginLeft: '4px' }
+                                    style: { fontSize: '32px', color: '#262261', marginLeft: '4px' }
                                 })
                             ),
                             !attributes.videoUrl && el(

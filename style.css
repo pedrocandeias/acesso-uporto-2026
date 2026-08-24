@@ -3,7 +3,7 @@ Theme Name: Acesso U.Porto 2026
 Theme URI: https://acesso.up.pt
 Author: U.Porto
 Description: Modern WordPress theme for University of Porto enrollment portal using Gutenberg blocks and ACF
-Version: 1.2.1
+Version: 1.3.0
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 8.0
@@ -18,24 +18,45 @@ Tags: full-site-editing, block-styles, custom-colors, custom-menu, featured-imag
    ========================================================================== */
 
 :root {
-    /* Primary Colors */
-    --color-purple: #572ddf;
-    --color-pink: #da2489;
-    --color-dark: #060221;
+    /* ----------------------------------------------------------------
+       Paleta base — "Receção 2026 / Retro Gaming"
+       Flat, sem gradientes, contorno ink e sombra dura.
+       ---------------------------------------------------------------- */
+    --color-yellow: #FFF100;
+    --color-red: #FF0000;
+    --color-lime: #D6DE23;
+    --color-green: #009345;
+    --color-cyan: #00ADEE;
+    --color-blue: #2B2E6F;
+    --color-navy: #262261;
+    --color-magenta: #E8196D;
+    --color-ink: #111111;
+    --color-panel: #ededed;
+    --color-paper: #f1efe6;
+
+    /* Papéis semânticos (sobrepostos pelo Personalizador) */
+    --color-primary: var(--color-navy);
+    --color-secondary: var(--color-magenta);
+    --color-dark: var(--color-ink);
     --color-white: #ffffff;
 
-    /* Accent Colors */
-    --color-cyan: #00d084;
-    --color-lavender: #8887e2;
-    --color-coral: #ff6b6b;
+    /* Aliases legados — mantidos para compatibilidade com CSS antigo */
+    --color-purple: var(--color-primary);
+    --color-pink: var(--color-secondary);
+    --color-lavender: var(--color-green);
+    --color-coral: var(--color-red);
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--color-purple) 0%, var(--color-pink) 100%);
-    --gradient-text: linear-gradient(90deg, var(--color-purple) 0%, var(--color-pink) 100%);
+    /* Gradientes: planos por predefinição (o Personalizador pode reativá-los) */
+    --gradient-primary: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy) 100%);
+    --gradient-text: linear-gradient(90deg, var(--color-navy) 0%, var(--color-navy) 100%);
 
-    /* Typography */
-    --font-primary: 'Barlow', sans-serif;
-    --font-condensed: 'Barlow Semi Condensed', sans-serif;
+    /* Tipografia — Jersey 10 (display) + Blinker (UI/corpo) */
+    --font-primary: 'Blinker', system-ui, sans-serif;
+    --font-display: 'Jersey 10', 'Blinker', sans-serif;
+    --font-condensed: var(--font-display);
+    /* Subtítulos (H3–H6) e UI: Blinker Black */
+    --font-ui: var(--font-primary);
+    --font-ui-weight: 900;
 
     /* Spacing */
     --spacing-xs: 0.5rem;
@@ -44,21 +65,74 @@ Tags: full-site-editing, block-styles, custom-colors, custom-menu, featured-imag
     --spacing-lg: 4rem;
     --spacing-xl: 6rem;
 
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
-    --radius-full: 50px;
+    /* Border Radius — 0 por predefinição (estética 8-bit) */
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-full: 0;
 
-    /* Shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+    /* Contorno e sombra dura */
+    --border-width: 3px;
+    --border-hard: var(--border-width) solid var(--color-ink);
+    --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 var(--color-ink);
+    --shadow-hard-sm: 4px 4px 0 var(--color-ink);
+    --shadow-hard-lg: 8px 8px 0 var(--color-ink);
+    --pixel-notch: 5px;
+    --border-band: 4px solid var(--color-ink);
+    --border-band-accent: 4px solid var(--color-yellow);
+    --shadow-offset: 6px;
 
-    /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
+    /* Canto "mordido" a pixel, para elementos sem sombra (etiquetas, chips). */
+    --pixel-clip: polygon(
+        0 var(--pixel-notch), var(--pixel-notch) var(--pixel-notch), var(--pixel-notch) 0,
+        calc(100% - var(--pixel-notch)) 0, calc(100% - var(--pixel-notch)) var(--pixel-notch),
+        100% var(--pixel-notch), 100% calc(100% - var(--pixel-notch)),
+        calc(100% - var(--pixel-notch)) calc(100% - var(--pixel-notch)),
+        calc(100% - var(--pixel-notch)) 100%, var(--pixel-notch) 100%,
+        var(--pixel-notch) calc(100% - var(--pixel-notch)), 0 calc(100% - var(--pixel-notch))
+    );
+
+    /* Botões: o clip-path recorta tudo o que é pintado a seguir, incluindo a
+       sombra (box-shadow e drop-shadow). Este polígono é a união do botão com
+       cantos mordidos e da área onde a sombra dura assenta, para que ambos
+       sobrevivam ao recorte. */
+    --pixel-clip-shadow: polygon(
+        0 var(--pixel-notch), var(--pixel-notch) var(--pixel-notch), var(--pixel-notch) 0,
+        calc(100% - var(--pixel-notch)) 0, calc(100% - var(--pixel-notch)) var(--pixel-notch),
+        100% var(--pixel-notch), 100% var(--shadow-offset),
+        calc(100% + var(--shadow-offset)) var(--shadow-offset),
+        calc(100% + var(--shadow-offset)) calc(100% + var(--shadow-offset)),
+        var(--shadow-offset) calc(100% + var(--shadow-offset)),
+        var(--shadow-offset) 100%, var(--pixel-notch) 100%,
+        var(--pixel-notch) calc(100% - var(--pixel-notch)), 0 calc(100% - var(--pixel-notch))
+    );
+
+    /* Sombras suaves (legado) — mapeadas para a sombra dura */
+    --shadow-sm: var(--shadow-hard-sm);
+    --shadow-md: var(--shadow-hard);
+    --shadow-lg: var(--shadow-hard-lg);
+
+    /* Detalhes de UI (o Personalizador sobrepõe-nos todos) */
+    --ui-text-transform: uppercase;
+    --texture-rendering: pixelated;
+    --section-rule-display: block;
+    --section-rule: repeating-linear-gradient(90deg,
+        var(--color-ink) 0 14px, transparent 14px 22px);
+    --section-rule-on-dark: repeating-linear-gradient(90deg,
+        var(--color-yellow) 0 14px, transparent 14px 22px);
+    --text-shadow-hero: 0.05em 0.05em 0 var(--color-ink);
+    --text-shadow-display: 0.06em 0.06em 0 var(--color-ink);
+    --text-shadow-section: 0.06em 0.06em 0 rgba(17, 17, 17, 0.18);
+    --text-shadow-section-on-dark: 0.06em 0.06em 0 rgba(17, 17, 17, 0.35);
+
+    /* Ruído de pixels (tileable, 120x120) */
+    --noise-paper: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.54  0 0 0 0 0.48  0 0 0 0.12 0'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+    --noise-navy: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.15  0 0 0 0 0.13  0 0 0 0 0.38  0 0 0 0.5 0'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+
+    /* Transitions — curtas, sem easing "suave" (resposta arcade) */
+    --transition-fast: 0.06s linear;
+    --transition-normal: 0.08s linear;
+    --transition-slow: 0.12s linear;
 }
 
 /* ==========================================================================
@@ -78,51 +152,76 @@ html {
 body {
     margin: 0;
     padding: 0;
+    /* As secções .alignfull usam 100vw, que inclui a largura da barra de
+       scroll e provoca 8-15px de scroll horizontal em desktop. "clip" corta
+       esse excesso sem criar um contentor de scroll — ao contrário de
+       "hidden", não parte position: sticky nos ascendentes. */
+    overflow-x: clip;
     font-family: var(--font-primary);
     font-size: 16px;
     font-weight: 400;
     line-height: 1.9;
-    color: var(--color-dark);
-    background-color: var(--color-white);
+    color: var(--color-ink);
+    background-color: var(--color-paper);
+    background-image: var(--noise-paper);
+    image-rendering: var(--texture-rendering, pixelated);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* O ruído é uma textura de fundo: não deve pixelizar imagens nem media. */
+img, svg, video, canvas, iframe {
+    image-rendering: auto;
 }
 
 /* ==========================================================================
    Typography
    ========================================================================== */
 
+/* Display (H1/H2): Jersey 10 — pixel font, apenas peso 400.
+   Subtítulos (H3–H6): Blinker Black — legível em tamanhos pequenos. */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-condensed);
-    font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.15;
     margin-top: 0;
-    color: var(--color-dark);
+    color: var(--color-navy);
+}
+
+h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+h3, h4, h5, h6 {
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    line-height: 1.25;
 }
 
 h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 600;
+    font-size: clamp(3rem, 7vw, 5.25rem);
 }
 
 h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-size: clamp(2.25rem, 4.5vw, 3rem);
 }
 
 h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
 }
 
 h4 {
-    font-size: 1.5rem;
+    font-size: 1.1875rem;
 }
 
 h5 {
-    font-size: 1.25rem;
+    font-size: 1.0625rem;
 }
 
 h6 {
-    font-size: 1rem;
+    font-size: 0.9375rem;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.06em;
 }
 
 p {
@@ -131,13 +230,13 @@ p {
 }
 
 a {
-    color: var(--color-purple);
+    color: var(--color-primary);
     text-decoration: none;
     transition: color var(--transition-fast);
 }
 
 a:hover {
-    color: var(--color-pink);
+    color: var(--color-secondary);
 }
 
 /* ==========================================================================
@@ -159,82 +258,207 @@ a:hover {
     max-width: 800px;
 }
 
+/* Só padding vertical: com o shorthand, um .container.section perdia o
+   padding lateral e o conteúdo encostava às margens do ecrã. */
 .section {
-    padding: var(--spacing-xl) 0;
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
 }
 
 .section-sm {
-    padding: var(--spacing-lg) 0;
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+}
+
+/* Em ecrãs estreitos 2rem de cada lado come demasiada largura útil. */
+@media (max-width: 576px) {
+    .container,
+    .container-wide,
+    .container-narrow {
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
 }
 
 /* ==========================================================================
    Buttons
    ========================================================================== */
 
+/* Botões: planos, quadrados, contorno ink, sombra dura e canto em pixel.
+   O "clique" empurra o botão para dentro da sombra (feedback arcade). */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-xs);
-    padding: 0.875rem 2rem;
-    font-family: var(--font-primary);
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: none;
-    border-radius: var(--radius-full);
+    gap: 0.55em;
+    padding: 0.875rem 1.375rem;
+    font-family: var(--font-ui);
+    font-size: 0.9375rem;
+    font-weight: var(--font-ui-weight);
+    line-height: 1;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.05em;
+    color: var(--color-ink);
+    background: var(--color-yellow);
+    border: var(--border-hard);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-hard);
+    clip-path: var(--pixel-clip-shadow);
     cursor: pointer;
-    transition: all var(--transition-normal);
     text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn:hover {
+    color: var(--color-ink);
+}
+
+.btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--color-cyan);
+    outline-offset: 3px;
 }
 
 .btn-primary {
-    background: var(--gradient-primary);
-    color: var(--color-white);
-    box-shadow: var(--shadow-md);
+    background: var(--color-btn-bg, var(--color-yellow));
+    color: var(--color-btn-text, var(--color-ink));
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    color: var(--color-white);
+    color: var(--color-btn-text, var(--color-ink));
 }
 
-.btn-secondary {
-    background: transparent;
-    color: var(--color-purple);
-    border: 2px solid var(--color-purple);
-}
-
-.btn-secondary:hover {
-    background: var(--color-purple);
-    color: var(--color-white);
-}
-
+.btn-secondary,
 .btn-white {
     background: var(--color-white);
-    color: var(--color-purple);
+    color: var(--color-ink);
 }
 
+.btn-secondary:hover,
 .btn-white:hover {
-    background: var(--color-dark);
+    background: var(--color-yellow);
+    color: var(--color-ink);
+}
+
+.btn-pink,
+.btn-magenta {
+    background: var(--color-secondary);
     color: var(--color-white);
 }
 
-.btn-pink {
-    background: var(--color-pink);
+.btn-pink:hover,
+.btn-magenta:hover {
     color: var(--color-white);
 }
 
-.btn-pink:hover {
-    background: var(--color-purple);
+.btn-cyan {
+    background: var(--color-cyan);
+    color: var(--color-white);
+}
+
+.btn-cyan:hover {
+    color: var(--color-white);
+}
+
+.btn-green {
+    background: var(--color-green);
+    color: var(--color-white);
+}
+
+.btn-green:hover {
+    color: var(--color-white);
+}
+
+.btn-ink {
+    background: var(--color-ink);
+    color: var(--color-yellow);
+}
+
+.btn-ink:hover {
+    color: var(--color-yellow);
+}
+
+/* ==========================================================================
+   Etiquetas, réguas e barras de HUD
+   ========================================================================== */
+
+/* Etiqueta "NÍVEL 1 ★" — badge plano com sombra dura curta. */
+.badge-pixel {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    font-size: 0.8125rem;
+    line-height: 1;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.1em;
+    padding: 0.4375rem 0.8125rem;
+    color: var(--color-ink);
+    background: var(--color-yellow);
+    border: 2px solid var(--color-ink);
+    box-shadow: var(--shadow-hard-sm);
+}
+
+/* Régua tracejada a pixel, usada por baixo dos títulos de secção. */
+.pixel-rule {
+    height: 4px;
+    border: 0;
+    margin: 0.625rem 0 1.875rem;
+    background: var(--section-rule, repeating-linear-gradient(90deg,
+        var(--color-ink) 0 14px, transparent 14px 22px));
+}
+
+.pixel-rule.on-dark {
+    background: var(--section-rule-on-dark, repeating-linear-gradient(90deg,
+        var(--color-yellow) 0 14px, transparent 14px 22px));
+    opacity: 0.9;
+}
+
+/* Barra de progresso tipo HUD. */
+.hud-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    width: 100%;
+    max-width: 280px;
+    padding: 8px 10px;
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    color: var(--color-white);
+    background: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    box-shadow: var(--shadow-hard-sm);
+}
+
+.hud-bar .hud-label {
+    font-size: 0.75rem;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.hud-bar .hud-track {
+    flex: 1;
+    height: 14px;
+    background: rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.hud-bar .hud-fill {
+    display: block;
+    height: 100%;
+    background: var(--color-cyan);
 }
 
 /* ==========================================================================
    Gradient Text
    ========================================================================== */
 
+/* Mantido por compatibilidade. Com os gradientes planos por predefinição
+   (navy → navy) o resultado é uma cor sólida, como manda o design system. */
 .gradient-text {
     background: var(--gradient-text);
     -webkit-background-clip: text;
@@ -252,13 +476,16 @@ a:hover {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: var(--color-white);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-normal);
+    color: var(--color-white);
+    background-color: var(--color-navy);
+    background-image: var(--noise-navy);
+    image-rendering: var(--texture-rendering, pixelated);
+    border-bottom: var(--border-band, 4px solid var(--color-ink));
+    box-shadow: none;
 }
 
 .site-header.scrolled {
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
 }
 
 .header-inner {
@@ -273,6 +500,24 @@ a:hover {
 .site-logo img {
     height: 50px;
     width: auto;
+}
+
+/* Fallback sem logo: caixa branca com o nome do site, como no design system. */
+.site-header .site-title {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    font-size: 1.25rem;
+    letter-spacing: 0.03em;
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
+    padding: 4px 10px;
+}
+
+.site-header .site-logo:hover .site-title {
+    color: var(--color-ink);
+    background: var(--color-yellow);
+    border-color: var(--color-yellow);
 }
 
 .main-navigation {
@@ -291,13 +536,18 @@ a:hover {
 }
 
 .nav-menu a {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--color-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-family: var(--font-ui);
+    font-size: 0.8125rem;
+    font-weight: var(--font-ui-weight);
+    color: var(--color-white);
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.06em;
     padding: var(--spacing-xs) 0;
     position: relative;
+}
+
+.nav-menu a:hover {
+    color: var(--color-yellow);
 }
 
 .nav-menu a::after {
@@ -306,8 +556,8 @@ a:hover {
     bottom: 0;
     left: 0;
     width: 0;
-    height: 2px;
-    background: var(--gradient-primary);
+    height: 3px;
+    background: var(--color-yellow);
     transition: width var(--transition-normal);
 }
 
@@ -325,16 +575,17 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    color: var(--color-pink);
-    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    color: var(--color-white);
+    border: 2px solid rgba(255, 255, 255, 0.6);
     transition: all var(--transition-fast);
 }
 
 .social-icons a:hover {
-    color: var(--color-purple);
-    background: rgba(87, 45, 223, 0.1);
+    color: var(--color-ink);
+    background: var(--color-yellow);
+    border-color: var(--color-yellow);
 }
 
 /* Mobile Menu Toggle */
@@ -352,8 +603,8 @@ a:hover {
     display: block;
     width: 25px;
     height: 3px;
-    background: var(--color-dark);
-    border-radius: 2px;
+    background: var(--color-white);
+    border-radius: 0;
     transition: all var(--transition-fast);
 }
 
@@ -368,7 +619,9 @@ a:hover {
         left: 0;
         right: 0;
         bottom: 0;
-        background: var(--color-white);
+        background-color: var(--color-navy);
+        background-image: var(--noise-navy);
+        border-top: 3px solid var(--color-ink);
         flex-direction: column;
         justify-content: flex-start;
         padding: var(--spacing-lg);
@@ -400,20 +653,12 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-primary);
+    background-color: var(--color-navy);
+    background-image: var(--noise-navy);
+    image-rendering: var(--texture-rendering, pixelated);
+    border-bottom: var(--border-band, 4px solid var(--color-ink));
     overflow: hidden;
     padding-top: 80px;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('assets/images/hero-pattern.svg') repeat;
-    opacity: 0.1;
 }
 
 .hero-content {
@@ -425,29 +670,41 @@ a:hover {
 }
 
 .hero-pretitle {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-family: var(--font-ui);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: var(--font-ui-weight);
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.1em;
     margin-bottom: var(--spacing-sm);
 }
 
+/* Linha rotativa: Blinker Black com sombra dura (como no mockup). */
 .hero-rotating-text {
-    font-family: var(--font-condensed);
-    font-size: clamp(3rem, 8vw, 8.75rem);
-    font-weight: 900;
-    line-height: 1;
+    font-family: var(--font-ui);
+    font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+    font-weight: var(--font-ui-weight);
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    color: var(--color-white);
+    text-shadow: var(--text-shadow-display, 4px 4px 0 var(--color-ink));
     margin-bottom: var(--spacing-md);
     min-height: 1.2em;
 }
 
+/* Título: Jersey 10 amarelo sobre navy, sombra dura de 7px. */
 .hero-title {
-    font-family: var(--font-condensed);
-    font-size: clamp(4rem, 10vw, 10rem);
-    font-weight: 900;
-    line-height: 0.9;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 13vw, 8.625rem);
+    font-weight: 400;
+    line-height: 0.95;
     margin-bottom: var(--spacing-lg);
-    color: var(--color-white);
+    color: var(--color-yellow);
+    text-shadow: var(--text-shadow-hero, 7px 7px 0 var(--color-ink));
+}
+
+.hero-tagline {
+    font-weight: 600;
 }
 
 .hero-buttons {
@@ -462,7 +719,7 @@ a:hover {
    ========================================================================== */
 
 .courses-section {
-    background: var(--color-white);
+    background: transparent;
 }
 
 .courses-filters {
@@ -473,30 +730,42 @@ a:hover {
 }
 
 .filter-btn {
-    padding: 0.5rem 1.5rem;
-    background: #f5f5f5;
-    border: none;
-    border-radius: var(--radius-full);
-    font-family: var(--font-primary);
-    font-weight: 600;
+    padding: 0.5rem 1.125rem;
+    background: var(--color-panel);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-hard-sm);
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    font-size: 0.8125rem;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.05em;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .filter-btn:hover,
 .filter-btn.active {
-    background: var(--gradient-primary);
-    color: var(--color-white);
+    background: var(--color-yellow);
+    color: var(--color-ink);
+}
+
+.filter-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-ink);
 }
 
 .course-accordion {
-    border: 1px solid #e5e5e5;
+    background: var(--color-panel);
+    border: var(--border-hard);
     border-radius: var(--radius-md);
+    box-shadow: var(--shadow-hard);
     overflow: hidden;
 }
 
 .course-item {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 3px solid var(--color-ink);
 }
 
 .course-item:last-child {
@@ -507,31 +776,42 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-md);
-    background: var(--color-white);
+    gap: var(--spacing-sm);
+    padding: 1.125rem 1.25rem;
+    background: transparent;
     cursor: pointer;
     transition: background var(--transition-fast);
 }
 
 .course-header:hover {
-    background: #f9f9f9;
+    background: var(--color-yellow);
 }
 
 .course-header h3 {
     margin: 0;
-    font-size: 1.25rem;
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    font-size: 1.0625rem;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.04em;
 }
 
 .course-toggle {
-    width: 40px;
-    height: 40px;
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-primary);
-    color: var(--color-white);
-    border-radius: 50%;
-    font-size: 1.5rem;
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--color-ink);
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    font-size: 1.25rem;
+    line-height: 1;
     transition: transform var(--transition-fast);
 }
 
@@ -542,7 +822,8 @@ a:hover {
 .course-content {
     display: none;
     padding: var(--spacing-md);
-    background: #f9f9f9;
+    background: var(--color-white);
+    border-top: 3px solid var(--color-ink);
 }
 
 .course-item.active .course-content {
@@ -562,15 +843,17 @@ a:hover {
 }
 
 .course-meta-label {
-    font-size: 0.875rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.6875rem;
+    color: #555;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.08em;
 }
 
 .course-meta-value {
-    font-weight: 600;
-    color: var(--color-dark);
+    font-weight: 900;
+    color: var(--color-ink);
 }
 
 /* ==========================================================================
@@ -578,8 +861,12 @@ a:hover {
    ========================================================================== */
 
 .stats-section {
-    background: var(--color-dark);
+    background-color: var(--color-navy);
+    background-image: var(--noise-navy);
+    image-rendering: var(--texture-rendering, pixelated);
     color: var(--color-white);
+    border-top: var(--border-band, 4px solid var(--color-ink));
+    border-bottom: var(--border-band, 4px solid var(--color-ink));
 }
 
 .stats-grid {
@@ -589,26 +876,31 @@ a:hover {
     text-align: center;
 }
 
+/* Contadores: painel plano com contorno ink, número em Jersey 10 navy. */
 .stat-item {
-    padding: var(--spacing-md);
+    padding: 1.25rem 0.75rem;
+    background: var(--color-panel);
+    color: var(--color-ink);
+    border: var(--border-hard);
+    box-shadow: var(--shadow-hard);
 }
 
 .stat-number {
-    font-family: var(--font-condensed);
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 700;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 3.75rem);
+    font-weight: 400;
+    color: var(--color-navy);
     line-height: 1;
     margin-bottom: var(--spacing-xs);
 }
 
 .stat-label {
-    font-size: 1.125rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-family: var(--font-ui);
+    font-weight: 800;
+    font-size: 0.71875rem;
+    line-height: 1.35;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.05em;
 }
 
 /* ==========================================================================
@@ -616,7 +908,7 @@ a:hover {
    ========================================================================== */
 
 .testimonials-section {
-    background: #f5f5f5;
+    background: transparent;
     overflow: hidden;
 }
 
@@ -638,10 +930,11 @@ a:hover {
     flex: 0 0 350px;
     scroll-snap-align: start;
     position: relative;
+    border: var(--border-hard);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--color-white);
-    box-shadow: var(--shadow-md);
+    background: var(--color-panel);
+    box-shadow: var(--shadow-hard);
 }
 
 .testimonial-image {
@@ -655,20 +948,23 @@ a:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: var(--spacing-md);
-    background: rgba(24, 27, 49, 0.9);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-ink);
+    border-top: 3px solid var(--color-ink);
     color: var(--color-white);
 }
 
 .testimonial-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-ui);
+    font-size: 1.1875rem;
+    font-weight: var(--font-ui-weight);
+    margin-bottom: 0.125rem;
 }
 
 .testimonial-course {
     font-size: 0.875rem;
-    opacity: 0.8;
+    font-weight: 600;
+    color: var(--color-yellow);
 }
 
 /* ==========================================================================
@@ -676,7 +972,7 @@ a:hover {
    ========================================================================== */
 
 .timeline-section {
-    background: var(--color-white);
+    background: transparent;
 }
 
 .timeline {
@@ -685,63 +981,78 @@ a:hover {
     gap: var(--spacing-lg);
 }
 
+/* Fases: painéis planos com etiqueta "Nível N". */
 .timeline-item {
     text-align: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--color-panel);
+    color: var(--color-ink);
+    border: var(--border-hard);
     border-radius: var(--radius-lg);
-    background: var(--color-white);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-hard);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .timeline-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard-lg);
 }
 
 .timeline-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto var(--spacing-md);
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    font-size: 2rem;
+    border: 3px solid var(--color-ink);
+    border-radius: 0;
+    box-shadow: var(--shadow-hard-sm);
+    font-size: 1.75rem;
 }
 
 .timeline-icon.cyan {
-    background: rgba(0, 208, 132, 0.15);
-    color: var(--color-cyan);
+    background: var(--color-cyan);
+    color: var(--color-white);
 }
 
 .timeline-icon.lavender {
-    background: rgba(136, 135, 226, 0.15);
-    color: var(--color-lavender);
+    background: var(--color-green);
+    color: var(--color-white);
 }
 
 .timeline-icon.coral {
-    background: rgba(255, 107, 107, 0.15);
-    color: var(--color-coral);
+    background: var(--color-yellow);
+    color: var(--color-ink);
 }
 
 .timeline-phase {
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #666;
-    margin-bottom: var(--spacing-xs);
-}
-
-.timeline-title {
-    font-size: 1.5rem;
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 0.8125rem;
+    font-weight: var(--font-ui-weight);
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.1em;
+    padding: 0.4375rem 0.8125rem;
+    color: var(--color-ink);
+    background: var(--color-yellow);
+    border: 2px solid var(--color-ink);
+    box-shadow: var(--shadow-hard-sm);
     margin-bottom: var(--spacing-sm);
 }
 
+.timeline-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.875rem;
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+}
+
 .timeline-dates {
-    font-weight: 600;
-    color: var(--color-purple);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: var(--color-ink);
 }
 
 /* ==========================================================================
@@ -749,10 +1060,11 @@ a:hover {
    ========================================================================== */
 
 .site-footer {
-    background: var(--color-dark);
+    background: var(--color-ink);
     color: var(--color-white);
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0;
     text-align: center;
+    border-top: var(--border-band-accent, 4px solid var(--color-yellow));
 }
 
 /* Rodapé centrado ao estilo up.pt/acesso: redes → logo → copyright */
@@ -773,10 +1085,11 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     color: var(--color-white);
-    transition: color var(--transition-fast);
+    border: 2px solid var(--color-white);
+    transition: all var(--transition-fast);
 }
 
 .footer-social a svg {
@@ -785,7 +1098,9 @@ a:hover {
 }
 
 .footer-social a:hover {
-    color: #eeee22;
+    color: var(--color-ink);
+    background: var(--color-yellow);
+    border-color: var(--color-yellow);
 }
 
 .footer-logo img {
@@ -795,10 +1110,12 @@ a:hover {
 
 .footer-copyright {
     margin: 0;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.78125rem;
+    letter-spacing: 0.08em;
+    text-transform: var(--ui-text-transform, uppercase);
+    color: var(--color-white);
 }
 
 /* ==========================================================================

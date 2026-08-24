@@ -246,28 +246,34 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 
 <style>
 .cursos-archive .cursos-header {
-    background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-pink) 100%);
+    background-color: var(--color-navy);
+    background-image: var(--noise-navy);
+    image-rendering: var(--texture-rendering, pixelated);
     color: var(--color-white);
+    border-bottom: var(--border-band, 4px solid var(--color-ink));
     padding: calc(80px + var(--spacing-xl)) 0 var(--spacing-xl);
     text-align: center;
 }
 
 .cursos-archive .page-title {
-    color: var(--color-white);
+    color: var(--color-yellow);
+    text-shadow: var(--text-shadow-hero, 5px 5px 0 var(--color-ink));
     margin-bottom: var(--spacing-sm);
 }
 
 .cursos-archive .page-description {
-    font-size: 1.25rem;
-    opacity: 0.9;
+    font-size: 1.125rem;
+    font-weight: 600;
+    opacity: 0.92;
     margin: 0;
 }
 
 .cursos-filters-bar {
-    background: var(--color-white);
+    background: var(--color-panel);
     padding: var(--spacing-md);
+    border: var(--border-hard);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-hard);
     margin-bottom: var(--spacing-lg);
     margin-top: calc(-1 * var(--spacing-lg));
     position: relative;
@@ -287,34 +293,35 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 
 .cursos-search-input {
     flex: 1;
-    padding: 0.875rem 1rem;
-    padding-right: 50px;
-    border: 2px solid #e5e5e5;
-    border-radius: var(--radius-full);
+    padding: 0.8125rem 1rem;
+    padding-right: 56px;
+    background: var(--color-white);
+    border: var(--border-hard);
+    border-radius: var(--radius-sm);
     font-family: var(--font-primary);
     font-size: 1rem;
-    transition: border-color var(--transition-fast);
+    transition: box-shadow var(--transition-fast);
 }
 
 .cursos-search-input:focus {
     outline: none;
-    border-color: var(--color-purple);
+    box-shadow: inset 0 0 0 3px var(--color-cyan);
 }
 
 .cursos-search-btn {
     position: absolute;
-    right: 5px;
+    right: 3px;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-primary);
-    color: var(--color-white);
-    border: none;
-    border-radius: 50%;
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -327,9 +334,10 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 
 .filter-select {
     padding: 0.625rem 1rem;
-    border: 2px solid #e5e5e5;
-    border-radius: var(--radius-full);
+    border: var(--border-hard);
+    border-radius: var(--radius-sm);
     font-family: var(--font-primary);
+    font-weight: 600;
     font-size: 0.9375rem;
     background: var(--color-white);
     cursor: pointer;
@@ -337,12 +345,17 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 }
 
 .filter-select:focus {
-    outline: none;
-    border-color: var(--color-purple);
+    outline: 3px solid var(--color-cyan);
+    outline-offset: 2px;
 }
 
 .results-count {
-    color: #666;
+    font-family: var(--font-ui);
+    font-weight: 800;
+    font-size: 0.8125rem;
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.06em;
+    color: var(--color-ink);
     margin-bottom: var(--spacing-md);
 }
 
@@ -355,22 +368,24 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 
 .badge {
     display: inline-block;
-    padding: 2px 10px;
+    padding: 3px 9px;
+    font-family: var(--font-ui);
     font-size: 0.6875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-radius: var(--radius-full);
+    font-weight: var(--font-ui-weight);
+    text-transform: var(--ui-text-transform, uppercase);
+    letter-spacing: 0.08em;
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-sm);
 }
 
 .badge-destaque {
-    background: var(--gradient-primary);
-    color: var(--color-white);
+    background: var(--color-yellow);
+    color: var(--color-ink);
 }
 
 .badge-novo {
     background: var(--color-cyan);
-    color: var(--color-dark);
+    color: var(--color-white);
 }
 
 .course-header-meta {
@@ -382,8 +397,8 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 }
 
 .course-grau {
-    color: var(--color-purple);
-    font-weight: 600;
+    color: var(--color-magenta);
+    font-weight: 900;
 }
 
 /* Course details grid */
@@ -393,7 +408,7 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid #eee;
+    border-bottom: 3px solid var(--color-ink);
 }
 
 .course-detail-item {
@@ -404,7 +419,7 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 .detail-label {
     font-size: 0.75rem;
     color: #666;
-    text-transform: uppercase;
+    text-transform: var(--ui-text-transform, uppercase);
     letter-spacing: 0.5px;
     margin-bottom: 4px;
 }
@@ -428,7 +443,7 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
 .course-provas h4 {
     font-size: 0.875rem;
     color: #666;
-    text-transform: uppercase;
+    text-transform: var(--ui-text-transform, uppercase);
     letter-spacing: 0.5px;
     margin-bottom: var(--spacing-xs);
 }
@@ -467,21 +482,24 @@ $search_query = isset($_GET['curso']) ? sanitize_text_field($_GET['curso']) : ''
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 44px;
-    height: 44px;
+    min-width: 42px;
+    height: 42px;
     padding: 0 var(--spacing-sm);
-    background: #f5f5f5;
+    background: var(--color-panel);
+    border: var(--border-hard);
     border-radius: var(--radius-md);
-    font-weight: 600;
-    color: var(--color-dark);
+    box-shadow: var(--shadow-hard-sm);
+    font-family: var(--font-ui);
+    font-weight: var(--font-ui-weight);
+    color: var(--color-ink);
     text-decoration: none;
-    transition: all var(--transition-fast);
+    transition: background var(--transition-fast);
 }
 
 .cursos-pagination .page-numbers:hover,
 .cursos-pagination .page-numbers.current {
-    background: var(--gradient-primary);
-    color: var(--color-white);
+    background: var(--color-yellow);
+    color: var(--color-ink);
 }
 
 @media (max-width: 768px) {

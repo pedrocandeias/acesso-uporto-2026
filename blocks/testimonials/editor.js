@@ -189,7 +189,7 @@
                                 textAlign: 'center'
                             }
                         },
-                        el('span', { className: 'dashicons dashicons-format-quote', style: { fontSize: '48px', color: '#572ddf', marginBottom: '10px' } }),
+                        el('span', { className: 'dashicons dashicons-format-quote', style: { fontSize: '48px', color: '#262261', marginBottom: '10px' } }),
                         el('h3', { style: { margin: '0 0 8px' } }, attributes.sectionTitle || __('Testemunhos', 'acesso-uporto')),
                         el('p', { style: { color: '#666', margin: '0 0 15px' } }, attributes.sectionSubtitle),
                         el('div', {
@@ -208,7 +208,7 @@
                                         height: '40px',
                                         borderRadius: '50%',
                                         background: t.image ? 'url(' + t.image + ') center/cover' : '#ddd',
-                                        border: '2px solid #572ddf'
+                                        border: '2px solid #262261'
                                     }
                                 });
                             })

@@ -15,8 +15,8 @@ $primary_btn_url = $attributes['primaryButtonUrl'] ?? '#cursos';
 $secondary_btn_text = $attributes['secondaryButtonText'] ?? '';
 $secondary_btn_url = $attributes['secondaryButtonUrl'] ?? '';
 $use_gradient = $attributes['useGradient'] ?? true;
-$gradient_start = $attributes['gradientStart'] ?? '#572ddf';
-$gradient_end = $attributes['gradientEnd'] ?? '#da2489';
+$gradient_start = $attributes['gradientStart'] ?? '#262261';
+$gradient_end = $attributes['gradientEnd'] ?? '#262261';
 $overlay_opacity = ($attributes['overlayOpacity'] ?? 70) / 100;
 
 // Cor de fundo: gradiente ou cor sólida (gradientStart) conforme o toggle.
@@ -30,11 +30,32 @@ $bg_position   = $attributes['backgroundPosition'] ?? 'center center';
 $bg_repeat     = $attributes['backgroundRepeat'] ?? 'no-repeat';
 $bg_attachment = $attributes['backgroundAttachment'] ?? 'scroll';
 
+// Um tamanho fixo em px escolhido para desktop rebenta o hero no telemóvel
+// (uma palavra longa a 94px não cabe em 375px). Converte-se num clamp() que
+// atinge o tamanho pedido a partir dos 1200px de largura e encolhe abaixo
+// disso. Tamanhos já responsivos (rem, %, clamp) passam intactos.
+$acesso_fluid_size = function ($size) {
+    $size = trim((string) $size);
+    if ($size === '' || !preg_match('/^(\d+(?:\.\d+)?)px$/', $size, $m)) {
+        return $size;
+    }
+    $px = (float) $m[1];
+    if ($px <= 32) {
+        return $size;
+    }
+    return sprintf(
+        'clamp(%dpx, %svw, %s)',
+        max(20, (int) round($px * 0.34)),
+        rtrim(rtrim(number_format($px / 12, 2, '.', ''), '0'), '.'),
+        $size
+    );
+};
+
 // Cores e tamanhos por elemento (aplicados só quando definidos).
-$acesso_el_style = function ($color, $size) {
+$acesso_el_style = function ($color, $size) use ($acesso_fluid_size) {
     $s = '';
     if ($color) { $s .= 'color:' . $color . ';'; }
-    if ($size)  { $s .= 'font-size:' . $size . ';'; }
+    if ($size)  { $s .= 'font-size:' . $acesso_fluid_size($size) . ';'; }
     return $s ? ' style="' . esc_attr($s) . '"' : '';
 };
 $rotating_style = $acesso_el_style($attributes['rotatingColor'] ?? '', $attributes['rotatingSize'] ?? '');
@@ -49,12 +70,12 @@ $secondary_btn_color = $attributes['secondaryBtnColor'] ?? '';
 $primary_btn_css = '';
 if ($primary_btn_bg)    { $primary_btn_css .= 'background:' . $primary_btn_bg . ';'; }
 if ($primary_btn_color) { $primary_btn_css .= 'color:' . $primary_btn_color . ';'; }
-if ($btn_size)          { $primary_btn_css .= 'font-size:' . $btn_size . ';'; }
+if ($btn_size)          { $primary_btn_css .= 'font-size:' . $acesso_fluid_size($btn_size) . ';'; }
 $primary_btn_style = $primary_btn_css ? ' style="' . esc_attr($primary_btn_css) . '"' : '';
 
 $secondary_btn_css = '';
 if ($secondary_btn_color) { $secondary_btn_css .= 'color:' . $secondary_btn_color . ';border-color:' . $secondary_btn_color . ';'; }
-if ($btn_size)            { $secondary_btn_css .= 'font-size:' . $btn_size . ';'; }
+if ($btn_size)            { $secondary_btn_css .= 'font-size:' . $acesso_fluid_size($btn_size) . ';'; }
 $secondary_btn_style = $secondary_btn_css ? ' style="' . esc_attr($secondary_btn_css) . '"' : '';
 
 // Fundo de pixels (sobrepõe a imagem carregada quando escolhido).

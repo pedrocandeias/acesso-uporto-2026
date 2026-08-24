@@ -188,7 +188,7 @@
                                 },
                                 attributes.showIcons && el('span', {
                                     className: 'dashicons dashicons-star-filled',
-                                    style: { fontSize: '32px', color: '#572ddf', marginBottom: '10px', display: 'block' }
+                                    style: { fontSize: '32px', color: '#262261', marginBottom: '10px', display: 'block' }
                                 }),
                                 el('h4', { style: { margin: '0 0 5px', fontSize: '1.25rem' } }, feature.title || __('Título', 'acesso-uporto')),
                                 el('p', { style: { margin: 0, color: '#666', fontSize: '0.875rem' } }, feature.description || __('Descrição', 'acesso-uporto'))

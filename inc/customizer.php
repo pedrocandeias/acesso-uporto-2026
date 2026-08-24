@@ -9,6 +9,301 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Preset de design system usado quando nada está escolhido.
+if (!defined('ACESSO_DEFAULT_PRESET')) {
+    define('ACESSO_DEFAULT_PRESET', 'retro-2026');
+}
+
+/**
+ * Presets de design system.
+ *
+ * Cada campanha tem o seu. Para a campanha do ano seguinte acrescenta-se uma
+ * entrada aqui e escolhe-se no Personalizador (Aparência → Design System) —
+ * não é preciso mexer em CSS. Cada preset define os valores de arranque de
+ * TODAS as opções de estilo; o que o utilizador guardar no Personalizador
+ * sobrepõe-se ao preset, e "Repor as predefinições" apaga essas sobreposições
+ * para o preset voltar a mandar.
+ *
+ * @return array<string, array{label: string, tokens: array<string, string>}>
+ */
+function acesso_style_presets() {
+    return array(
+        'retro-2026' => array(
+            'label'  => __('Receção 2026 — Retro Gaming (8-bit)', 'acesso-uporto'),
+            'tokens' => array(
+                // Formas
+                'acesso_corner_style'       => 'square',
+                'acesso_border_width'       => '3',
+                'acesso_shadow_style'       => 'hard',
+                'acesso_shadow_offset'      => '6',
+                'acesso_pixel_notch'        => '5',
+                'acesso_texture'            => 'pixel',
+                'acesso_section_rule'       => 'dashed',
+                'acesso_display_shadow'     => 'hard',
+                'acesso_ui_uppercase'       => '1',
+
+                // Cores principais
+                'acesso_color_primary'      => '#262261', // navy
+                'acesso_color_secondary'    => '#E8196D', // magenta
+                'acesso_color_dark'         => '#111111', // ink
+
+                // Superfícies
+                'acesso_color_accent'       => '#FFF100', // amarelo
+                'acesso_color_panel'        => '#ededed',
+                'acesso_color_paper'        => '#f1efe6',
+
+                // Cores de destaque
+                'acesso_color_cyan'         => '#00ADEE',
+                'acesso_color_lavender'     => '#2B2E6F', // azul
+                'acesso_color_coral'        => '#FF0000', // vermelho
+                'acesso_color_lime'         => '#D6DE23',
+                'acesso_color_green'        => '#009345',
+
+                // Gradiente: plano (navy → navy)
+                'acesso_gradient_start'     => '#262261',
+                'acesso_gradient_end'       => '#262261',
+                'acesso_gradient_direction' => '135deg',
+
+                // Texto e elementos
+                'acesso_color_text'         => '#111111',
+                'acesso_color_heading'      => '#262261',
+                'acesso_color_link'         => '#262261',
+                'acesso_color_link_hover'   => '#E8196D',
+                'acesso_color_button_bg'    => '#FFF100',
+                'acesso_color_button_text'  => '#111111',
+
+                // Tipografia: Jersey 10 (display) + Blinker (UI/corpo)
+                'acesso_font_body'          => 'Blinker',
+                'acesso_font_body_custom'   => '',
+                'acesso_font_body_weight'   => '400',
+                'acesso_font_heading'       => 'Jersey 10',
+                'acesso_font_heading_custom' => '',
+                'acesso_font_heading_weight' => '400',
+                'acesso_font_menu'          => 'Jersey 10',
+                'acesso_font_menu_custom'   => '',
+                'acesso_font_footer'        => '',
+                'acesso_font_footer_custom' => '',
+                'acesso_font_size_base'     => '16',
+                'acesso_font_heading_scale' => '100',
+            ),
+        ),
+
+        'classico' => array(
+            'label'  => __('Clássico — cantos suaves, gradiente', 'acesso-uporto'),
+            'tokens' => array(
+                // Formas
+                'acesso_corner_style'       => 'rounded',
+                'acesso_border_width'       => '0',
+                'acesso_shadow_style'       => 'soft',
+                'acesso_shadow_offset'      => '6',
+                'acesso_pixel_notch'        => '0',
+                'acesso_texture'            => 'none',
+                'acesso_section_rule'       => 'none',
+                'acesso_display_shadow'     => 'none',
+                'acesso_ui_uppercase'       => '1',
+
+                // Cores principais
+                'acesso_color_primary'      => '#572ddf',
+                'acesso_color_secondary'    => '#da2489',
+                'acesso_color_dark'         => '#060221',
+
+                // Superfícies
+                'acesso_color_accent'       => '#efeaff',
+                'acesso_color_panel'        => '#ffffff',
+                'acesso_color_paper'        => '#ffffff',
+
+                // Cores de destaque
+                'acesso_color_cyan'         => '#00d084',
+                'acesso_color_lavender'     => '#8887e2',
+                'acesso_color_coral'        => '#ff6b6b',
+                'acesso_color_lime'         => '#d6de23',
+                'acesso_color_green'        => '#009345',
+
+                // Gradiente da marca
+                'acesso_gradient_start'     => '#572ddf',
+                'acesso_gradient_end'       => '#da2489',
+                'acesso_gradient_direction' => '135deg',
+
+                // Texto e elementos
+                'acesso_color_text'         => '#060221',
+                'acesso_color_heading'      => '#060221',
+                'acesso_color_link'         => '#572ddf',
+                'acesso_color_link_hover'   => '#da2489',
+                'acesso_color_button_bg'    => '#572ddf',
+                'acesso_color_button_text'  => '#ffffff',
+
+                // Tipografia
+                'acesso_font_body'          => 'Barlow',
+                'acesso_font_body_custom'   => '',
+                'acesso_font_body_weight'   => '400',
+                'acesso_font_heading'       => 'Barlow Semi Condensed',
+                'acesso_font_heading_custom' => '',
+                'acesso_font_heading_weight' => '700',
+                'acesso_font_menu'          => '',
+                'acesso_font_menu_custom'   => '',
+                'acesso_font_footer'        => '',
+                'acesso_font_footer_custom' => '',
+                'acesso_font_size_base'     => '16',
+                'acesso_font_heading_scale' => '100',
+            ),
+        ),
+    );
+}
+
+/**
+ * Preset de design system em uso.
+ *
+ * @return string
+ */
+function acesso_active_preset() {
+    $preset  = get_theme_mod('acesso_style_preset', ACESSO_DEFAULT_PRESET);
+    $presets = acesso_style_presets();
+    return isset($presets[$preset]) ? $preset : ACESSO_DEFAULT_PRESET;
+}
+
+/**
+ * Predefinições de estilo do preset ativo.
+ *
+ * Fonte única de verdade: usada pelos controlos do Personalizador, pelo CSS
+ * gerado em acesso_customizer_css() e pela reposição em acesso_reset_design().
+ *
+ * Nota: `acesso_style_preset` não entra neste mapa de propósito — repor as
+ * predefinições limpa as sobreposições, não a campanha escolhida.
+ *
+ * @return array<string, string>
+ */
+function acesso_theme_defaults() {
+    $presets = acesso_style_presets();
+    return $presets[acesso_active_preset()]['tokens'];
+}
+
+/**
+ * Predefinição de uma opção do tema.
+ *
+ * @param string $key      Chave do theme_mod.
+ * @param string $fallback Valor caso a chave não exista no mapa.
+ * @return string
+ */
+function acesso_default($key, $fallback = '') {
+    $defaults = acesso_theme_defaults();
+    return array_key_exists($key, $defaults) ? $defaults[$key] : $fallback;
+}
+
+/**
+ * Valor efetivo de uma opção: theme_mod guardado ou predefinição do preset.
+ *
+ * @param string $key Chave do theme_mod.
+ * @return string
+ */
+function acesso_mod($key) {
+    return get_theme_mod($key, acesso_default($key));
+}
+
+/**
+ * Paleta do tema, derivada das opções em vigor.
+ *
+ * Usada pela paleta do editor (add_theme_support) e injetada no theme.json em
+ * tempo de execução, para que o Gutenberg mostre sempre as cores da campanha
+ * ativa em vez das que ficaram escritas no ficheiro.
+ *
+ * Os slugs antigos (purple/pink/lavender/coral) mantêm-se de propósito: há
+ * conteúdo publicado com classes has-<slug>-background-color que partiria se
+ * mudassem.
+ *
+ * @return array<int, array{slug: string, name: string, color: string}>
+ */
+function acesso_color_palette() {
+    return array(
+        array('slug' => 'purple',     'name' => __('Primária', 'acesso-uporto'),   'color' => acesso_mod('acesso_color_primary')),
+        array('slug' => 'pink',       'name' => __('Secundária', 'acesso-uporto'), 'color' => acesso_mod('acesso_color_secondary')),
+        array('slug' => 'dark',       'name' => __('Contorno', 'acesso-uporto'),   'color' => acesso_mod('acesso_color_dark')),
+        array('slug' => 'yellow',     'name' => __('Destaque', 'acesso-uporto'),   'color' => acesso_mod('acesso_color_accent')),
+        array('slug' => 'cyan',       'name' => __('Destaque 1', 'acesso-uporto'), 'color' => acesso_mod('acesso_color_cyan')),
+        array('slug' => 'lavender',   'name' => __('Destaque 2', 'acesso-uporto'), 'color' => acesso_mod('acesso_color_lavender')),
+        array('slug' => 'coral',      'name' => __('Destaque 3', 'acesso-uporto'), 'color' => acesso_mod('acesso_color_coral')),
+        array('slug' => 'lime',       'name' => __('Destaque 4', 'acesso-uporto'), 'color' => acesso_mod('acesso_color_lime')),
+        array('slug' => 'green',      'name' => __('Destaque 5', 'acesso-uporto'), 'color' => acesso_mod('acesso_color_green')),
+        array('slug' => 'light-gray', 'name' => __('Cartão', 'acesso-uporto'),     'color' => acesso_mod('acesso_color_panel')),
+        array('slug' => 'paper',      'name' => __('Papel', 'acesso-uporto'),      'color' => acesso_mod('acesso_color_paper')),
+        array('slug' => 'white',      'name' => __('Branco', 'acesso-uporto'),     'color' => '#ffffff'),
+    );
+}
+
+/**
+ * Gradientes do tema, derivados das opções em vigor.
+ *
+ * @return array<int, array{slug: string, name: string, gradient: string}>
+ */
+function acesso_color_gradients() {
+    $start = acesso_mod('acesso_gradient_start');
+    $end   = acesso_mod('acesso_gradient_end');
+    $dir   = acesso_mod('acesso_gradient_direction');
+    $dark  = acesso_mod('acesso_color_dark');
+
+    return array(
+        array(
+            'slug'     => 'purple-pink',
+            'name'     => __('Gradiente da marca', 'acesso-uporto'),
+            'gradient' => sprintf('linear-gradient(%s, %s 0%%, %s 100%%)', $dir, $start, $end),
+        ),
+        array(
+            'slug'     => 'pink-purple',
+            'name'     => __('Gradiente da marca (invertido)', 'acesso-uporto'),
+            'gradient' => sprintf('linear-gradient(%s, %s 0%%, %s 100%%)', $dir, $end, $start),
+        ),
+        array(
+            'slug'     => 'purple-dark',
+            'name'     => __('Marca para contorno', 'acesso-uporto'),
+            'gradient' => sprintf('linear-gradient(180deg, %s 0%%, %s 100%%)', $start, $dark),
+        ),
+    );
+}
+
+/**
+ * Injeta a paleta e os tipos em vigor no theme.json.
+ *
+ * O theme.json é um ficheiro estático e ganha à paleta do add_theme_support,
+ * por isso sem este filtro o editor mostraria as cores da campanha de 2026
+ * mesmo depois de o Personalizador as ter mudado.
+ *
+ * @param WP_Theme_JSON_Data $theme_json
+ * @return WP_Theme_JSON_Data
+ */
+function acesso_filter_theme_json($theme_json) {
+    $font_body    = acesso_mod('acesso_font_body_custom') ?: acesso_mod('acesso_font_body');
+    $font_heading = acesso_mod('acesso_font_heading_custom') ?: acesso_mod('acesso_font_heading');
+
+    return $theme_json->update_with(array(
+        'version'  => 2,
+        'settings' => array(
+            'color' => array(
+                // Reafirmados para que o seletor de cores continue a mostrar
+                // só a paleta da campanha, como no theme.json.
+                'defaultPalette'   => false,
+                'defaultGradients' => false,
+                'palette'          => acesso_color_palette(),
+                'gradients'        => acesso_color_gradients(),
+            ),
+        ),
+        'styles' => array(
+            'typography' => array(
+                'fontFamily' => sprintf("'%s', sans-serif", $font_body),
+            ),
+            'elements' => array(
+                'h1' => array('typography' => array('fontFamily' => sprintf("'%s', sans-serif", $font_heading))),
+                'h2' => array('typography' => array('fontFamily' => sprintf("'%s', sans-serif", $font_heading))),
+                'h3' => array('typography' => array('fontFamily' => sprintf("'%s', sans-serif", $font_body))),
+                'h4' => array('typography' => array('fontFamily' => sprintf("'%s', sans-serif", $font_body))),
+            ),
+            'blocks' => array(
+                'core/heading' => array('typography' => array('fontFamily' => sprintf("'%s', sans-serif", $font_heading))),
+                'core/button'  => array('typography' => array('fontFamily' => sprintf("'%s', sans-serif", $font_body))),
+            ),
+        ),
+    ));
+}
+add_filter('wp_theme_json_data_theme', 'acesso_filter_theme_json');
+
 /**
  * Register Customizer settings
  */
@@ -42,11 +337,32 @@ function acesso_customize_register($wp_customize) {
     // APARÊNCIA
     // =====================================================
     $wp_customize->add_section('acesso_appearance', array(
-        'title'    => __('Aparência', 'acesso-uporto'),
-        'priority' => 25,
+        'title'       => __('Aparência', 'acesso-uporto'),
+        'description' => __('A linguagem visual da campanha: formas, sombras e textura. As cores e a tipografia estão nos painéis próprios.', 'acesso-uporto'),
+        'priority'    => 25,
     ));
+
+    // --- Design system da campanha ---
+    $acesso_preset_choices = array();
+    foreach (acesso_style_presets() as $acesso_preset_id => $acesso_preset) {
+        $acesso_preset_choices[$acesso_preset_id] = $acesso_preset['label'];
+    }
+    $wp_customize->add_setting('acesso_style_preset', array(
+        'default'           => ACESSO_DEFAULT_PRESET,
+        'sanitize_callback' => 'acesso_sanitize_style_preset',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_style_preset', array(
+        'label'       => __('Design System', 'acesso-uporto'),
+        'description' => __('Define os valores de arranque de todas as opções de estilo. O que personalizares abaixo sobrepõe-se ao preset; "Repor as predefinições" limpa essas personalizações.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'select',
+        'priority'    => 5,
+        'choices'     => $acesso_preset_choices,
+    ));
+
     $wp_customize->add_setting('acesso_corner_style', array(
-        'default'           => 'rounded',
+        'default'           => acesso_default('acesso_corner_style'),
         'sanitize_callback' => 'acesso_sanitize_corner_style',
         'transport'         => 'refresh',
     ));
@@ -55,10 +371,156 @@ function acesso_customize_register($wp_customize) {
         'description' => __('Cantos das caixas, cartões e botões. (Ícones e avatares redondos mantêm-se.)', 'acesso-uporto'),
         'section'     => 'acesso_appearance',
         'type'        => 'radio',
+        'priority'    => 10,
         'choices'     => array(
-            'rounded' => __('Redondos (predefinição)', 'acesso-uporto'),
             'square'  => __('Retangulares', 'acesso-uporto'),
+            'rounded' => __('Redondos', 'acesso-uporto'),
         ),
+    ));
+
+    // --- Contorno ---
+    $wp_customize->add_setting('acesso_border_width', array(
+        'default'           => acesso_default('acesso_border_width'),
+        'sanitize_callback' => 'absint',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_border_width', array(
+        'label'       => __('Espessura do contorno (px)', 'acesso-uporto'),
+        'description' => __('Contorno dos cartões, painéis e botões. 0 remove o contorno.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'number',
+        'priority'    => 15,
+        'input_attrs' => array('min' => 0, 'max' => 8, 'step' => 1),
+    ));
+
+    // --- Sombra ---
+    $wp_customize->add_setting('acesso_shadow_style', array(
+        'default'           => acesso_default('acesso_shadow_style'),
+        'sanitize_callback' => 'acesso_sanitize_shadow_style',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_shadow_style', array(
+        'label'       => __('Sombras', 'acesso-uporto'),
+        'description' => __('Como as caixas assentam na página.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'radio',
+        'priority'    => 20,
+        'choices'     => array(
+            'hard' => __('Dura (deslocada, sem desfoque)', 'acesso-uporto'),
+            'soft' => __('Suave (desfocada)', 'acesso-uporto'),
+            'none' => __('Sem sombra', 'acesso-uporto'),
+        ),
+    ));
+
+    $wp_customize->add_setting('acesso_shadow_offset', array(
+        'default'           => acesso_default('acesso_shadow_offset'),
+        'sanitize_callback' => 'absint',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_shadow_offset', array(
+        'label'       => __('Deslocamento da sombra (px)', 'acesso-uporto'),
+        'description' => __('Só se aplica à sombra dura.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'number',
+        'priority'    => 25,
+        'input_attrs' => array('min' => 0, 'max' => 16, 'step' => 1),
+    ));
+
+    // --- Canto em pixel ---
+    $wp_customize->add_setting('acesso_pixel_notch', array(
+        'default'           => acesso_default('acesso_pixel_notch'),
+        'sanitize_callback' => 'absint',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_pixel_notch', array(
+        'label'       => __('Canto "mordido" dos botões (px)', 'acesso-uporto'),
+        'description' => __('O recorte a pixel nos cantos dos botões. 0 desliga.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'number',
+        'priority'    => 30,
+        'input_attrs' => array('min' => 0, 'max' => 12, 'step' => 1),
+    ));
+
+    // --- Textura de fundo ---
+    $wp_customize->add_setting('acesso_texture', array(
+        'default'           => acesso_default('acesso_texture'),
+        'sanitize_callback' => 'acesso_sanitize_texture',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_texture', array(
+        'label'       => __('Textura de fundo', 'acesso-uporto'),
+        'description' => __('Ruído de pixels no fundo do site e nas bandas escuras.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'radio',
+        'priority'    => 35,
+        'choices'     => array(
+            'pixel' => __('Ruído de pixels', 'acesso-uporto'),
+            'none'  => __('Sem textura', 'acesso-uporto'),
+        ),
+    ));
+
+    // --- Régua dos títulos de secção ---
+    $wp_customize->add_setting('acesso_section_rule', array(
+        'default'           => acesso_default('acesso_section_rule'),
+        'sanitize_callback' => 'acesso_sanitize_section_rule',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_section_rule', array(
+        'label'       => __('Régua sob os títulos de secção', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'radio',
+        'priority'    => 40,
+        'choices'     => array(
+            'dashed' => __('Tracejada a pixel', 'acesso-uporto'),
+            'solid'  => __('Contínua', 'acesso-uporto'),
+            'none'   => __('Nenhuma', 'acesso-uporto'),
+        ),
+    ));
+
+    // --- Sombra dos títulos de display ---
+    $wp_customize->add_setting('acesso_display_shadow', array(
+        'default'           => acesso_default('acesso_display_shadow'),
+        'sanitize_callback' => 'acesso_sanitize_display_shadow',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_display_shadow', array(
+        'label'       => __('Sombra nos títulos grandes', 'acesso-uporto'),
+        'description' => __('A sombra dura por baixo do título do hero e dos títulos de secção.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'radio',
+        'priority'    => 45,
+        'choices'     => array(
+            'hard' => __('Dura', 'acesso-uporto'),
+            'none' => __('Nenhuma', 'acesso-uporto'),
+        ),
+    ));
+
+    // --- Caixa alta na interface ---
+    $wp_customize->add_setting('acesso_ui_uppercase', array(
+        'default'           => acesso_default('acesso_ui_uppercase'),
+        'sanitize_callback' => 'acesso_sanitize_checkbox',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_ui_uppercase', array(
+        'label'       => __('Interface em CAIXA ALTA', 'acesso-uporto'),
+        'description' => __('Botões, navegação, etiquetas e nomes de cartões.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'checkbox',
+        'priority'    => 50,
+    ));
+
+    // Reposição das predefinições do design system.
+    $wp_customize->add_setting('acesso_reset_design', array(
+        'default'           => false,
+        'sanitize_callback' => 'acesso_sanitize_checkbox',
+        'transport'         => 'refresh',
+    ));
+    $wp_customize->add_control('acesso_reset_design', array(
+        'label'       => __('Repor as predefinições do design system', 'acesso-uporto'),
+        'description' => __('Ao guardar, apaga todas as personalizações de cor, forma e tipografia e volta aos valores do design system escolhido acima. Não afeta o logo, os menus nem os conteúdos.', 'acesso-uporto'),
+        'section'     => 'acesso_appearance',
+        'type'        => 'checkbox',
+        'priority'    => 90,
     ));
 
     // =====================================================
@@ -79,19 +541,19 @@ function acesso_customize_register($wp_customize) {
 
     // Primary Color (Purple)
     $wp_customize->add_setting('acesso_color_primary', array(
-        'default'           => '#572ddf',
+        'default'           => acesso_default('acesso_color_primary'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_primary', array(
         'label'    => __('Cor Primária', 'acesso-uporto'),
-        'description' => __('Cor principal do tema (botões, links, destaques).', 'acesso-uporto'),
+        'description' => __('A cor da marca: bandas escuras, cabeçalho, títulos e links.', 'acesso-uporto'),
         'section'  => 'acesso_primary_colors',
     )));
 
     // Secondary Color (Pink)
     $wp_customize->add_setting('acesso_color_secondary', array(
-        'default'           => '#da2489',
+        'default'           => acesso_default('acesso_color_secondary'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
@@ -103,13 +565,13 @@ function acesso_customize_register($wp_customize) {
 
     // Dark Color
     $wp_customize->add_setting('acesso_color_dark', array(
-        'default'           => '#060221',
+        'default'           => acesso_default('acesso_color_dark'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_dark', array(
-        'label'    => __('Cor Escura', 'acesso-uporto'),
-        'description' => __('Cor para textos e fundos escuros.', 'acesso-uporto'),
+        'label'    => __('Cor de Contorno', 'acesso-uporto'),
+        'description' => __('O preto do design system: contornos, sombras duras, rodapé e texto do corpo.', 'acesso-uporto'),
         'section'  => 'acesso_primary_colors',
     )));
 
@@ -121,22 +583,22 @@ function acesso_customize_register($wp_customize) {
     ));
 
     $acesso_text_color_fields = array(
-        'acesso_color_text'        => array('#060221', __('Cor do Texto', 'acesso-uporto'), __('Cor do texto do corpo.', 'acesso-uporto')),
-        'acesso_color_heading'     => array('#060221', __('Cor dos Títulos', 'acesso-uporto'), __('Cor dos títulos e cabeçalhos.', 'acesso-uporto')),
-        'acesso_color_link'        => array('#572ddf', __('Cor dos Links', 'acesso-uporto'), __('Cor das ligações.', 'acesso-uporto')),
-        'acesso_color_link_hover'  => array('#da2489', __('Cor dos Links (rato em cima)', 'acesso-uporto'), __('Cor das ligações no hover.', 'acesso-uporto')),
-        'acesso_color_button_bg'   => array('#572ddf', __('Fundo dos Botões', 'acesso-uporto'), __('Cor de fundo dos botões primários.', 'acesso-uporto')),
-        'acesso_color_button_text' => array('#ffffff', __('Texto dos Botões', 'acesso-uporto'), __('Cor do texto dos botões primários.', 'acesso-uporto')),
+        'acesso_color_text'        => array(__('Cor do Texto', 'acesso-uporto'), __('Cor do texto do corpo.', 'acesso-uporto')),
+        'acesso_color_heading'     => array(__('Cor dos Títulos', 'acesso-uporto'), __('Cor dos títulos e cabeçalhos.', 'acesso-uporto')),
+        'acesso_color_link'        => array(__('Cor dos Links', 'acesso-uporto'), __('Cor das ligações.', 'acesso-uporto')),
+        'acesso_color_link_hover'  => array(__('Cor dos Links (rato em cima)', 'acesso-uporto'), __('Cor das ligações no hover.', 'acesso-uporto')),
+        'acesso_color_button_bg'   => array(__('Fundo dos Botões', 'acesso-uporto'), __('Cor de fundo dos botões primários.', 'acesso-uporto')),
+        'acesso_color_button_text' => array(__('Texto dos Botões', 'acesso-uporto'), __('Cor do texto dos botões primários.', 'acesso-uporto')),
     );
     foreach ($acesso_text_color_fields as $acesso_tc_id => $acesso_tc_cfg) {
         $wp_customize->add_setting($acesso_tc_id, array(
-            'default'           => $acesso_tc_cfg[0],
+            'default'           => acesso_default($acesso_tc_id),
             'sanitize_callback' => 'sanitize_hex_color',
             'transport'         => 'refresh',
         ));
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $acesso_tc_id, array(
-            'label'       => $acesso_tc_cfg[1],
-            'description' => $acesso_tc_cfg[2],
+            'label'       => $acesso_tc_cfg[0],
+            'description' => $acesso_tc_cfg[1],
             'section'     => 'acesso_text_colors',
         )));
     }
@@ -150,36 +612,98 @@ function acesso_customize_register($wp_customize) {
 
     // Cyan
     $wp_customize->add_setting('acesso_color_cyan', array(
-        'default'           => '#00d084',
+        'default'           => acesso_default('acesso_color_cyan'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_cyan', array(
-        'label'   => __('Cyan / Verde', 'acesso-uporto'),
-        'section' => 'acesso_accent_colors',
+        'label'       => __('Destaque 1 (Cyan)', 'acesso-uporto'),
+        'description' => __('Ícones, botões secundários e barras de nível.', 'acesso-uporto'),
+        'section'     => 'acesso_accent_colors',
     )));
 
     // Lavender
     $wp_customize->add_setting('acesso_color_lavender', array(
-        'default'           => '#8887e2',
+        'default'           => acesso_default('acesso_color_lavender'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_lavender', array(
-        'label'   => __('Lavanda', 'acesso-uporto'),
-        'section' => 'acesso_accent_colors',
+        'label'       => __('Destaque 2 (Azul)', 'acesso-uporto'),
+        'description' => __('Fundos de vídeo e de imagens em falta.', 'acesso-uporto'),
+        'section'     => 'acesso_accent_colors',
     )));
 
     // Coral
     $wp_customize->add_setting('acesso_color_coral', array(
-        'default'           => '#ff6b6b',
+        'default'           => acesso_default('acesso_color_coral'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_coral', array(
-        'label'   => __('Coral', 'acesso-uporto'),
-        'section' => 'acesso_accent_colors',
+        'label'       => __('Destaque 3 (Vermelho)', 'acesso-uporto'),
+        'description' => __('Alertas e a terceira fase da timeline.', 'acesso-uporto'),
+        'section'     => 'acesso_accent_colors',
     )));
+
+    // Lima
+    $wp_customize->add_setting('acesso_color_lime', array(
+        'default'           => acesso_default('acesso_color_lime'),
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_lime', array(
+        'label'       => __('Destaque 4 (Lima)', 'acesso-uporto'),
+        'description' => __('Disponível na paleta do editor.', 'acesso-uporto'),
+        'section'     => 'acesso_accent_colors',
+    )));
+
+    // Verde
+    $wp_customize->add_setting('acesso_color_green', array(
+        'default'           => acesso_default('acesso_color_green'),
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'acesso_color_green', array(
+        'label'       => __('Destaque 5 (Verde)', 'acesso-uporto'),
+        'description' => __('Estados de sucesso e barras de progresso.', 'acesso-uporto'),
+        'section'     => 'acesso_accent_colors',
+    )));
+
+    // --- Superfícies ---
+    $wp_customize->add_section('acesso_surface_colors', array(
+        'title'       => __('Superfícies', 'acesso-uporto'),
+        'description' => __('Os fundos sobre os quais tudo assenta.', 'acesso-uporto'),
+        'panel'       => 'acesso_colors_panel',
+        'priority'    => 18,
+    ));
+
+    $acesso_surface_fields = array(
+        'acesso_color_accent' => array(
+            __('Cor de Destaque', 'acesso-uporto'),
+            __('A cor "de aviso" do design system: etiquetas, hover de botões e chips ativos.', 'acesso-uporto'),
+        ),
+        'acesso_color_panel'  => array(
+            __('Fundo dos Cartões', 'acesso-uporto'),
+            __('Painéis, cartões e caixas de conteúdo.', 'acesso-uporto'),
+        ),
+        'acesso_color_paper'  => array(
+            __('Fundo do Site', 'acesso-uporto'),
+            __('O fundo geral das páginas, por baixo da textura.', 'acesso-uporto'),
+        ),
+    );
+    foreach ($acesso_surface_fields as $acesso_sf_id => $acesso_sf_cfg) {
+        $wp_customize->add_setting($acesso_sf_id, array(
+            'default'           => acesso_default($acesso_sf_id),
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport'         => 'postMessage',
+        ));
+        $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $acesso_sf_id, array(
+            'label'       => $acesso_sf_cfg[0],
+            'description' => $acesso_sf_cfg[1],
+            'section'     => 'acesso_surface_colors',
+        )));
+    }
 
     // --- Gradient Section ---
     $wp_customize->add_section('acesso_gradient_colors', array(
@@ -190,7 +714,7 @@ function acesso_customize_register($wp_customize) {
 
     // Gradient Start Color
     $wp_customize->add_setting('acesso_gradient_start', array(
-        'default'           => '#572ddf',
+        'default'           => acesso_default('acesso_gradient_start'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
@@ -201,7 +725,7 @@ function acesso_customize_register($wp_customize) {
 
     // Gradient End Color
     $wp_customize->add_setting('acesso_gradient_end', array(
-        'default'           => '#da2489',
+        'default'           => acesso_default('acesso_gradient_end'),
         'sanitize_callback' => 'sanitize_hex_color',
         'transport'         => 'postMessage',
     ));
@@ -212,7 +736,7 @@ function acesso_customize_register($wp_customize) {
 
     // Gradient Direction
     $wp_customize->add_setting('acesso_gradient_direction', array(
-        'default'           => '135deg',
+        'default'           => acesso_default('acesso_gradient_direction'),
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'postMessage',
     ));
@@ -247,7 +771,7 @@ function acesso_customize_register($wp_customize) {
 
     // Body Font Family
     $wp_customize->add_setting('acesso_font_body', array(
-        'default'           => 'Barlow',
+        'default'           => acesso_default('acesso_font_body'),
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'refresh',
     ));
@@ -283,7 +807,7 @@ function acesso_customize_register($wp_customize) {
 
     // Body Font Weight
     $wp_customize->add_setting('acesso_font_body_weight', array(
-        'default'           => '400',
+        'default'           => acesso_default('acesso_font_body_weight'),
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'postMessage',
     ));
@@ -309,7 +833,7 @@ function acesso_customize_register($wp_customize) {
 
     // Heading Font Family
     $wp_customize->add_setting('acesso_font_heading', array(
-        'default'           => 'Barlow Semi Condensed',
+        'default'           => acesso_default('acesso_font_heading'),
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'refresh',
     ));
@@ -345,12 +869,13 @@ function acesso_customize_register($wp_customize) {
 
     // Heading Font Weight
     $wp_customize->add_setting('acesso_font_heading_weight', array(
-        'default'           => '700',
+        'default'           => acesso_default('acesso_font_heading_weight'),
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'postMessage',
     ));
     $wp_customize->add_control('acesso_font_heading_weight', array(
         'label'   => __('Peso da Fonte', 'acesso-uporto'),
+        'description' => __('A Jersey 10 só existe em Regular (400); os outros pesos não têm efeito com essa fonte.', 'acesso-uporto'),
         'section' => 'acesso_heading_font',
         'type'    => 'select',
         'choices' => array(
@@ -450,7 +975,7 @@ function acesso_customize_register($wp_customize) {
 
     // Base Font Size
     $wp_customize->add_setting('acesso_font_size_base', array(
-        'default'           => '16',
+        'default'           => acesso_default('acesso_font_size_base'),
         'sanitize_callback' => 'absint',
         'transport'         => 'postMessage',
     ));
@@ -468,7 +993,7 @@ function acesso_customize_register($wp_customize) {
 
     // Heading Scale (multiplicador dos títulos)
     $wp_customize->add_setting('acesso_font_heading_scale', array(
-        'default'           => '100',
+        'default'           => acesso_default('acesso_font_heading_scale'),
         'sanitize_callback' => 'absint',
         'transport'         => 'refresh',
     ));
@@ -549,6 +1074,7 @@ function acesso_get_google_fonts_list() {
         'Bebas Neue'          => 'Bebas Neue',
         'Anton'               => 'Anton',
         'Archivo Black'       => 'Archivo Black',
+        'Jersey 10'           => 'Jersey 10',
         'Pixelify Sans'       => 'Pixelify Sans',
         'Righteous'           => 'Righteous',
         'Fredoka'             => 'Fredoka',
@@ -575,10 +1101,83 @@ function acesso_get_google_fonts_list() {
 }
 
 /**
+ * Sanitiza uma caixa de verificação do Personalizador.
+ */
+function acesso_sanitize_checkbox($value) {
+    return (bool) $value;
+}
+
+/**
+ * Repõe as predefinições do design system depois de guardar o Personalizador.
+ *
+ * A caixa "Repor as predefinições do tema" não guarda estado: quando marcada,
+ * apagam-se os theme_mods de cor/tipografia para que voltem a valer os valores
+ * de acesso_theme_defaults().
+ *
+ * @param WP_Customize_Manager $wp_customize
+ */
+function acesso_reset_design($wp_customize) {
+    $setting = $wp_customize->get_setting('acesso_reset_design');
+    if (!$setting || !$setting->post_value()) {
+        return;
+    }
+    foreach (array_keys(acesso_theme_defaults()) as $key) {
+        remove_theme_mod($key);
+    }
+    remove_theme_mod('acesso_reset_design');
+}
+add_action('customize_save_after', 'acesso_reset_design');
+
+/**
  * Sanitiza a opção de estilo de cantos.
  */
 function acesso_sanitize_corner_style($value) {
-    return in_array($value, array('rounded', 'square'), true) ? $value : 'rounded';
+    return in_array($value, array('rounded', 'square'), true)
+        ? $value
+        : acesso_default('acesso_corner_style', 'square');
+}
+
+/**
+ * Sanitiza o preset de design system.
+ */
+function acesso_sanitize_style_preset($value) {
+    return isset(acesso_style_presets()[$value]) ? $value : ACESSO_DEFAULT_PRESET;
+}
+
+/**
+ * Sanitiza o estilo de sombra.
+ */
+function acesso_sanitize_shadow_style($value) {
+    return in_array($value, array('hard', 'soft', 'none'), true)
+        ? $value
+        : acesso_default('acesso_shadow_style', 'hard');
+}
+
+/**
+ * Sanitiza a textura de fundo.
+ */
+function acesso_sanitize_texture($value) {
+    return in_array($value, array('pixel', 'none'), true)
+        ? $value
+        : acesso_default('acesso_texture', 'pixel');
+}
+
+/**
+ * Sanitiza o estilo da régua dos títulos de secção.
+ */
+function acesso_sanitize_section_rule($value) {
+    return in_array($value, array('dashed', 'solid', 'none'), true)
+        ? $value
+        : acesso_default('acesso_section_rule', 'dashed');
+}
+
+/**
+ * Sanitiza a sombra dos títulos de display.
+ */
+function acesso_sanitize_display_shadow($value) {
+    return in_array($value, array('hard', 'none'), true)
+        ? $value
+        : acesso_default('acesso_display_shadow', 'hard');
 }
 
 /**
@@ -586,51 +1185,112 @@ function acesso_sanitize_corner_style($value) {
  */
 function acesso_customizer_css() {
     // Get settings
-    $primary      = get_theme_mod('acesso_color_primary', '#572ddf');
-    $secondary    = get_theme_mod('acesso_color_secondary', '#da2489');
-    $dark         = get_theme_mod('acesso_color_dark', '#060221');
-    $cyan         = get_theme_mod('acesso_color_cyan', '#00d084');
-    $lavender     = get_theme_mod('acesso_color_lavender', '#8887e2');
-    $coral        = get_theme_mod('acesso_color_coral', '#ff6b6b');
+    $primary      = acesso_mod('acesso_color_primary');
+    $secondary    = acesso_mod('acesso_color_secondary');
+    $dark         = acesso_mod('acesso_color_dark');
+    $cyan         = acesso_mod('acesso_color_cyan');
+    $lavender     = acesso_mod('acesso_color_lavender');
+    $coral        = acesso_mod('acesso_color_coral');
+    $lime         = acesso_mod('acesso_color_lime');
+    $green        = acesso_mod('acesso_color_green');
 
-    $gradient_start = get_theme_mod('acesso_gradient_start', '#572ddf');
-    $gradient_end   = get_theme_mod('acesso_gradient_end', '#da2489');
-    $gradient_dir   = get_theme_mod('acesso_gradient_direction', '135deg');
+    // Superfícies.
+    $accent = acesso_mod('acesso_color_accent');
+    $panel  = acesso_mod('acesso_color_panel');
+    $paper  = acesso_mod('acesso_color_paper');
+
+    $gradient_start = acesso_mod('acesso_gradient_start');
+    $gradient_end   = acesso_mod('acesso_gradient_end');
+    $gradient_dir   = acesso_mod('acesso_gradient_direction');
 
     // Cores de texto e elementos.
-    $color_text        = get_theme_mod('acesso_color_text', '#060221');
-    $color_heading     = get_theme_mod('acesso_color_heading', '#060221');
-    $color_link        = get_theme_mod('acesso_color_link', '#572ddf');
-    $color_link_hover  = get_theme_mod('acesso_color_link_hover', '#da2489');
-    $color_button_bg   = get_theme_mod('acesso_color_button_bg', '#572ddf');
-    $color_button_text = get_theme_mod('acesso_color_button_text', '#ffffff');
+    $color_text        = acesso_mod('acesso_color_text');
+    $color_heading     = acesso_mod('acesso_color_heading');
+    $color_link        = acesso_mod('acesso_color_link');
+    $color_link_hover  = acesso_mod('acesso_color_link_hover');
+    $color_button_bg   = acesso_mod('acesso_color_button_bg');
+    $color_button_text = acesso_mod('acesso_color_button_text');
 
-    $font_body         = get_theme_mod('acesso_font_body_custom', '') ?: get_theme_mod('acesso_font_body', 'Barlow');
-    $font_body_weight  = get_theme_mod('acesso_font_body_weight', '400');
-    $font_heading      = get_theme_mod('acesso_font_heading_custom', '') ?: get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
-    $font_heading_weight = get_theme_mod('acesso_font_heading_weight', '700');
-    $font_size_base    = get_theme_mod('acesso_font_size_base', '16');
+    $font_body         = acesso_mod('acesso_font_body_custom') ?: acesso_mod('acesso_font_body');
+    $font_body_weight  = acesso_mod('acesso_font_body_weight');
+    $font_heading      = acesso_mod('acesso_font_heading_custom') ?: acesso_mod('acesso_font_heading');
+    $font_heading_weight = acesso_mod('acesso_font_heading_weight');
+    $font_size_base    = acesso_mod('acesso_font_size_base');
 
     // Fontes específicas (opcionais) do menu e do rodapé.
-    $font_menu   = get_theme_mod('acesso_font_menu_custom', '') ?: get_theme_mod('acesso_font_menu', '');
-    $font_footer = get_theme_mod('acesso_font_footer_custom', '') ?: get_theme_mod('acesso_font_footer', '');
+    $font_menu   = acesso_mod('acesso_font_menu_custom') ?: acesso_mod('acesso_font_menu');
+    $font_footer = acesso_mod('acesso_font_footer_custom') ?: acesso_mod('acesso_font_footer');
 
     // Escala dos títulos (multiplicador). 100 = sem alteração.
-    $heading_scale_pct = absint(get_theme_mod('acesso_font_heading_scale', 100));
+    $heading_scale_pct = absint(acesso_mod('acesso_font_heading_scale'));
     $heading_scale_pct = max(50, min(200, $heading_scale_pct ?: 100));
     $heading_scale     = round($heading_scale_pct / 100, 3);
 
-    // Estilo dos cantos (redondos por defeito / retangulares).
-    $corner_style = acesso_sanitize_corner_style(get_theme_mod('acesso_corner_style', 'rounded'));
+    // ---- Forma: contorno, sombra, canto em pixel, textura ----
+    $corner_style   = acesso_sanitize_corner_style(acesso_mod('acesso_corner_style'));
+    $border_width   = max(0, min(8, absint(acesso_mod('acesso_border_width'))));
+    $shadow_style   = acesso_sanitize_shadow_style(acesso_mod('acesso_shadow_style'));
+    $shadow_offset  = max(0, min(16, absint(acesso_mod('acesso_shadow_offset'))));
+    $pixel_notch    = max(0, min(12, absint(acesso_mod('acesso_pixel_notch'))));
+    $texture        = acesso_sanitize_texture(acesso_mod('acesso_texture'));
+    $section_rule   = acesso_sanitize_section_rule(acesso_mod('acesso_section_rule'));
+    $display_shadow = acesso_sanitize_display_shadow(acesso_mod('acesso_display_shadow'));
+    $ui_uppercase   = (bool) acesso_mod('acesso_ui_uppercase');
+
+    // As três sombras do sistema, na linguagem escolhida.
+    if ($shadow_style === 'hard') {
+        $sh_sm = sprintf('%1$dpx %1$dpx 0 %2$s', max(1, $shadow_offset - 2), $dark);
+        $sh    = sprintf('%1$dpx %1$dpx 0 %2$s', $shadow_offset, $dark);
+        $sh_lg = sprintf('%1$dpx %1$dpx 0 %2$s', $shadow_offset + 2, $dark);
+    } elseif ($shadow_style === 'soft') {
+        $sh_sm = '0 2px 6px rgba(0, 0, 0, 0.10)';
+        $sh    = '0 4px 16px rgba(0, 0, 0, 0.14)';
+        $sh_lg = '0 10px 30px rgba(0, 0, 0, 0.18)';
+    } else {
+        $sh_sm = $sh = $sh_lg = 'none';
+    }
+
+    // Textura: ruído de pixels gerado por SVG, ou nenhuma.
+    $noise = function ($r, $g, $b, $a) {
+        return "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'>"
+             . "<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2' stitchTiles='stitch'/>"
+             . "<feColorMatrix values='0 0 0 0 {$r}  0 0 0 0 {$g}  0 0 0 0 {$b}  0 0 0 {$a} 0'/></filter>"
+             . "<rect width='120' height='120' filter='url(%23n)'/></svg>\")";
+    };
+    $noise_paper = $texture === 'pixel' ? $noise('0.55', '0.54', '0.48', '0.12') : 'none';
+    $noise_navy  = $texture === 'pixel' ? $noise('0.15', '0.13', '0.38', '0.5') : 'none';
+
+    // Régua sob os títulos de secção.
+    if ($section_rule === 'dashed') {
+        $rule_bg   = "repeating-linear-gradient(90deg, {$dark} 0 14px, transparent 14px 22px)";
+        $rule_bg_d = "repeating-linear-gradient(90deg, {$accent} 0 14px, transparent 14px 22px)";
+    } elseif ($section_rule === 'solid') {
+        $rule_bg   = $dark;
+        $rule_bg_d = $accent;
+    } else {
+        $rule_bg = $rule_bg_d = 'none';
+    }
 
     ?>
     <style type="text/css" id="acesso-customizer-css">
         :root {
-            /* Colors */
+            /* Paleta — os nomes de token que o CSS do tema usa */
+            --color-navy: <?php echo esc_attr($primary); ?>;
+            --color-magenta: <?php echo esc_attr($secondary); ?>;
+            --color-ink: <?php echo esc_attr($dark); ?>;
+            --color-cyan: <?php echo esc_attr($cyan); ?>;
+            --color-blue: <?php echo esc_attr($lavender); ?>;
+            --color-red: <?php echo esc_attr($coral); ?>;
+            --color-lime: <?php echo esc_attr($lime); ?>;
+            --color-green: <?php echo esc_attr($green); ?>;
+            --color-yellow: <?php echo esc_attr($accent); ?>;
+            --color-panel: <?php echo esc_attr($panel); ?>;
+            --color-paper: <?php echo esc_attr($paper); ?>;
+
+            /* Papéis semânticos */
             --color-primary: <?php echo esc_attr($primary); ?>;
             --color-secondary: <?php echo esc_attr($secondary); ?>;
             --color-dark: <?php echo esc_attr($dark); ?>;
-            --color-cyan: <?php echo esc_attr($cyan); ?>;
             --color-lavender: <?php echo esc_attr($lavender); ?>;
             --color-coral: <?php echo esc_attr($coral); ?>;
 
@@ -653,18 +1313,99 @@ function acesso_customizer_css() {
             --font-primary: '<?php echo esc_attr($font_body); ?>', sans-serif;
             --font-condensed: '<?php echo esc_attr($font_heading); ?>', sans-serif;
             --font-display: '<?php echo esc_attr($font_heading); ?>', sans-serif;
+            --font-ui: '<?php echo esc_attr($font_body); ?>', sans-serif;
             /* Sobrepor os presets do theme.json (usados por headings e blocos via .wp-block-*) */
+            --wp--preset--font-family--jersey-10: '<?php echo esc_attr($font_heading); ?>', sans-serif;
+            --wp--preset--font-family--blinker: '<?php echo esc_attr($font_body); ?>', sans-serif;
             --wp--preset--font-family--barlow: '<?php echo esc_attr($font_body); ?>', sans-serif;
             --wp--preset--font-family--barlow-condensed: '<?php echo esc_attr($font_heading); ?>', sans-serif;
             --font-body-weight: <?php echo esc_attr($font_body_weight); ?>;
             --font-heading-weight: <?php echo esc_attr($font_heading_weight); ?>;
             --font-size-base: <?php echo esc_attr($font_size_base); ?>px;
-<?php if ($corner_style === 'square') : ?>
-            /* Cantos retangulares: anula os raios das caixas/cartões/botões */
+            --ui-text-transform: <?php echo $ui_uppercase ? 'uppercase' : 'none'; ?>;
+
+            /* Forma */
+            --border-width: <?php echo esc_attr($border_width); ?>px;
+            --border-hard: <?php echo $border_width ? 'var(--border-width) solid var(--color-ink)' : 'none'; ?>;
+            --border-band: <?php echo $border_width ? sprintf('%dpx solid var(--color-ink)', $border_width + 1) : 'none'; ?>;
+            --border-band-accent: <?php echo $border_width ? sprintf('%dpx solid var(--color-yellow)', $border_width + 1) : 'none'; ?>;
+            --shadow-offset: <?php echo esc_attr($shadow_offset); ?>px;
+            --shadow-hard-sm: <?php echo esc_attr($sh_sm); ?>;
+            --shadow-hard: <?php echo esc_attr($sh); ?>;
+            --shadow-hard-lg: <?php echo esc_attr($sh_lg); ?>;
+            --shadow-sm: <?php echo esc_attr($sh_sm); ?>;
+            --shadow-md: <?php echo esc_attr($sh); ?>;
+            --shadow-lg: <?php echo esc_attr($sh_lg); ?>;
+
+            /* Textura de fundo */
+            --noise-paper: <?php echo $noise_paper; ?>;
+            --noise-navy: <?php echo $noise_navy; ?>;
+            --texture-rendering: <?php echo $texture === 'pixel' ? 'pixelated' : 'auto'; ?>;
+
+            /* Régua dos títulos de secção */
+            --section-rule: <?php echo $rule_bg; ?>;
+            --section-rule-on-dark: <?php echo $rule_bg_d; ?>;
+            --section-rule-display: <?php echo $section_rule === 'none' ? 'none' : 'block'; ?>;
+
+            /* Sombra dos títulos de display */
+<?php if ($display_shadow === 'hard') : ?>
+            /* Em em, não em px: uma sombra de 7px que fica bem num título de
+               138px lê-se como texto duplicado num de 32px no telemóvel. */
+            --text-shadow-hero: 0.05em 0.05em 0 var(--color-ink);
+            --text-shadow-display: 0.06em 0.06em 0 var(--color-ink);
+            --text-shadow-section: 0.06em 0.06em 0 rgba(17, 17, 17, 0.18);
+            --text-shadow-section-on-dark: 0.06em 0.06em 0 rgba(17, 17, 17, 0.35);
+<?php else : ?>
+            --text-shadow-hero: none;
+            --text-shadow-display: none;
+            --text-shadow-section: none;
+            --text-shadow-section-on-dark: none;
+<?php endif; ?>
+
+            /* Cantos */
+<?php if ($corner_style === 'rounded') : ?>
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-full: 50px;
+<?php else : ?>
             --radius-sm: 0;
             --radius-md: 0;
             --radius-lg: 0;
             --radius-full: 0;
+<?php endif; ?>
+
+            /* Canto "mordido" a pixel dos botões. O clip-path recorta tudo o
+               que é pintado a seguir, incluindo a sombra, por isso o polígono
+               de --pixel-clip-shadow inclui a goteira onde ela assenta. */
+<?php if ($pixel_notch > 0) : ?>
+            --pixel-notch: <?php echo esc_attr($pixel_notch); ?>px;
+            --pixel-clip: polygon(
+                0 var(--pixel-notch), var(--pixel-notch) var(--pixel-notch), var(--pixel-notch) 0,
+                calc(100% - var(--pixel-notch)) 0, calc(100% - var(--pixel-notch)) var(--pixel-notch),
+                100% var(--pixel-notch), 100% calc(100% - var(--pixel-notch)),
+                calc(100% - var(--pixel-notch)) calc(100% - var(--pixel-notch)),
+                calc(100% - var(--pixel-notch)) 100%, var(--pixel-notch) 100%,
+                var(--pixel-notch) calc(100% - var(--pixel-notch)), 0 calc(100% - var(--pixel-notch))
+            );
+<?php if ($shadow_style === 'hard' && $shadow_offset > 0) : ?>
+            --pixel-clip-shadow: polygon(
+                0 var(--pixel-notch), var(--pixel-notch) var(--pixel-notch), var(--pixel-notch) 0,
+                calc(100% - var(--pixel-notch)) 0, calc(100% - var(--pixel-notch)) var(--pixel-notch),
+                100% var(--pixel-notch), 100% var(--shadow-offset),
+                calc(100% + var(--shadow-offset)) var(--shadow-offset),
+                calc(100% + var(--shadow-offset)) calc(100% + var(--shadow-offset)),
+                var(--shadow-offset) calc(100% + var(--shadow-offset)),
+                var(--shadow-offset) 100%, var(--pixel-notch) 100%,
+                var(--pixel-notch) calc(100% - var(--pixel-notch)), 0 calc(100% - var(--pixel-notch))
+            );
+<?php else : ?>
+            --pixel-clip-shadow: var(--pixel-clip);
+<?php endif; ?>
+<?php else : ?>
+            --pixel-notch: 0px;
+            --pixel-clip: none;
+            --pixel-clip-shadow: none;
 <?php endif; ?>
         }
 
@@ -681,11 +1422,23 @@ function acesso_customizer_css() {
             color: var(--color-text);
         }
 
-        h1, h2, h3, h4, h5, h6,
+        /* Display (H1/H2, títulos de secção e hero) usa a fonte dos títulos.
+           H3–H6 ficam na fonte de UI a 900, que se lê bem em corpo pequeno. */
+        h1, h2,
         .section-title,
-        .hero-title {
+        .hero-title,
+        .stat-number,
+        .statistics-section .stat-number,
+        .cta-title,
+        .timeline-title,
+        .course-detail-title {
             font-family: var(--font-display);
             font-weight: var(--font-heading-weight);
+        }
+
+        h3, h4, h5, h6 {
+            font-family: var(--font-ui);
+            font-weight: 900;
         }
 
         /* Cor dos títulos/cabeçalhos (.hero-title fica branco sobre o hero) */
@@ -713,6 +1466,39 @@ function acesso_customizer_css() {
         .main-navigation .nav-menu a {
             font-family: '<?php echo esc_attr($font_menu); ?>', sans-serif;
         }
+<?php if ($font_menu === $font_heading) : ?>
+        /* O menu está na fonte de display (por predefinição, Jersey 10). Uma
+           fonte de pixels precisa de mais corpo e de peso normal para se ler
+           em caixa alta; estes valores só se aplicam neste caso.
+           O tamanho é fluido porque o menu horizontal só dá lugar ao
+           hamburger aos 992px, e entre os 993px e os 1400px não há espaço
+           para o corpo máximo. */
+        #site-navigation .nav-menu a,
+        .main-navigation .nav-menu a {
+            font-size: clamp(0.9375rem, 1.5vw, 1.375rem);
+            font-weight: 400;
+            letter-spacing: 0.03em;
+        }
+
+        @media (max-width: 1200px) {
+            #site-navigation .nav-menu,
+            .main-navigation .nav-menu {
+                gap: var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 992px) {
+            #site-navigation .nav-menu a,
+            .main-navigation .nav-menu a {
+                font-size: 2rem;
+            }
+
+            #site-navigation .nav-menu,
+            .main-navigation .nav-menu {
+                gap: var(--spacing-md);
+            }
+        }
+<?php endif; ?>
 <?php endif; ?>
 <?php if ($font_footer) : ?>
         /* Fonte específica do rodapé */
@@ -737,6 +1523,10 @@ function acesso_customizer_css() {
         input[type="submit"] {
             background: var(--color-btn-bg);
             color: var(--color-btn-text);
+            border: var(--border-hard);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-hard);
+            clip-path: var(--pixel-clip-shadow);
         }
         .btn-primary:hover,
         button[type="submit"]:hover,
@@ -781,14 +1571,18 @@ add_action('wp_head', 'acesso_customizer_css', 100);
  * Enqueue Google Fonts based on Customizer settings
  */
 function acesso_customizer_fonts() {
-    $font_body    = get_theme_mod('acesso_font_body_custom', '') ?: get_theme_mod('acesso_font_body', 'Barlow');
-    $font_heading = get_theme_mod('acesso_font_heading_custom', '') ?: get_theme_mod('acesso_font_heading', 'Barlow Semi Condensed');
+    $font_body    = acesso_mod('acesso_font_body_custom') ?: acesso_mod('acesso_font_body');
+    $font_heading = acesso_mod('acesso_font_heading_custom') ?: acesso_mod('acesso_font_heading');
 
-    $font_menu   = get_theme_mod('acesso_font_menu_custom', '') ?: get_theme_mod('acesso_font_menu', '');
-    $font_footer = get_theme_mod('acesso_font_footer_custom', '') ?: get_theme_mod('acesso_font_footer', '');
+    $font_menu   = acesso_mod('acesso_font_menu_custom') ?: acesso_mod('acesso_font_menu');
+    $font_footer = acesso_mod('acesso_font_footer_custom') ?: acesso_mod('acesso_font_footer');
 
     // Fontes já auto-alojadas no tema (assets/fonts/fonts.css) — não pedir à Google.
-    $bundled = array('Barlow', 'Barlow Semi Condensed');
+    $bundled = array(
+        'Jersey 10', 'Blinker', 'Barlow', 'Barlow Semi Condensed',
+        'Inter', 'Poppins', 'Montserrat', 'Roboto', 'Playfair Display',
+        'Lora', 'Merriweather', 'Oswald', 'Bebas Neue', 'Pixelify Sans',
+    );
 
     // Construir só as fontes ADICIONAIS (não incluídas) para carregar da Google.
     $fonts = array();
